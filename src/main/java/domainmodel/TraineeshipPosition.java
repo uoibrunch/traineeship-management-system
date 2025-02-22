@@ -2,29 +2,63 @@ package domainmodel;
 
 import java.time.LocalDate;
 import java.util.List;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "traineeship_positions")
 public class TraineeshipPosition {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "trainseeship_id")
+    private int traineeshipId;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "fromDate")
     private LocalDate fromDate;
+
+    @Column(name = "toDate")
     private LocalDate toDate;
+
+    @Column(name = "topics")
     private String topics;
+
+    @Column(name = "skills")
     private String skills;
+
+    @Column(name = "is_assigned")
     private boolean isAssigned;
+
+    @Column(name = "student_logbook")
     private String studentLogbook;
+
+    @Column(name = "pass_fail_grade")
     private boolean passFailGrade;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
     private Student student;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supervisor_id")
     private Professor supervisor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
     private Company company;
+
     private List <Evaluation> evaluations;
     
     public int getId() {
-        return id;
+        return traineeshipId;
     }
     public void setId(int id) {
-        this.id = id;
+        this.traineeshipId = id;
     }
     public String getTitle() {
         return title;

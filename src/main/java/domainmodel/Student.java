@@ -24,9 +24,9 @@ public class Student {
     private double avgGrade;
 
     @Column(name = "preferred_location")
-    private String prefferedLocation;
+    private String preferedLocation;
 
-    @Column(name = "ineterests")
+    @Column(name = "interests")
     private String  interests;
 
     @Column(name = "skills")
@@ -35,7 +35,7 @@ public class Student {
     @Column(name =  "looking_for_traineeship")
     private boolean lookingForTraineeship;
 
-    @OneToOne(mappedBy = "student")
+    @OneToOne(mappedBy = "student", fetch = FetchType.LAZY)
     private TraineeshipPosition assignedTraineeship;
 
     
@@ -64,10 +64,10 @@ public class Student {
         this.avgGrade = avgGrade;
     }
     public String getPrefferedLocation() {
-        return prefferedLocation;
+        return preferedLocation;
     }
-    public void setPrefferedLocation(String prefferedLocation) {
-        this.prefferedLocation = prefferedLocation;
+    public void setPrefferedLocation(String preferedLocation) {
+        this.preferedLocation = preferedLocation;
     }
     public String getInterests() {
         return interests;

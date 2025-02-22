@@ -19,8 +19,8 @@ public class Professor {
 
     @Column(name="interests")
     private String interests;
-    
-    @OneToMany(mappedBy = "supervisor")
+
+    @OneToMany(mappedBy = "supervisor", fetch = FetchType.LAZY)
     private List<TraineeshipPosition> supervisedPositions;
 
     public String getUsername() {

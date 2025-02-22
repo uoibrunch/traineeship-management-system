@@ -25,7 +25,7 @@ public class Company {
     @Column(name = "company_location")
     private String companyLocation;
     
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     private List <TraineeshipPosition> positions;
 
     public String getUsername() {
