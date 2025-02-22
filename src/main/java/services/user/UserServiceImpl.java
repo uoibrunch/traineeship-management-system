@@ -1,10 +1,14 @@
 package services.user;
 
 import domainmodel.User;
-import domainmodel.UserDetails;
 import mappers.UserMapper;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,32 +16,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    private UserMapper userDAO;
-
-   
-    public void saveUser(User user) {
-       
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private UserDAO userDAO;
+	
+	@Override
+	public void saveUser(User user) {
+		String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        userDAO.save(user);	
     }
 
-    
-    public boolean isUserPresent(User user) {
-        return true;
-    }
+	 
+	public boolean isUserPresent(User user) {
+		Optional<User> storedUser = userDAO.findByUsername(user.getUsername());
+		return storedUser.isPresent();
+	}
 
-    
-    public User findById(String username) {
-        return userDAO.findByUsername(username);//will remove later
-    }
-
-    
-    public UserDetails loadUserByUsername(String username) {
-        User user = userDAO.findByUsername(username);
-        return user; // temporary solution , will remove later
-    }
-    
-
+	// Method defined in Spring Security UserDetailsService interface
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// orElseThrow method of Optional container that throws an exception if Optional result  is null
+		return userDAO.findByUsername(username).orElseThrow(
+	                ()-> new UsernameNotFoundException(
+	                        String.format("USER_NOT_FOUND %s", username)
+	                ));
+	}
 }

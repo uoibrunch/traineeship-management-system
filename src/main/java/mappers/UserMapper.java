@@ -1,11 +1,11 @@
 package mappers;
-
-import org.springframework.stereotype.Repository;
 import domainmodel.User;
 
-//interface created by Marios might not be necesary 
-@Repository
+import java.util.Optional;
 
-public interface UserMapper {
-    User findByUsername(String username);
+import org.springframework.data.jpa.repository.JpaRepository;
+//interface created by Marios might not be necesary 
+
+public interface UserMapper extends JpaRepository<User,Integer> {
+    Optional<User> findByUsername(String username);
 }
