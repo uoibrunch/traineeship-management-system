@@ -12,6 +12,10 @@ import jakarta.persistence.*;
 @Entity
 @Table( name = "users")
 public class User implements UserDetails{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private int userId;
 
     @Column(name="user_name", unique=true)
     private String username;
@@ -23,7 +27,7 @@ public class User implements UserDetails{
     @Column(name="role")
     private Role role;
 
-
+    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
         return Collections.singletonList(authority);

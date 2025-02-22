@@ -1,14 +1,41 @@
 package domainmodel;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "students")
 public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
+    private int studentId;
+
+    @Column(name = "user_name", unique = true)
     private String username;
+
+    @Column(name = "student_name")
     private String studentName;
+
+    @Column(name= "AM")
     private String AM;
+
+    @Column(name = "avg_grade")
     private double avgGrade;
+
+    @Column(name = "preferred_location")
     private String prefferedLocation;
+
+    @Column(name = "ineterests")
     private String  interests;
+
+    @Column(name = "skills")
     private String skills;
+
+    @Column(name =  "looking_for_traineeship")
     private boolean lookingForTraineeship;
+
+    @OneToOne(mappedBy = "student")
     private TraineeshipPosition assignedTraineeship;
 
     

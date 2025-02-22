@@ -2,11 +2,30 @@ package domainmodel;
 
 import java.util.List;
 
-public class Company {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "Company" )
+public class Company {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "company_id")
+    private int companyId;
+    
+    @Column(name = "user_name", unique = true)
     private String username;
+
+    @Column(name = "company_name")
     private String companyName;
+
+    @Column(name = "company_location")
     private String companyLocation;
+    
+    @OneToMany(mappedBy = "company")
     private List <TraineeshipPosition> positions;
 
     public String getUsername() {
@@ -40,7 +59,4 @@ public class Company {
     public void setPositions(List<TraineeshipPosition> positions) {
         this.positions = positions;
     }
-
-    
-
 }

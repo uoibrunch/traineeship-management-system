@@ -11,13 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 @Repository
-public class TraineeshipPositionsMapper  {
+public interface TraineeshipPositionsMapper extends JpaRepository<TraineeshipPosition,Integer>{
 
-    
-    
-    public TraineeshipPosition findByTraineeshipId(Long traineeshipId) {
-        
-        return null;  
-
-    }
 }

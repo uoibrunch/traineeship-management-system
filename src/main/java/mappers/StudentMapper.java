@@ -10,9 +10,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public class StudentMapper {
+public interface StudentMapper extends JpaRepository<Student,Integer> {
 
-   
+   /*
     public User findByUsername(String username) {
         return null;
     }
@@ -22,4 +22,5 @@ public class StudentMapper {
         // Custom logic for finding a student by id
         return new Student();  // Placeholder for example
     }
+        */
 }

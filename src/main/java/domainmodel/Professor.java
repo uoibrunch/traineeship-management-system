@@ -2,17 +2,32 @@ package domainmodel;
 
 import java.util.List;
 
+import jakarta.persistence.*;
+
 public class Professor {
+
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	private int professorId;
+
+    @Column(name="user_name", unique=true)
     private String username;
-    private String professoreName;
+
+    @Column(name="professor_name")
+    private String professorName;
+
+    @Column(name="interests")
     private String interests;
+    
+    @OneToMany(mappedBy = "supervisor")
     private List<TraineeshipPosition> supervisedPositions;
 
     public String getUsername() {
         return username;
     }
     public String getProfessoreName() {
-        return professoreName;
+        return professorName;
     }
 
     public String getInterests() {
@@ -28,7 +43,7 @@ public class Professor {
     }
     
     public void setProfessoreName(String professoreName) {
-        this.professoreName = professoreName;
+        this.professorName = professoreName;
     }
 
     public void setInterests(String interests) {

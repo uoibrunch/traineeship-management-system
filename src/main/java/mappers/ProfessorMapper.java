@@ -11,19 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 @Repository
-public class ProfessorMapper  {
+public interface ProfessorMapper extends JpaRepository<Professor,Integer> {
 
-
-
-    
-    public Professor findByProfessorId(Long professorId) {
-       
-        return null;  
-    }
-
-    
-    public Professor findByProfessorName(String name) {
-        
-        return null;  
-    }
 }
