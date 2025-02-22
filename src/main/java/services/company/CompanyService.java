@@ -1,4 +1,4 @@
-package services;
+package services.company;
 
 import java.util.List;
 

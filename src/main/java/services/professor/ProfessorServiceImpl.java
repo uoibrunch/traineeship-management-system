@@ -1,4 +1,4 @@
-package services;
+package services.professor;
 
 import java.util.List;
 

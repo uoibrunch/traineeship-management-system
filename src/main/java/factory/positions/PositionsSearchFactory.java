@@ -1,4 +1,7 @@
-package factory;
+package factory.positions;
+
+import factory.search.SearchBasedOnInterests;
+import factory.search.SearchBasedOnLoad;
 
 public class PositionsSearchFactory {
 

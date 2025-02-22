@@ -1,4 +1,4 @@
-package factory;
+package factory.positions;
 
 import java.util.List;
 

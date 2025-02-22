@@ -1,4 +1,4 @@
-package factory;
+package factory.supervisor;
 
 public interface SupervisorAssignmentStrategy {
 

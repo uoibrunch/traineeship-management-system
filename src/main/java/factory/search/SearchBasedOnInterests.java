@@ -1,4 +1,4 @@
-package factory;
+package factory.search;
 
 import mappers.StudentMapper;
 import mappers.TraineeshipPositionsMapper;
@@ -6,6 +6,7 @@ import mappers.TraineeshipPositionsMapper;
 import java.util.List;
 
 import domainmodel.*;
+import factory.positions.PositionsSearchStrategy;
 
 public class SearchBasedOnInterests implements PositionsSearchStrategy{
     

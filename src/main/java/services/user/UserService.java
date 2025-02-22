@@ -1,4 +1,4 @@
-package services;
+package services.user;
 import domainmodel.User;
 
 public interface UserService {

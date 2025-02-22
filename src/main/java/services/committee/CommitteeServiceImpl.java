@@ -1,6 +1,8 @@
-package services;
+package services.committee;
 
 import factory.*;
+import factory.positions.PositionsSearchFactory;
+import factory.supervisor.SupervisorAssignmentFactory;
 import mappers.*;
 
 import java.util.List;

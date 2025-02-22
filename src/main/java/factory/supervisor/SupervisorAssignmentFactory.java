@@ -1,4 +1,7 @@
-package factory;
+package factory.supervisor;
+
+import factory.assignment.AssignmentBasedOnInterests;
+import factory.assignment.AssignmentBasedOnLoad;
 
 public class SupervisorAssignmentFactory {
 

@@ -1,4 +1,4 @@
-package services;
+package services.committee;
 import java.util.List;
 
 import domainmodel.*;

@@ -2,8 +2,8 @@ package controllers;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import services.ProfessorService;
 import domainmodel.*;
+import services.professor.ProfessorService;
 
 public class ProfessorController {
 

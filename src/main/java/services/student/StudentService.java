@@ -1,4 +1,4 @@
-package services;
+package services.student;
 
 import domainmodel.Student;
 import domainmodel.TraineeshipPosition;

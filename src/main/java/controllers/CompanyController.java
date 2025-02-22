@@ -1,6 +1,7 @@
 package controllers;
 
 import services.*;
+import services.company.CompanyService;
 import domainmodel.*;
 
 public class CompanyController {

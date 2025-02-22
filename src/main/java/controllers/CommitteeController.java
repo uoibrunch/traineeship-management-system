@@ -1,6 +1,7 @@
 package controllers;
 
 import services.*;
+import services.committee.CommitteeService;
 
 public class CommitteeController {
 
