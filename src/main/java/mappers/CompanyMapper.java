@@ -4,21 +4,13 @@ import domainmodel.User;
 import domainmodel.Company; 
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
 
 @Repository
-public class CompanyMapper implements UserMapper {
-
-   
-
-    @Override
-    public User findByUsername(String username) {
-        
-        return null; 
-    }
-
-    
-    public Company findByCompanyId(String companyId) {
-        
-        return null;
-    }
+public class CompanyMapper {
+	
 }

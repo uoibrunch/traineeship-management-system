@@ -10,9 +10,9 @@ import domainmodel.Evaluation;
 public class CompanyServiceImpl {
     private CompanyMapper companyMapper;
 
-    public Company retrievePofile(String usernname){
-        return companyMapper.findByCompanyId(usernname);
-    }
+    // public Company retrievePofile(String usernname){
+    //     return companyMapper.findByCompanyId(usernname);
+    // }
 
     public void saveProfile(Company company){};
 
