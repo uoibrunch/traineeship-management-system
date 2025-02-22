@@ -7,7 +7,7 @@ import java.util.List;
 
 import domainmodel.*;
 
-public class CommiteeServiceImpl implements CommiteeService{
+public class CommitteeServiceImpl implements CommitteeService{
 
     private PositionsSearchFactory positionsSearchFactory;
 

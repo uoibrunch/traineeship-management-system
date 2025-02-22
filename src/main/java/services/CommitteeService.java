@@ -3,7 +3,7 @@ import java.util.List;
 
 import domainmodel.*;
 
-public interface CommiteeService {
+public interface CommitteeService {
     List<TraineeshipPosition> retrievePositionsForApplicant(String applicantUsername, String Strategy);
 
     List<Student> retrieveTraineeshipApplications();
