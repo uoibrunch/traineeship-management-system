@@ -1,12 +1,14 @@
 package services.user;
 
 import domainmodel.User;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import mappers.UserMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 
 @Service
