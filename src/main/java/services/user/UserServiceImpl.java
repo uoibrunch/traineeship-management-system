@@ -1,7 +1,7 @@
 package services.user;
 
 import domainmodel.User;
-import domainmodel.UserDetails;
+import org.springframework.security.core.userdetails.UserDetails;
 import mappers.UserMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
