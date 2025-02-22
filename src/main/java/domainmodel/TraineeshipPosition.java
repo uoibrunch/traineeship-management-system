@@ -52,6 +52,7 @@ public class TraineeshipPosition {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    @OneToMany(mappedBy = "traineeshipPosition", fetch = FetchType.LAZY)
     private List <Evaluation> evaluations;
     
     public int getId() {

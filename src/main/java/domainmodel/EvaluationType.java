@@ -1,6 +1,7 @@
 package domainmodel;
 
-//class created by Marios might not be necesary 
-public class EvaluationType {
-
+//rwtame zarra gia sigouria 
+public enum EvaluationType {
+    MID_TERM,
+    FINAL
 }
