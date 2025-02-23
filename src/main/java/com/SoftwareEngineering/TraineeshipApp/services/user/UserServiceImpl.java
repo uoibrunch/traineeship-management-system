@@ -16,8 +16,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    // @Autowired
+    // private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserMapper userDAO;
@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     // Save the user with an encrypted password
     @Override
     public void saveUser(User user) {
-        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        //String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        //user.setPassword(encodedPassword);
         userDAO.save(user);  // Save the user entity using the UserDAO (repository)
     }
 
