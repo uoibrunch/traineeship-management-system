@@ -30,6 +30,7 @@ public class User implements UserDetails{
    public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
         return Collections.singletonList(authority);
+        
     }
 
     @Override

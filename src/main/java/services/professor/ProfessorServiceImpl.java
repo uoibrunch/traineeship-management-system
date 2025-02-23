@@ -5,9 +5,11 @@ import java.util.List;
 import domainmodel.Professor;
 import mappers.ProfessorMapper;
 import domainmodel.TraineeshipPosition;
+import domainmodel.User;
 import domainmodel.Evaluation;
 
 public class ProfessorServiceImpl  implements ProfessorService{
+
 
     private ProfessorMapper professorMapper;
 

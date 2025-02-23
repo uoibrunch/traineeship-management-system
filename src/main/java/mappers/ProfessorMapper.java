@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface ProfessorMapper extends JpaRepository<Professor,Integer> {
-
+    
 }

@@ -48,9 +48,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findById(String username) {
-        return userDAO.findByUsername(username).orElseThrow(
-                () -> new RuntimeException("User not found with username: " + username)
+    public User findById(String id) {
+        return userDAO.findByUsername(id).orElseThrow(
+                () -> new RuntimeException("User not found with username: " + id)
         );
     }
 }

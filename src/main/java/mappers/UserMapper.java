@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 
 public interface UserMapper extends JpaRepository<User, Integer> {
 	Optional<User> findByUsername(String username);
+
+	
 }
+
