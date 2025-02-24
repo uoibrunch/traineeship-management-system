@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 public class CustomSecuritySuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-    @Override
+           @Override
             protected void handle(
                 HttpServletRequest request,
                 HttpServletResponse response,
