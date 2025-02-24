@@ -62,36 +62,61 @@ public class WebSecurityConfig {
      * Authorization configuration .... 
      */
     
-     @Bean
-     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-         http
-             .csrf(csrf -> csrf.disable()) // Optional: Disable CSRF if using APIs or testing
-             .authorizeHttpRequests(authz -> authz
-                 .requestMatchers("/", "/login", "/register", "/save", "/auth/**").permitAll()  // Allow open access
-                 .requestMatchers("/student/**").hasAuthority("STUDENT")
-                 .requestMatchers("/professor/**").hasAuthority("PROFESSOR")
-                 .requestMatchers("/company/**").hasAuthority("COMPANY")
-                 .requestMatchers("/committee/**").hasAuthority("COMMITTEE_MEMBER")
-                 .anyRequest().authenticated() // Require authentication for other endpoints
-             )
-             .formLogin(fL -> fL
-                 .loginPage("/login")
-                 .failureUrl("/login?error=true")
-                 .successHandler(customSecuritySuccessHandler)
-                 .usernameParameter("username")
-                 .passwordParameter("password")
-                 .permitAll()
-             )
-             .logout(logOut -> logOut
-                 .logoutUrl("/logout")
-                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                 .logoutSuccessUrl("/")
-                 .permitAll()
-             )
-             .authenticationProvider(authenticationProvider());
-     
-         return http.build();
-     }
-     
+	@Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    	
+                http.
+                authorizeHttpRequests(
+                		(authz) -> authz
+                		.requestMatchers("/", "/login", "/register", "/save", "/auth/**", "/templates/**", "/logout").permitAll()
+                        .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/user/**").hasAnyAuthority("USER") // ??? ZAS is this needed ??? - changed from account to user
+                        .anyRequest().authenticated()
+                		);
+                
+                http.formLogin(fL -> fL.loginPage("/login")
+                		.failureUrl("/login?error=true")
+                        .successHandler(customSecuritySuccessHandler)
+                        .usernameParameter("username")
+                        .passwordParameter("password"));
+                
+                http.logout(logOut -> logOut.logoutUrl("/logout")
+                		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                		.logoutSuccessUrl("/")
+                		);
 
+                http.authenticationProvider(authenticationProvider());
+
+                return http.build();
+    }
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//
+//                http.authorizeRequests()
+//                // URL matching for accessibility
+//                .antMatchers("/", "/login", "/register", "/save").permitAll()
+//                .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
+//                .antMatchers("/user/**").hasAnyAuthority("USER") 
+//                .anyRequest().authenticated() // any request should be authenticated
+//                .and()
+//                // customize login
+//                .formLogin()
+//                .loginPage("/login")
+//                .successHandler(customSecuritySuccessHandler)
+//               .usernameParameter("username")
+//               .passwordParameter("password")
+//                .and()
+//                // customize logout
+//                .logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/")
+//                .and()
+//                .exceptionHandling()
+//                .accessDeniedPage("/access-denied");
+//
+//                http.authenticationProvider(authenticationProvider());
+//                http.headers().frameOptions().sameOrigin();
+//    	
+//                return http.build();
+//    }
 }
