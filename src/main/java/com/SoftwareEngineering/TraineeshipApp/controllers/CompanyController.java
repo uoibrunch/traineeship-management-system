@@ -3,14 +3,20 @@ package com.SoftwareEngineering.TraineeshipApp.controllers;
 
 
 import com.SoftwareEngineering.TraineeshipApp.services.company.CompanyService;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 
+@Controller
 public class CompanyController {
 
     CompanyService companyService;
 
+    @RequestMapping("/company/dashboard")
     public String getCompanyDashboard(){
-        return null;
+       return "company/dashboard";
     }
 
     public String retrieveProfile(Model model){

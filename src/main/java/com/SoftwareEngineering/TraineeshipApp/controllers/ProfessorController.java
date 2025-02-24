@@ -1,18 +1,21 @@
 package com.SoftwareEngineering.TraineeshipApp.controllers;
 
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.services.professor.ProfessorService;
 
+@Controller
 public class ProfessorController {
 
     ProfessorService professorService;
 
-
+    @RequestMapping("/professor/dashboard")
     public String getProfessorDashBoard(){
-        return null;
+        return "professor/dashboard";
     }
 
     public String retrieveProfile(Model model){

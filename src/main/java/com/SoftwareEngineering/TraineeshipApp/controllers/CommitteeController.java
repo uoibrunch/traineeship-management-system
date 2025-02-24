@@ -1,15 +1,19 @@
 package com.SoftwareEngineering.TraineeshipApp.controllers;
 
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.SoftwareEngineering.TraineeshipApp.services.committee.CommitteeService;
 
+@Controller
 public class CommitteeController {
 
     private CommitteeService CommitteeService;
 
-
+    @RequestMapping("/committee/dashboard")
     public String getComimmitteeDashboard(){
-        return null;
+        return "committe/dashboard";
     }
 
     public String listTrainseeshipApplications(Model model){
