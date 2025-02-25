@@ -5,8 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
-
-
+import org.springframework.validation.BindingResult;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
 import com.SoftwareEngineering.TraineeshipApp.services.user.UserService;
@@ -31,8 +30,11 @@ public class AuthController {
     }
 
     @RequestMapping("/save")
-    public String registerUser(@ModelAttribute("user") User user, Model model){
-       
+    public String registerUser(@ModelAttribute("user") User user, BindingResult result ,Model model){
+        if (result.hasErrors()) {
+            System.out.println("Binding Errors: " + result.getAllErrors());
+        }
+        System.out.println("Received user: " + user.getUsername() + ", " + user.getPassword() + ", " + user.getRole());
         if(userService.isUserPresent(user)){
             model.addAttribute("successMessage", "User already registered!");
             return "auth/signin";

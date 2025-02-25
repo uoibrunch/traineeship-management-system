@@ -69,8 +69,10 @@ public class WebSecurityConfig {
                 authorizeHttpRequests(
                 		(authz) -> authz
                 		.requestMatchers("/", "/login", "/register", "/save", "/auth/**", "/templates/**", "/logout").permitAll()
-                        .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/user/**").hasAnyAuthority("USER") // ??? ZAS is this needed ??? - changed from account to user
+                        .requestMatchers("/student/**").hasAuthority("Student")
+                        .requestMatchers("/professor/**").hasAuthority("Professor")
+                        .requestMatchers("/company/**").hasAuthority("Company")
+                        .requestMatchers("/committee/**").hasAuthority("Comitte_member")
                         .anyRequest().authenticated()
                 		);
                 
