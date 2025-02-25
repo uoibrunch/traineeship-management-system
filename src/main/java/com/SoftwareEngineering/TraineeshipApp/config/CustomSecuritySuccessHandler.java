@@ -37,17 +37,17 @@ public class CustomSecuritySuccessHandler extends SimpleUrlAuthenticationSuccess
                 for(GrantedAuthority a: authorities){
                     roles.add(a.getAuthority());
                 }
-                if(roles.contains("Professor")){
-                    url = "/Professor/dashboard";
+                if(roles.contains("PROFESSOR")){
+                    url = "/professor/dashboard";
                 }
-                else if(roles.contains("Company")){
-                    url = "/Company/dashboard";
+                else if(roles.contains("COMPANY")){
+                    url = "/company/dashboard";
                 }
-                else if(roles.contains("Student")){
-                    url = "/Student/dashboard";
+                else if(roles.contains("STUDENT")){
+                    url = "/student/dashboard";
                 }
-                else if(roles.contains("Committee")){
-                    url = "/Committee/dashboard";
+                else if(roles.contains("COMMITTEE_MEMBER")){
+                    url = "/committee/dashboard";
                 }
 
                 return url;

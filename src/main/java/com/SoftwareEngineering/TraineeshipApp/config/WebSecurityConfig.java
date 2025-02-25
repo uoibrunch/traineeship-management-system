@@ -69,10 +69,10 @@ public class WebSecurityConfig {
                 authorizeHttpRequests(
                 		(authz) -> authz
                 		.requestMatchers("/", "/login", "/register", "/save", "/auth/**", "/templates/**", "/logout").permitAll()
-                        .requestMatchers("/student/**").hasAuthority("Student")
-                        .requestMatchers("/professor/**").hasAuthority("Professor")
-                        .requestMatchers("/company/**").hasAuthority("Company")
-                        .requestMatchers("/committee/**").hasAuthority("Comitte_member")
+                        .requestMatchers("/student/**").hasAuthority("STUDENT")
+                        .requestMatchers("/professor/**").hasAuthority("PROFESSOR")
+                        .requestMatchers("/company/**").hasAuthority("COMPANY")
+                        .requestMatchers("/committee/**").hasAuthority("COMMITTEE_MEMBER")
                         .anyRequest().authenticated()
                 		);
                 

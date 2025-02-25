@@ -4,7 +4,7 @@ public enum Role {
     STUDENT("Student"),
     PROFESSOR("Professor"),
     COMPANY("Company"),
-    COMMITTEE_MEMBER("Committee Member");
+    COMMITTEE_MEMBER("Committee_member");
 
     private final String value;
 

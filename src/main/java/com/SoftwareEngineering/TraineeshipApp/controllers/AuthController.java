@@ -19,7 +19,7 @@ public class AuthController {
     //private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @RequestMapping("/login")
-        public String login(){
+    public String login(){
         return "auth/signin";
     }
 
@@ -30,11 +30,8 @@ public class AuthController {
     }
 
     @RequestMapping("/save")
-    public String registerUser(@ModelAttribute("user") User user, BindingResult result ,Model model){
-        if (result.hasErrors()) {
-            System.out.println("Binding Errors: " + result.getAllErrors());
-        }
-        System.out.println("Received user: " + user.getUsername() + ", " + user.getPassword() + ", " + user.getRole());
+    public String registerUser(@ModelAttribute("user") User user,Model model){
+       
         if(userService.isUserPresent(user)){
             model.addAttribute("successMessage", "User already registered!");
             return "auth/signin";

@@ -22,30 +22,29 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserMapper userDAO;
 
-    // Save the user with an encrypted password
+    
     @Override
     public void saveUser(User user) {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        userDAO.save(user);  // Save the user entity using the UserDAO (repository)
+        userDAO.save(user);  
     }
 
-    // Check if user already exists in the database
+    
     @Override
     public boolean isUserPresent(User user) {
         Optional<User> storedUser = userDAO.findByUsername(user.getUsername());
         return storedUser.isPresent();
     }
 
-    // Method defined in Spring Security UserDetailsService interface
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // orElseThrow method of Optional container that throws an exception if Optional result is null
-        return userDAO.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException(
-                        String.format("USER_NOT_FOUND %s", username)
-                ));
+        return userDAO.findByUsername(username).orElseThrow(() -> {
+            return new UsernameNotFoundException(String.format("USER_NOT_FOUND %s", username));
+        });
     }
+
 
     @Override
     public User findById(String id) {
@@ -53,4 +52,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 () -> new RuntimeException("User not found with username: " + id)
         );
     }
+
+    
 }
