@@ -3,20 +3,39 @@ import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.mappers.StudentMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-public class StudentServiceImpl {
 
+import io.micrometer.observation.annotation.Observed;
+
+@Service
+public class StudentServiceImpl implements StudentService {
+    
+    @Autowired
     private StudentMapper studentMapper;
+
+
     private TraineeshipPositionsMapper positionsMapper;
 
-    public Student retrievePofile(String studentUsername){
-        return null;
+    @Override
+    public Student retrieveProfile(String studentUsername){
+
+        return studentMapper.findByUsername(studentUsername);
+        
     }
 
+    @Override
     public void saveProfile(Student student){
-
+        
+        studentMapper.save(student);
     }
 
-    public void saveLogbook(TraineeshipPosition position){}
-
+    @Override
+    public void saveLogbook(TraineeshipPosition position){
+        
+    }
 }
+
+    

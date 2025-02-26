@@ -12,7 +12,6 @@ import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
 
 public interface UserMapper extends JpaRepository<User, Integer> {
 	Optional<User> findByUsername(String username);
-
 	
 }
 

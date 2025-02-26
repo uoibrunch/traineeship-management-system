@@ -2,6 +2,7 @@ package com.SoftwareEngineering.TraineeshipApp.domainmodel;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "students")
 public class Student {
@@ -24,7 +25,7 @@ public class Student {
     private double avgGrade;
 
     @Column(name = "preferred_location")
-    private String preferedLocation;
+    private String preferredLocation;
 
     @Column(name = "interests")
     private String  interests;
@@ -63,11 +64,11 @@ public class Student {
     public void setAvgGrade(double avgGrade) {
         this.avgGrade = avgGrade;
     }
-    public String getPrefferedLocation() {
-        return preferedLocation;
+    public String getPreferredLocation() {
+        return preferredLocation;
     }
-    public void setPrefferedLocation(String preferedLocation) {
-        this.preferedLocation = preferedLocation;
+    public void setPreferredLocation(String preferredLocation) {
+        this.preferredLocation = preferredLocation;
     }
     public String getInterests() {
         return interests;
@@ -92,6 +93,14 @@ public class Student {
     }
     public void setAssignedTraineeship(TraineeshipPosition assignedTraineeship) {
         this.assignedTraineeship = assignedTraineeship;
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
+    
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
 }

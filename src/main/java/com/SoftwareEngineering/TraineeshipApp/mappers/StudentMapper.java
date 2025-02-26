@@ -4,23 +4,12 @@ import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
 
 
 import org.springframework.stereotype.Repository;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
-import java.util.Optional;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface StudentMapper extends JpaRepository<Student,Integer> {
 
-   /*
-    public User findByUsername(String username) {
-        return null;
-    }
-
-    // You can add methods specific to StudentMapper if needed
-    public Student findStudentById(Long id) {
-        // Custom logic for finding a student by id
-        return new Student();  // Placeholder for example
-    }
-        */
+    Student findByUsername(String username);
 }

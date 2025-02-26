@@ -1,0 +1,62 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Update Student Profile</title>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Update Student Profile</h3>
+        <hr>
+
+        <p class="h4 mb-4">Save Student </p>
+        <!-- Form to update student profile -->
+        <form th:action="@{/students/save}" th:object="${student}" method="POST">
+            
+            <!-- Add hidden form field to handle update -->
+            <input type="hidden" th:field="*{studentId}" />
+
+            <div class="form-group">
+                <label for="studentName">Student Name</label>
+                <input type="text" id="studentName" th:field="*{studentName}" class="form-control mb-4" placeholder="Enter student name">
+            </div>
+
+            <div class="form-group">
+                <label for="AM">University ID</label>
+                <input type="text" id="AM" th:field="*{AM}" class="form-control mb-4" placeholder="Enter University ID">
+            </div>
+
+            <div class="form-group">
+                <label for="preferredLocation">Preferred Location</label>
+                <input type="text" id="preferredLocation" th:field="*{preferredLocation}" class="form-control mb-4" placeholder="Enter preferred location">
+            </div>
+    
+            <div class="form-group">
+                <label for="interests">Interests</label>
+                <input type="text" id="interests" th:field="*{interests}" class="form-control mb-4" placeholder="Enter your interests">
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Skills</label>
+                <input type="text" id="skills" th:field="*{skills}" class="form-control mb-4" placeholder="Enter your skills">
+            </div>
+
+            <button type="submit" class="btn btn-info col-2">Save</button>
+        
+        </form>
+        
+        <hr>
+        <a href="/student/dashboard">Back to Dashboard</a>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -7,30 +7,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.SoftwareEngineering.TraineeshipApp.services.student.StudentService;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
+
+
+
 
 @Controller
 public class StudentController {
 
+    @Autowired
     private StudentService studentService;
 
-    @RequestMapping("/student/dashboard")
+    @RequestMapping("/students/dashboard")
     public String getStudentDashboard(){
-        return "student/dashboard";
+        return "students/dashboard";
     }
 
+    @RequestMapping("/students/showFormForUpdate")
+	public String showFormForAdd(Model theModel) {
+		
+		// create model attribute to bind form data
+		Student theStudent = new Student();
+        
+		
+		theModel.addAttribute("student", theStudent);
+		
+		return "students/student-form";
+	}
+
+    @RequestMapping("/students/retrieveProfile")
     public String retrieveProfile(Model model){
-        return null;
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Student student = studentService.retrieveProfile(username);
+        if (student == null) {
+            System.out.println("no one in database");
+        }
+        model.addAttribute("student", student);
+        return "students/dashboard";
     }
 
-    public String saveProfile(@ModelAttribute("student") Student student , Model theModel){
-        return null;
-    }
-
-    public String fillLogbook(Model model){
-        return null;
+    @RequestMapping("/students/save")
+    public String saveProfile(@ModelAttribute("student") Student student){
+        student.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        studentService.saveProfile(student);
+        
+        return "redirect:/students/retrieveProfile";
     }
 
     public String saveLogbook(@ModelAttribute("position") TraineeshipPosition position , Model theModel){
+        return null;
+    }
+
+    public String fillLogbook(@ModelAttribute("position") TraineeshipPosition position , Model thModel){
         return null;
     }
 
