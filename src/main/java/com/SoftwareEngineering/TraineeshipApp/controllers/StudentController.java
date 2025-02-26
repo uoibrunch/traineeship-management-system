@@ -25,7 +25,11 @@ public class StudentController {
 
 
     @RequestMapping("/students/dashboard")
-    public String getStudentDashboard(){
+    public String getStudentDashboard(Model model){
+        
+        Student student = studentService.retrieveProfile(extractUsernameFromUser());
+        model.addAttribute("student", student);
+
         return "students/dashboard";
     }
 

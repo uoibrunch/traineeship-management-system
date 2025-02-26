@@ -47,8 +47,14 @@
                 <strong>Skills:</strong> 
                 <span th:text="${student != null ? student.skills : 'Not Set'}"></span>
             </p>
+            <p class="card-text">
+                <strong>Applied for Traineeship:</strong> 
+                <span th:text="${student != null && student.lookingForTraineeship ? 'Yes' : 'No'}"></span>
+            </p>
         </div>
     </div>
+    
+    <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
 
 </div>
 
