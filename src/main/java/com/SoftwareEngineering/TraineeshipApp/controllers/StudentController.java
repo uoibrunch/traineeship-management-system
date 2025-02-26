@@ -34,7 +34,7 @@ public class StudentController {
     }
 
     @RequestMapping("/students/showFormForUpdate")
-	public String showFormForAdd(Model theModel) {
+	public String showFormForUpdate(Model theModel) {
 		
 		// create model attribute to bind form data
 		Student theStudent = new Student();
@@ -49,7 +49,7 @@ public class StudentController {
     public String retrieveProfile(Model model){
 
         Student student = studentService.retrieveProfile(extractUsernameFromUser());
-        
+
         model.addAttribute("student", student);
 
         return "students/dashboard";

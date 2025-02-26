@@ -1,21 +1,52 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <title>Professor Dashboard</title>
+
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Professor Profile</title>
 </head>
+
 <body>
-<div class="container">
-    <h2>Welcome to Professor Dashboard</h2>
-    <h4>Logged as: <span sec:authentication="name"></span></h4>
-    <h4>Has role: <span sec:authentication="authorities"></span></h4>
-    <br><hr><br>
-    <p>
-        <a th:href="@{/}" class="btn btn-primary">Home</a>
-        <a th:href="@{/logout}" class="btn btn-danger">Logout</a>
-    </p>
+
+<div class="container mt-5">
+
+    <h3>Professor Profile</h3>
+    <hr>
+
+    <!-- Button to create or update profile -->
+    <a href="/professor/showFormForUpdate" class="btn btn-primary btn-sm mb-3">
+        Update Profile
+    </a>
+
+    <!-- Student profile card -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">
+                <strong>Full Name:</strong> 
+                <span th:text="${professor != null ? professor.professorName : 'Not Set'}"></span>
+            </h5>
+            <p class="card-text">
+                <strong>Interests:</strong> 
+                <span th:text="${professor != null ? professor.interests : 'Not Set'}"></span>
+            </p>
+            
+        </div>
+    </div>
+    
+    <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
+
 </div>
+
+<!-- Optional: Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -29,7 +29,7 @@ public class Professor {
     public String getUsername() {
         return username;
     }
-    public String getProfessoreName() {
+    public String getProfessorName() {
         return professorName;
     }
 
@@ -45,7 +45,7 @@ public class Professor {
         this.username = username;
     }
     
-    public void setProfessoreName(String professoreName) {
+    public void setProfessorName(String professoreName) {
         this.professorName = professoreName;
     }
 
@@ -55,6 +55,10 @@ public class Professor {
 
     public void setSupervisedPositions(List<TraineeshipPosition> supervisedPositions) {
         this.supervisedPositions = supervisedPositions;
+    }
+
+    public void setProfessorId(int id){
+        this.professorId = id;
     }
 
 }

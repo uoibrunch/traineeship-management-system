@@ -40,16 +40,16 @@ public class CompanyController {
     }
 
     @RequestMapping("/company/showFormForUpdate")
-	public String showFormForAdd(Model theModel) {
+	public String showFormForUpdate(Model theModel) {
 		
-		// create model attribute to bind form data
 		Company theCompany = new Company();
         
-		
 		theModel.addAttribute("company", theCompany);
 		
 		return "company/company-form";
 	}
+
+    
 
     @RequestMapping("/company/save")
     public String saveProfile(Company company , Model model){

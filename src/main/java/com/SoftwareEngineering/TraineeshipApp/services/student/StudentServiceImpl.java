@@ -30,6 +30,7 @@ public class StudentServiceImpl implements StudentService {
     public void saveProfile(Student student){
         
         studentMapper.save(student);
+        
     }
 
     @Override
