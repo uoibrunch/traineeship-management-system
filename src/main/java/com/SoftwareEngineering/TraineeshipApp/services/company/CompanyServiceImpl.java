@@ -7,27 +7,43 @@ import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.mappers.CompanyMapper;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
 
-public class CompanyServiceImpl {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+@Service
+public class CompanyServiceImpl implements CompanyService {
+    
+    @Autowired
     private CompanyMapper companyMapper;
 
-    // public Company retrievePofile(String usernname){
-    //     return companyMapper.findByCompanyId(usernname);
-    // }
+    @Override
+    public Company retrieveProfile(String username){
+        return companyMapper.findByUsername(username);
+    }
 
-    public void saveProfile(Company company){};
+    @Override
+    public void saveProfile(Company company){
+        companyMapper.save(company);
+    };
 
+    @Override
     public List<TraineeshipPosition> retrieveAvailablePositions(String Username){
         return null;
     }
 
+    @Override
     public void addPosition(String username, TraineeshipPosition poisition){};
 
+    @Override
     public List<TraineeshipPosition> retrieveAssignedPositions(String username){
         return null;
     }
     
+    @Override
     public void evaluateAssignedPosition(Integer poistionId){};
 
+    @Override
     public void saveEvaluation(Integer positionId, Evaluation evaulation){};
 
 }

@@ -9,7 +9,7 @@ import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
 
 public interface CompanyService {
 
-    Company retrievePofile(String username);
+    Company retrieveProfile(String username);
 
     void saveProfile(Company company);
 

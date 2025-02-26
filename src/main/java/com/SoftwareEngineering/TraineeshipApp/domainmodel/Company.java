@@ -2,9 +2,6 @@ package com.SoftwareEngineering.TraineeshipApp.domainmodel;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
 
 @Entity
@@ -58,5 +55,9 @@ public class Company {
 
     public void setPositions(List<TraineeshipPosition> positions) {
         this.positions = positions;
+    }
+
+    public void setCompanyId(int companyId){
+        this.companyId = companyId;
     }
 }
