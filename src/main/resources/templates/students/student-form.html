@@ -17,9 +17,6 @@
         <!-- Form to update student profile -->
         <form th:action="@{/students/save}" th:object="${student}" method="POST">
             
-            <!-- Add hidden form field to handle update -->
-            <input type="hidden" th:field="*{studentId}" />
-
             <div class="form-group">
                 <label for="studentName">Student Name</label>
                 <input type="text" id="studentName" th:field="*{studentName}" class="form-control mb-4" placeholder="Enter student name">

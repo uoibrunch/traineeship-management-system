@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.SoftwareEngineering.TraineeshipApp.services.student.StudentService;
+import com.SoftwareEngineering.TraineeshipApp.services.user.UserService;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.ui.Model;
 
 
@@ -19,6 +22,7 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
 
     @RequestMapping("/students/dashboard")
     public String getStudentDashboard(){
@@ -39,8 +43,7 @@ public class StudentController {
 
     @RequestMapping("/students/retrieveProfile")
     public String retrieveProfile(Model model){
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Student student = studentService.retrieveProfile(username);
+        Student student = studentService.retrieveProfile(extractUsernameFromUser());
         if (student == null) {
             System.out.println("no one in database");
         }
@@ -50,10 +53,27 @@ public class StudentController {
 
     @RequestMapping("/students/save")
     public String saveProfile(@ModelAttribute("student") Student student){
-        student.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        saveUsernameAndId(student);
+       
         studentService.saveProfile(student);
         
         return "redirect:/students/retrieveProfile";
+    }
+
+    public void saveUsernameAndId(Student student){
+
+        student.setUsername(extractUsernameFromUser());
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) userDetails;
+        student.setStudentId(user.getId());
+
+    }
+
+    public String extractUsernameFromUser(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return username;
     }
 
     public String saveLogbook(@ModelAttribute("position") TraineeshipPosition position , Model theModel){
