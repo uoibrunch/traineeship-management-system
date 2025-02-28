@@ -23,7 +23,7 @@ public class Company {
     private String companyLocation;
     
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    private List <TraineeshipPosition> positions;
+    private List <TraineeshipPosition> positions ;
 
     public String getUsername() {
         return username;

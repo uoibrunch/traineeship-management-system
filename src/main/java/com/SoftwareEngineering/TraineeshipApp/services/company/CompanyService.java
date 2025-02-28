@@ -23,4 +23,6 @@ public interface CompanyService {
 
     void saveEvaluation(Integer positionId, Evaluation evaluation);
 
+    void deleteById(int id);
+
 }

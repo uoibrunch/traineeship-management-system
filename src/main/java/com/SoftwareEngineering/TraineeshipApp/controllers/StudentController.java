@@ -66,6 +66,25 @@ public class StudentController {
         return "redirect:/students/retrieveProfile";
     }
 
+    @RequestMapping("/students/fillLogbook")
+    public String fillLogbook(Model model) {
+
+        Student student = studentService.retrieveProfile(extractUsernameFromUser());
+
+        if (student.getAssignedTraineeship() != null) {
+            model.addAttribute("position", student.getAssignedTraineeship());
+            return "students/fill-logbook";
+        } else {
+            return "redirect:/students/dashboard"; 
+        }
+    }
+
+    @RequestMapping(value = "/students/saveLogbook")
+    public String saveLogbook(@ModelAttribute("position") TraineeshipPosition position) {
+        studentService.saveLogbook(position);
+        return "redirect:/students/dashboard"; 
+    }
+
     public void saveUsernameAndId(Student student){
 
         student.setUsername(extractUsernameFromUser());
@@ -79,14 +98,6 @@ public class StudentController {
     public String extractUsernameFromUser(){
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return username;
-    }
-
-    public String saveLogbook(@ModelAttribute("position") TraineeshipPosition position , Model theModel){
-        return null;
-    }
-
-    public String fillLogbook(@ModelAttribute("position") TraineeshipPosition position , Model thModel){
-        return null;
     }
 
 }

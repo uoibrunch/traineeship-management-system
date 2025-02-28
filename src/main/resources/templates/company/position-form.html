@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announce Traineeship Position</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Create a New Traineeship Position</h1>
+    <hr>
+
+    <!-- Form to create a new traineeship position -->
+    <form action="#" th:action="@{/company/savePosition}" method="post" th:object="${position}">
+        <div class="mb4">
+        <label class="form-label">title:</label>
+        <input type="text" class="form-control" th:field="*{title}" /><br/>
+ 		</div>
+
+         <div class="mb-4">
+            <label class="form-label">Start Date:</label>
+            <input type="date" class="form-control" th:field="*{fromDate}" required/><br/>
+        </div>
+
+        <!-- To Date input -->
+        <div class="mb-4">
+            <label class="form-label">End Date:</label>
+            <input type="date" class="form-control" th:field="*{toDate}" required/><br/>
+        </div>
+
+        
+        <div class="mb4">
+        <label class="form-label">Description:</label>
+        <input type="text" class="form-control" th:field="*{description}" /><br/>
+        </div>
+        
+        <div class="mb4">
+        <label class="form-label">Required Skills:</label>
+        <input type="text" class="form-control" th:field="*{skills}" /><br/>
+        </div>
+
+        <div class="mb4">
+        <label class="form-label">Topics of Interest:</label>
+        <input type="text" class="form-control" th:field="*{topics}" /><br/>
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Anounce Position</button>    
+    </form>
+</div>
+
+<!-- Optional: Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

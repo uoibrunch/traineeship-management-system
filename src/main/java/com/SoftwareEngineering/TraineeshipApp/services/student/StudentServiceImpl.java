@@ -6,6 +6,8 @@ import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Optional;
+
 
 
 import io.micrometer.observation.annotation.Observed;
@@ -35,6 +37,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void saveLogbook(TraineeshipPosition position){
+
+        Optional<TraineeshipPosition> existingPosition = positionsMapper.findById(position.getTraineeshipId());
+        if (existingPosition.isPresent()) {
+            TraineeshipPosition updatedPosition = existingPosition.get();
+            updatedPosition.setStudentLogbook(position.getStudentLogbook()); 
+            positionsMapper.save(updatedPosition); 
+        }
         
     }
 }

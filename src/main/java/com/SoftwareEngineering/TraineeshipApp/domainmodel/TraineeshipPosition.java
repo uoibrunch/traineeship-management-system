@@ -100,7 +100,7 @@ public class TraineeshipPosition {
     public boolean isAssigned() {
         return isAssigned;
     }
-    public void setAssigned(boolean isAssigned) {
+    public void setIsAssigned(boolean isAssigned) {
         this.isAssigned = isAssigned;
     }
     public String getStudentLogbook() {
@@ -138,6 +138,10 @@ public class TraineeshipPosition {
     }
     public void setEvaluations(List<Evaluation> evaluations) {
         this.evaluations = evaluations;
+    }
+
+    public int getTraineeshipId(){
+        return traineeshipId;
     }
     
 

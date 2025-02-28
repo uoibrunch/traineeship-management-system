@@ -5,6 +5,7 @@ import java.util.List;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.mappers.CompanyMapper;
+import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ public class CompanyServiceImpl implements CompanyService {
     
     @Autowired
     private CompanyMapper companyMapper;
-
+    
+    @Autowired
+    private TraineeshipPositionsMapper traineeshipPositionMapper;
     @Override
     public Company retrieveProfile(String username){
         return companyMapper.findByUsername(username);
@@ -28,16 +31,53 @@ public class CompanyServiceImpl implements CompanyService {
     };
 
     @Override
-    public List<TraineeshipPosition> retrieveAvailablePositions(String Username){
-        return null;
+    public List<TraineeshipPosition> retrieveAvailablePositions(String username){
+
+        Company company = companyMapper.findByUsername(username);
+        
+
+        if (company != null) {
+
+            return company.getPositions(); 
+            
+        } else {
+            
+            throw new RuntimeException("Company with username " + username + " not found.");
+
+        }
+        
     }
 
     @Override
-    public void addPosition(String username, TraineeshipPosition poisition){};
+    public void addPosition(String username, TraineeshipPosition position) {
+        
+        Company company = companyMapper.findByUsername(username);
+        
+        if (company != null) {
+           
+            company.getPositions().add(position);
+
+            position.setCompany(company);
+
+            traineeshipPositionMapper.save(position);
+           
+        } else {
+            
+            throw new RuntimeException("Company with username " + username + " not found.");
+
+        }
+    }
 
     @Override
     public List<TraineeshipPosition> retrieveAssignedPositions(String username){
-        return null;
+        return null;    
+    }
+
+    @Override
+    public void deleteById(int theId){
+
+        traineeshipPositionMapper.deleteById(theId);
+
     }
     
     @Override
