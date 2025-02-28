@@ -47,6 +47,10 @@ public class CommitteeServiceImpl implements CommitteeService{
         return studentMapper.findById(id);
     }
 
+    @Override
+    public List <TraineeshipPosition> listUnassignedTraineeships(){
+        return positionsMapper.findByIsAssignedFalse();
+    }
 
     @Override
     public void assignPosition(Integer positionId, String studentUsername){

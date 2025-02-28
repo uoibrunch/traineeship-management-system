@@ -51,9 +51,13 @@ public class CommitteeController {
 
     @RequestMapping("/committee/selectStudent")
     public String selectStudent(@RequestParam("studentId") int theId,  Model model){
+
         Student student = committeeService.findStudentById(theId);
 
+        List<TraineeshipPosition> unassignedPositions = committeeService.listUnassignedTraineeships();
+
         model.addAttribute("student", student);
+        model.addAttribute("positions", unassignedPositions);
 
         return "committee/selected-student";
     }

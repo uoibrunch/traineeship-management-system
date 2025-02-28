@@ -18,4 +18,6 @@ public interface CommitteeService {
 
     Student findStudentById(int id);
 
+    List <TraineeshipPosition> listUnassignedTraineeships();
+
 }

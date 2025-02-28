@@ -39,6 +39,32 @@
         <button type="submit" class="btn btn-primary">Find Positions</button>
     </form>
 
+    <div class="card p-3 mt-4">
+        <h4>Available Traineeship Positions</h4>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Topics</th>
+                    <th>Skills</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="position : ${positions}">
+                    <td th:text="${position.title}"></td>
+                    <td th:text="${position.description}"></td>
+                    <td th:text="${position.fromDate}"></td>
+                    <td th:text="${position.toDate}"></td>
+                    <td th:text="${position.topics}"></td>
+                    <td th:text="${position.skills}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <a href="/committee/showTraineeshipApplications" class="btn btn-secondary mt-3">Back to Student List</a>
 </div>
 
