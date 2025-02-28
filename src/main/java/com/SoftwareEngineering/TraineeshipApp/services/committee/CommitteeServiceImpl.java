@@ -42,6 +42,11 @@ public class CommitteeServiceImpl implements CommitteeService{
         return searchStrategy.search(applicantUsername);
     }
 
+    @Override
+    public Student findStudentById(int id){
+        return studentMapper.findById(id);
+    }
+
 
     @Override
     public void assignPosition(Integer positionId, String studentUsername){

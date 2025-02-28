@@ -16,4 +16,6 @@ public interface CommitteeService {
 
     void completeAssignedTraineeships(Integer positionId);
 
+    Student findStudentById(int id);
+
 }

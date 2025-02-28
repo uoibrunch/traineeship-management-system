@@ -15,4 +15,6 @@ public interface StudentMapper extends JpaRepository<Student,Integer> {
     Student findByUsername(String username);
     
     List<Student> findByLookingForTraineeshipTrue();
+
+    Student findById(int studentId);
 }

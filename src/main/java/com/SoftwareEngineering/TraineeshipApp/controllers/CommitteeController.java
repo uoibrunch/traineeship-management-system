@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.CommitteeMember;
@@ -46,6 +47,15 @@ public class CommitteeController {
         List<TraineeshipPosition> positions = committeeService.retrievePositionsForApplicant(studentUsername, strategy);
         model.addAttribute("positions", positions);
         return "committee/positions-list";
+    }
+
+    @RequestMapping("/committee/selectStudent")
+    public String selectStudent(@RequestParam("studentId") int theId,  Model model){
+        Student student = committeeService.findStudentById(theId);
+
+        model.addAttribute("student", student);
+
+        return "committee/selected-student";
     }
 
     public String assignPosition(Integer positionId, String studentUsername , Model model){

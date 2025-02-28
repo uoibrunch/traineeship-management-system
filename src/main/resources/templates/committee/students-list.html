@@ -20,6 +20,7 @@
                 <th>Preferred Location</th>
                 <th>Interests</th>
                 <th>Skills</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,12 @@
                 <td th:text="${student.preferredLocation}"></td>
                 <td th:text="${student.interests}"></td>
                 <td th:text="${student.skills}"></td>
+                <td>
+					<a th:href="@{/committee/selectStudent(studentId=${student.studentId})}"
+					   class="btn btn-info btn-sm">
+					    Select
+					</a>
+                </td>
             </tr>
         </tbody>
     </table>
