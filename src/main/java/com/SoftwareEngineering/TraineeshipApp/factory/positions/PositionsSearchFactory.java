@@ -1,14 +1,42 @@
 package com.SoftwareEngineering.TraineeshipApp.factory.positions;
 
-import com.SoftwareEngineering.TraineeshipApp.factory.search.SearchBasedOnInterests;
-import com.SoftwareEngineering.TraineeshipApp.factory.search.SearchBasedOnLoad;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
+import com.SoftwareEngineering.TraineeshipApp.factory.search.CompositeSearch;
+import com.SoftwareEngineering.TraineeshipApp.factory.search.PositionsSearchStrategy;
+import com.SoftwareEngineering.TraineeshipApp.factory.search.SearchBasedOnInterests;
+import com.SoftwareEngineering.TraineeshipApp.factory.search.SearchBasedOnLocation;
+import com.SoftwareEngineering.TraineeshipApp.factory.search.SearchBasedOnLocation;
+
+@Service
 public class PositionsSearchFactory {
 
-    private SearchBasedOnLoad searchBasedOnLocation;
+    @Autowired
+    private SearchBasedOnLocation searchBasedOnLocation;
 
+    @Autowired
     private SearchBasedOnInterests searchBasedOnInterests;
 
-    //private CompositeSearch compositeSearch;    
+    @Autowired
+    private CompositeSearch compositeSearch;  
+    
+    
+    public PositionsSearchStrategy create(String strategy) {
+        if ("location".equalsIgnoreCase(strategy)) {
+            return searchBasedOnLocation;
+        } else if ("interests".equalsIgnoreCase(strategy)) {
+            return searchBasedOnInterests;
+        } else if ("both".equalsIgnoreCase(strategy)) {
+            return compositeSearch;
+        } else {
+            throw new IllegalArgumentException("Invalid search strategy: " + strategy);
+        }
+    }
+    
 
 }

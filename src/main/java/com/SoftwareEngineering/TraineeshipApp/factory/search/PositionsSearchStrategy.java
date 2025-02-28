@@ -1,4 +1,5 @@
-package com.SoftwareEngineering.TraineeshipApp.factory.positions;
+package com.SoftwareEngineering.TraineeshipApp.factory.search;
+
 
 import java.util.List;
 

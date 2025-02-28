@@ -1,7 +1,6 @@
 package com.SoftwareEngineering.TraineeshipApp.factory.search;
 
-import com.SoftwareEngineering.TraineeshipApp.mappers.StudentMapper;
-import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
+import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,30 +11,37 @@ import org.springframework.stereotype.Service;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 
-
 @Service
-public class SearchBasedOnInterests implements PositionsSearchStrategy{
-    
+public class SearchBasedOnLocation implements PositionsSearchStrategy {
+
     @Autowired
-    private TraineeshipPositionsMapper positionsMapper;
+    private CompanyMapper companyMapper;
 
     @Autowired
     private StudentMapper studentMapper;
+
 
     @Override
     public List<TraineeshipPosition> search(String applicantUsername) {
 
         Student student = studentMapper.findByUsername(applicantUsername);
 
-        if (student == null || student.getSkills() == null) {
-
-            return new ArrayList<>();
+        if (student == null || student.getPreferredLocation() == null) {
             
+            return new ArrayList<>();
         }
 
-        List<String> studentSkills = Arrays.asList(student.getSkills().split(","));
+        List<Company> companies = companyMapper.findByCompanyLocation(student.getPreferredLocation());
 
-        return positionsMapper.findByRequiredSkillsIn(studentSkills);
+        List<TraineeshipPosition> positions = new ArrayList<>();
+
+        for (Company company : companies) {
+
+            positions.addAll(company.getPositions());
+
+        }
+
+        return positions;
     }
 
 }

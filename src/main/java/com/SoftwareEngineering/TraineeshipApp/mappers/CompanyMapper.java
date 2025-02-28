@@ -6,11 +6,15 @@ import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface CompanyMapper extends JpaRepository<Company, Integer>{
+
     Company findByUsername(String username);
+    
+    List<Company> findByCompanyLocation(String location);
 }

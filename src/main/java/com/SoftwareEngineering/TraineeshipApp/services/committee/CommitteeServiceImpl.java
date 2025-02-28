@@ -2,47 +2,63 @@ package com.SoftwareEngineering.TraineeshipApp.services.committee;
 
 import com.SoftwareEngineering.TraineeshipApp.factory.*;
 import com.SoftwareEngineering.TraineeshipApp.factory.positions.PositionsSearchFactory;
+import com.SoftwareEngineering.TraineeshipApp.factory.search.PositionsSearchStrategy;
 import com.SoftwareEngineering.TraineeshipApp.factory.supervisor.SupervisorAssignmentFactory;
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 
+@Service
 public class CommitteeServiceImpl implements CommitteeService{
 
+    @Autowired
     private PositionsSearchFactory positionsSearchFactory;
 
-    private SupervisorAssignmentFactory supervisorAssignementFactory;
+    // @Autowired
+    // private SupervisorAssignmentFactory supervisorAssignementFactory;
 
+    @Autowired
     private StudentMapper studentMapper;
 
+    @Autowired
     private TraineeshipPositionsMapper positionsMapper;
 
 
-
-
-
-    public List<TraineeshipPosition> retrievePositionsForApplicant(String applicantUsername, String Strategy){
-        return null;
-    }
-
+    @Override
     public List<Student> retrieveTraineeshipApplications(){
-        return null;
+
+        return studentMapper.findByLookingForTraineeshipTrue() ;
+
     }
 
+    @Override
+    public List<TraineeshipPosition> retrievePositionsForApplicant(String applicantUsername, String strategy){
+        PositionsSearchStrategy searchStrategy = positionsSearchFactory.create(strategy);
+        return searchStrategy.search(applicantUsername);
+    }
+
+
+    @Override
     public void assignPosition(Integer positionId, String studentUsername){
 
     }
 
+    @Override
     public void assignSupervisor(Integer positionId, String strategy){
 
     }
 
+    @Override
     public List<TraineeshipPosition> listAssignedTraineeships(){
         return null;
     }
 
+    @Override
     public void completeAssignedTraineeships(Integer positionId){
 
     }

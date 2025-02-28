@@ -5,6 +5,7 @@ import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,4 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface StudentMapper extends JpaRepository<Student,Integer> {
 
     Student findByUsername(String username);
+    
+    List<Student> findByLookingForTraineeshipTrue();
 }
