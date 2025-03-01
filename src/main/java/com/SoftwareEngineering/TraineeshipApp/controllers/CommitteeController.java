@@ -70,9 +70,16 @@ public class CommitteeController {
         return "committee/selected-student";
     }
 
-    public String assignPosition(Integer positionId, String studentUsername , Model model){
-        return null;
+    @RequestMapping("/committee/assignPosition")
+    public String assignPosition(@RequestParam("positionId") Integer positionId, @RequestParam("studentUsername") String studentUsername, Model model) {
+        
+        committeeService.assignPosition(positionId, studentUsername);
+            
+        model.addAttribute("successMessage", "Position assigned successfully!");
+       
+        return "committee/dashboard";
     }
+
 
     public String assignSupervisor(Integer positionId, String strategy, Model model){
         return null;

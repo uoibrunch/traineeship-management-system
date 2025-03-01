@@ -22,6 +22,7 @@
         <p><strong>Preferred Location:</strong> <span th:text="${student.preferredLocation}"></span></p>
         <p><strong>Interests:</strong> <span th:text="${student.interests}"></span></p>
         <p><strong>Skills:</strong> <span th:text="${student.skills}"></span></p>
+        
     </div>
 
     <!-- Search Results - Positions -->
@@ -37,6 +38,7 @@
                     <th>To</th>
                     <th>Topics</th>
                     <th>Skills</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +49,13 @@
                     <td th:text="${position.toDate}"></td>
                     <td th:text="${position.topics}"></td>
                     <td th:text="${position.skills}"></td>
+                    <td>
+                        <form th:action="@{/committee/assignPosition}" method="post">
+                            <input type="hidden" name="positionId" th:value="${position.id}">
+                            <input type="hidden" name="studentUsername" th:value="${student.username}">
+                            <button type="submit" class="btn btn-success">Assign</button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>

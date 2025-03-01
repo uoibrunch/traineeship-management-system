@@ -17,6 +17,9 @@ public class CompanyServiceImpl implements CompanyService {
     
     @Autowired
     private CompanyMapper companyMapper;
+
+    @Autowired
+    private TraineeshipPositionsMapper positionsMapper;
     
     @Autowired
     private TraineeshipPositionsMapper traineeshipPositionMapper;
@@ -45,7 +48,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         if (company != null) {
 
-            return company.getPositions(); 
+            return positionsMapper.findByCompanyAndIsAssignedFalse(company);
             
         } else {
             

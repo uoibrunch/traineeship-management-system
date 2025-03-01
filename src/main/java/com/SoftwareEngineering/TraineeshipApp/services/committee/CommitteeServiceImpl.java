@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 
@@ -65,9 +66,39 @@ public class CommitteeServiceImpl implements CommitteeService{
     }
 
     @Override
-    public void assignPosition(Integer positionId, String studentUsername){
+    public void assignPosition(Integer positionId, String studentUsername) {
+    
+        Student student = studentMapper.findByUsername(studentUsername);
+        
+        if (student == null) {
+            throw new IllegalArgumentException("Student with username " + studentUsername + " not found.");
+        }
 
+        Optional<TraineeshipPosition> positionOpt = positionsMapper.findById(positionId);
+        
+        if (!positionOpt.isPresent()) {
+            throw new IllegalArgumentException("Traineeship Position with ID " + positionId + " not found.");
+        }
+
+        TraineeshipPosition position = positionOpt.get();
+        
+        if (position.isAssigned()) {
+            throw new IllegalStateException("Traineeship Position with ID " + positionId + " is already assigned.");
+        }
+
+        position.setStudent(student);
+
+        position.setIsAssigned(true);
+
+        student.setLookingForTraineeship(false);
+
+        student.setAssignedTraineeship(position);
+
+        positionsMapper.save(position);
+
+        studentMapper.save(student);
     }
+
 
     @Override
     public void assignSupervisor(Integer positionId, String strategy){

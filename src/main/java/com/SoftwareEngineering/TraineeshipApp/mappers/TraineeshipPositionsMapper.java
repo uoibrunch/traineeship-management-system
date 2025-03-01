@@ -2,6 +2,7 @@ package com.SoftwareEngineering.TraineeshipApp.mappers;
 
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,10 @@ public interface TraineeshipPositionsMapper extends JpaRepository<TraineeshipPos
 
     @Query("SELECT t FROM TraineeshipPosition t WHERE t.topics LIKE %:interest%")
     List<TraineeshipPosition> findByTopicsContaining(@Param("interest") String interest);
+
+    Optional<TraineeshipPosition> findById(Integer traineeshipId);
+
+    List<TraineeshipPosition> findByCompanyAndIsAssignedFalse(Company company);
+
 	
 }
