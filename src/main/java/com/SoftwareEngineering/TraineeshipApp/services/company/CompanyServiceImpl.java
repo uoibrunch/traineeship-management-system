@@ -80,7 +80,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<TraineeshipPosition> retrieveAssignedPositions(String username){
-        return null;    
+        Company company = companyMapper.findByUsername(username);
+    
+        if (company != null) {
+            return traineeshipPositionMapper.findByCompanyAndIsAssignedTrue(company);
+
+        } else {
+
+            throw new RuntimeException("Company with username " + username + " not found.");
+            
+        }
     }
 
     @Override

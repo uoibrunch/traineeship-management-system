@@ -108,8 +108,16 @@ public class CompanyController {
 
     }
     
+    @RequestMapping("/company/assignedPositions")
     public String listAssignedPositions(Model model){
-        return null;
+
+        String username = extractUsernameFromUser();
+    
+        List<TraineeshipPosition> assignedPositions = companyService.retrieveAssignedPositions(username);
+        
+        model.addAttribute("assignedPositions", assignedPositions);
+        
+        return "company/assigned-positions-list";
     }
 
     public String evaluateAssignedTraineeship(Integer positionId, Model model){
