@@ -44,12 +44,24 @@ public class CommitteeServiceImpl implements CommitteeService{
 
     @Override
     public Student findStudentById(int id){
+
         return studentMapper.findById(id);
+        
     }
 
     @Override
     public List <TraineeshipPosition> listUnassignedTraineeships(){
+
         return positionsMapper.findByIsAssignedFalse();
+
+    }
+
+    @Override
+    public Student findStudentByUsername(String username) {
+
+        Student student = studentMapper.findByUsername(username);
+
+        return student;
     }
 
     @Override
@@ -71,5 +83,7 @@ public class CommitteeServiceImpl implements CommitteeService{
     public void completeAssignedTraineeships(Integer positionId){
 
     }
+
+  
 
 }

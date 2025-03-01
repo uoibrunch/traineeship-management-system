@@ -44,8 +44,15 @@ public class CommitteeController {
 
     @RequestMapping("/committee/findPositions")
     public String findPositions(String studentUsername , String strategy , Model model){
+
+        Student student = committeeService.findStudentByUsername(studentUsername);
+
         List<TraineeshipPosition> positions = committeeService.retrievePositionsForApplicant(studentUsername, strategy);
+
+        model.addAttribute("student", student);
+
         model.addAttribute("positions", positions);
+
         return "committee/positions-list";
     }
 
@@ -57,6 +64,7 @@ public class CommitteeController {
         List<TraineeshipPosition> unassignedPositions = committeeService.listUnassignedTraineeships();
 
         model.addAttribute("student", student);
+
         model.addAttribute("positions", unassignedPositions);
 
         return "committee/selected-student";

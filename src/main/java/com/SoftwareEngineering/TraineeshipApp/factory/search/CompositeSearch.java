@@ -25,7 +25,9 @@ public class CompositeSearch implements PositionsSearchStrategy {
 
     @Override
     public List<TraineeshipPosition> search(String applicantUsername) {
+        
         List<TraineeshipPosition> byLocation = searchBasedOnLocation.search(applicantUsername);
+        
         List<TraineeshipPosition> byInterests = searchBasedOnInterests.search(applicantUsername);
 
         Set<TraineeshipPosition> combinedResults = new HashSet<>(byLocation);

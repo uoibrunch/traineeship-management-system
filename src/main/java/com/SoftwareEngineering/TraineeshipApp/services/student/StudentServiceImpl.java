@@ -31,6 +31,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void saveProfile(Student student){
         
+        Student existingStudent = studentMapper.findByUsername(student.getUsername());
+
+        if (existingStudent != null) {
+            student.setStudentId(existingStudent.getStudentId());
+        }
+
         studentMapper.save(student);
         
     }

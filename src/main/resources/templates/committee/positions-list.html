@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Search Results - Positions</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h3>Available Positions Matching Search Criteria</h3>
+    <hr>
+
+    <!-- Student Information -->
+    <div class="card p-3 mb-3">
+        <h4>Student Information</h4>
+        <p><strong>Student Name:</strong> <span th:text="${student.studentName}"></span></p>
+        <p><strong>University ID:</strong> <span th:text="${student.AM}"></span></p>
+        <p><strong>Preferred Location:</strong> <span th:text="${student.preferredLocation}"></span></p>
+        <p><strong>Interests:</strong> <span th:text="${student.interests}"></span></p>
+        <p><strong>Skills:</strong> <span th:text="${student.skills}"></span></p>
+    </div>
+
+    <!-- Search Results - Positions -->
+    <div class="card p-3">
+        <h4>Matching Traineeship Positions</h4>
+
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Topics</th>
+                    <th>Skills</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="position : ${positions}">
+                    <td th:text="${position.title}"></td>
+                    <td th:text="${position.description}"></td>
+                    <td th:text="${position.fromDate}"></td>
+                    <td th:text="${position.toDate}"></td>
+                    <td th:text="${position.topics}"></td>
+                    <td th:text="${position.skills}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Show message if no results found -->
+        <p class="text-muted" th:if="${positions.empty}">No matching positions found.</p>
+    </div>
+
+    <a href="/committee/selectStudent?studentId=" th:href="@{/committee/selectStudent(studentId=${student.studentId})}" class="btn btn-secondary mt-3">Back to Student Details</a>
+</div>
+
+</body>
+</html>

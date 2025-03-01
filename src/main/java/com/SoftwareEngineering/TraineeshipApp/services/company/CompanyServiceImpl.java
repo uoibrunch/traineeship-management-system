@@ -27,7 +27,14 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void saveProfile(Company company){
-        companyMapper.save(company);
+        Company existingCompany = companyMapper.findByUsername(company.getUsername());
+        if (existingCompany != null) {
+            existingCompany.setCompanyName(company.getCompanyName());
+            existingCompany.setCompanyLocation(company.getCompanyLocation());
+            companyMapper.save(existingCompany); 
+        } else {
+        companyMapper.save(company); 
+    }
     };
 
     @Override

@@ -5,6 +5,7 @@ import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,22 +27,43 @@ public class SearchBasedOnLocation implements PositionsSearchStrategy {
 
         Student student = studentMapper.findByUsername(applicantUsername);
 
-        if (student == null || student.getPreferredLocation() == null) {
-            
+        if (student == null || student.getPreferredLocation() == null || student.getSkills() == null) {
             return new ArrayList<>();
         }
 
-        List<Company> companies = companyMapper.findByCompanyLocation(student.getPreferredLocation());
+        List<String> studentSkills = Arrays.asList(student.getSkills().split(","));
 
-        List<TraineeshipPosition> positions = new ArrayList<>();
+        studentSkills = studentSkills.stream()
+                .map(String::trim)
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
+            
 
-        for (Company company : companies) {
+        List<Company> companiesBasedOnPrefferredLocation = companyMapper.findByCompanyLocation(student.getPreferredLocation());
+        List<TraineeshipPosition> matchingPositions = new ArrayList<>();
 
-            positions.addAll(company.getPositions());
+        for (Company company : companiesBasedOnPrefferredLocation) {
+            for (TraineeshipPosition position : company.getPositions()) {
+                if (position.isAssigned()) {
+                    continue; 
+                }
 
+                List<String> positionSkills = Arrays.asList(position.getSkills().split(","));
+                positionSkills = positionSkills.stream()
+                    .map(String::trim)
+                    .map(String::toLowerCase)
+                    .collect(Collectors.toList());
+
+                if (!studentSkills.containsAll(positionSkills)) {
+                    continue; 
+                }
+
+                matchingPositions.add(position);
+
+            }
         }
 
-        return positions;
+        return matchingPositions;
     }
 
 }

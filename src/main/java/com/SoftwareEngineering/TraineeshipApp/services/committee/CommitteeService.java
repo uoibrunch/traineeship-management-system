@@ -20,4 +20,6 @@ public interface CommitteeService {
 
     List <TraineeshipPosition> listUnassignedTraineeships();
 
+    Student findStudentByUsername(String username);
+
 }

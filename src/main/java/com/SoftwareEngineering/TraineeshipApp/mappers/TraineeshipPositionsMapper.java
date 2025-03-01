@@ -20,5 +20,9 @@ public interface TraineeshipPositionsMapper extends JpaRepository<TraineeshipPos
     List<TraineeshipPosition> findByRequiredSkillsIn(@Param("requiredSkills") List<String> requiredSkills);
     
     List<TraineeshipPosition> findByIsAssignedFalse();
+
+
+    @Query("SELECT t FROM TraineeshipPosition t WHERE t.topics LIKE %:interest%")
+    List<TraineeshipPosition> findByTopicsContaining(@Param("interest") String interest);
 	
 }
