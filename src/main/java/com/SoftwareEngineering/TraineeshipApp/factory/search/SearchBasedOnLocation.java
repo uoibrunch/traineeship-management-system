@@ -30,7 +30,7 @@ public class SearchBasedOnLocation implements PositionsSearchStrategy {
         if (student == null || student.getPreferredLocation() == null || student.getSkills() == null) {
             return new ArrayList<>();
         }
-
+        
         List<String> studentSkills = Arrays.asList(student.getSkills().split(","));
 
         studentSkills = studentSkills.stream()
