@@ -57,13 +57,45 @@
     <a th:href="@{/students/fillLogbook}" class="btn btn-warning btn-sm mb-3">Fill Logbook</a>
     <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
 
-</div>
+    <!-- Wrap the entire traineeship logbook section in th:if -->
+    <div class="card mb-3" th:if="${student != null && student.assignedTraineeship != null}">
+        <div class="card-body">
+            <h5 class="card-title">Traineeship Logbook</h5>
+            
+            <p>
+                <strong>Title:</strong> 
+                <span th:text="${student.assignedTraineeship.title}"></span>
+            </p>
+            
+            <p th:if="${student.assignedTraineeship.company != null and student.assignedTraineeship.company.companyName != null}">
+                <strong>Company:</strong> 
+                <span th:text="${student.assignedTraineeship.company.companyName}"></span>
+            </p>
+            
+            <!-- Display logbook entries only if there are any -->
+            <div th:if="${student.assignedTraineeship.studentLogbook != null and not #lists.isEmpty(logbooks)}">
+                <p><strong>Logbook Entries:</strong></p>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 60px; text-align: center;">Date</th>
+                            <th style="width: 500px;">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="logbook : ${logbooks}">
+                            <td th:text="${logbook.Date}"></td>
+                            <td th:text="${logbook.Description}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-<!-- Optional: Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</div>
 
 </body>
 </html>
+
 

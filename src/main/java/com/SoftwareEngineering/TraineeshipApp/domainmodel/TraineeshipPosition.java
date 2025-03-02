@@ -35,7 +35,9 @@ public class TraineeshipPosition {
     private boolean isAssigned;
 
     @Column(name = "student_logbook")
-    private String studentLogbook;
+    
+    @OneToMany(mappedBy = "traineeshipPosition", fetch = FetchType.LAZY) // Corrected relationship with mappedBy
+    private List<Logbook> studentLogbook; 
 
     @Column(name = "pass_fail_grade")
     private boolean passFailGrade;
@@ -103,10 +105,10 @@ public class TraineeshipPosition {
     public void setIsAssigned(boolean isAssigned) {
         this.isAssigned = isAssigned;
     }
-    public String getStudentLogbook() {
+    public List<Logbook> getStudentLogbook() {
         return studentLogbook;
     }
-    public void setStudentLogbook(String studentLogbook) {
+    public void setStudentLogbook(List<Logbook> studentLogbook) {
         this.studentLogbook = studentLogbook;
     }
     public boolean isPassFailGrade() {

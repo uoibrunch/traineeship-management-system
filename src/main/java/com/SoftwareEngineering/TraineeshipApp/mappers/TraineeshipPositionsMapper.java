@@ -31,5 +31,6 @@ public interface TraineeshipPositionsMapper extends JpaRepository<TraineeshipPos
     List<TraineeshipPosition> findByCompanyAndIsAssignedFalse(Company company);
 
     List<TraineeshipPosition> findByCompanyAndIsAssignedTrue (Company company);
+
 	
 }

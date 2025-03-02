@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.SoftwareEngineering.TraineeshipApp.services.student.StudentService;
 import com.SoftwareEngineering.TraineeshipApp.services.user.UserService;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +31,15 @@ public class StudentController {
     public String getStudentDashboard(Model model){
         
         Student student = studentService.retrieveProfile(extractUsernameFromUser());
+
+        if (student != null && student.getAssignedTraineeship() != null) {
+            
+            List<Logbook> logbooks = student.getAssignedTraineeship().getStudentLogbook();
+
+            model.addAttribute("logbooks", logbooks);
+
+        }
+
         model.addAttribute("student", student);
 
         return "students/dashboard";
@@ -69,19 +81,19 @@ public class StudentController {
     @RequestMapping("/students/fillLogbook")
     public String fillLogbook(Model model) {
 
-        Student student = studentService.retrieveProfile(extractUsernameFromUser());
+        model.addAttribute("logbook", new Logbook());
 
-        if (student.getAssignedTraineeship() != null) {
-            model.addAttribute("position", student.getAssignedTraineeship());
-            return "students/fill-logbook";
-        } else {
-            return "redirect:/students/dashboard"; 
-        }
+        return("students/fill-logbook");
+
     }
 
     @RequestMapping(value = "/students/saveLogbook")
-    public String saveLogbook(@ModelAttribute("position") TraineeshipPosition position) {
-        studentService.saveLogbook(position);
+    public String saveLogbook(@ModelAttribute("logbook") Logbook logbook){
+    
+        Student student = studentService.retrieveProfile(extractUsernameFromUser());
+
+        studentService.saveLogbook(logbook , student);
+
         return "redirect:/students/dashboard"; 
     }
 
@@ -90,7 +102,9 @@ public class StudentController {
         student.setUsername(extractUsernameFromUser());
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         User user = (User) userDetails;
+        
         student.setStudentId(user.getId());
 
     }

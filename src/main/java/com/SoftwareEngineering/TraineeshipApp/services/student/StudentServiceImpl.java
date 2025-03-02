@@ -1,16 +1,23 @@
 package com.SoftwareEngineering.TraineeshipApp.services.student;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Logbook;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
+import com.SoftwareEngineering.TraineeshipApp.mappers.LogbookMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.StudentMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 
 
 
 import io.micrometer.observation.annotation.Observed;
+import lombok.extern.java.Log;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -18,8 +25,11 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
-
+    @Autowired
     private TraineeshipPositionsMapper positionsMapper;
+
+    @Autowired
+    private LogbookMapper logbookMapper;
 
     @Override
     public Student retrieveProfile(String studentUsername){
@@ -42,16 +52,29 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void saveLogbook(TraineeshipPosition position){
+    public void saveLogbook(Logbook logbook, Student student){
 
-        Optional<TraineeshipPosition> existingPosition = positionsMapper.findById(position.getTraineeshipId());
-        if (existingPosition.isPresent()) {
-            TraineeshipPosition updatedPosition = existingPosition.get();
-            updatedPosition.setStudentLogbook(position.getStudentLogbook()); 
-            positionsMapper.save(updatedPosition); 
+        TraineeshipPosition traineeshipPosition = student.getAssignedTraineeship();
+
+        if (traineeshipPosition != null) {
+          
+            logbook.setTraineeshipPosition(traineeshipPosition);  
+
+            logbookMapper.save(logbook);
+
+            traineeshipPosition.getStudentLogbook().add(logbook);
+
+            positionsMapper.save(traineeshipPosition);
+
+        } else {
+
+            throw new IllegalStateException("Student does not have an assigned traineeship position.");
+
         }
-        
+
     }
+
+
 }
 
     
