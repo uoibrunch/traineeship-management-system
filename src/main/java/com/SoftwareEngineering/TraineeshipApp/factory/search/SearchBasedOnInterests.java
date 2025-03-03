@@ -5,7 +5,9 @@ import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,57 +25,68 @@ public class SearchBasedOnInterests implements PositionsSearchStrategy {
     @Autowired
     private StudentMapper studentMapper;
 
+    
     @Override
     public List<TraineeshipPosition> search(String applicantUsername) {
 
         Student student = studentMapper.findByUsername(applicantUsername);
 
+        Double threshold = 0.7;
+
         if (student == null || student.getSkills() == null || student.getInterests() == null) {
             return new ArrayList<>();
         }
 
-        List<String> studentSkills = Arrays.asList(student.getSkills().split(","));
-        studentSkills = studentSkills.stream()
-            .map(String::trim)          
-            .map(String::toLowerCase)  
-            .collect(Collectors.toList());
-
-        List<String> studentInterests = Arrays.asList(student.getInterests().split(","));
-
-        studentInterests = studentInterests.stream()
+        List<String> studentSkills = Arrays.stream(student.getSkills().split(","))
             .map(String::trim)
             .map(String::toLowerCase)
             .collect(Collectors.toList());
 
-        List<TraineeshipPosition> positionsBasedOnInterests = new ArrayList<>();
+        Set<String> studentInterests = Arrays.stream(student.getInterests().split(","))
+            .map(String::trim)
+            .map(String::toLowerCase)
+            .collect(Collectors.toSet());
 
+        List<TraineeshipPosition> allPositions = positionsMapper.findAll(); // Get all traineeship positions
         List<TraineeshipPosition> matchingPositions = new ArrayList<>();
 
-        for (String interest : studentInterests) {
-
-            positionsBasedOnInterests.addAll(positionsMapper.findByTopicsContaining(interest));
-
-        }
-
-        for (TraineeshipPosition position : positionsBasedOnInterests) {
+        for (TraineeshipPosition position : allPositions) {
             if (position.isAssigned()) {
-                continue;
+                continue;  
             }
 
-            List<String> positionSkills = Arrays.asList(position.getSkills().split(","));
-            positionSkills = positionSkills.stream()
+            List<String> positionSkills = Arrays.stream(position.getSkills().split(","))
                 .map(String::trim)
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
-            
+
             if (!studentSkills.containsAll(positionSkills)) {
-                continue;
+                continue; 
             }
 
-            matchingPositions.add(position);
+            Set<String> positionTopics = Arrays.stream(position.getTopics().split(","))
+                .map(String::trim)
+                .map(String::toLowerCase)
+                .collect(Collectors.toSet());
 
+            double jaccardSimilarity = calculateJaccardSimilarity(studentInterests, positionTopics);
+
+            if (jaccardSimilarity >= threshold) {
+                matchingPositions.add(position);
+            }
         }
 
         return matchingPositions;
     }
+
+    private double calculateJaccardSimilarity(Set<String> set1, Set<String> set2) {
+        Set<String> intersection = new HashSet<>(set1);
+        intersection.retainAll(set2);
+
+        Set<String> union = new HashSet<>(set1);
+        union.addAll(set2);
+
+        return (double) intersection.size() / union.size();
+    }
 }
+
