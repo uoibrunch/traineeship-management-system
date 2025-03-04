@@ -93,6 +93,8 @@ public class CompanyController {
         
         position.setIsAssigned(false);
 
+        position.setIsSupervised(false);
+
        
         companyService.addPosition(extractUsernameFromUser(),position);  
         

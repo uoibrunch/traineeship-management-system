@@ -45,20 +45,17 @@ public class StudentServiceImpl implements StudentService {
         if (existingStudent != null) {
             student.setStudentId(existingStudent.getStudentId());
             
-            // If student is looking for a traineeship, remove assigned traineeship
             if (student.isLookingForTraineeship() && existingStudent.getAssignedTraineeship() != null) {
                 TraineeshipPosition traineeship = existingStudent.getAssignedTraineeship();
     
-                // Unassign student from the traineeship
                 traineeship.setStudent(null);
                 traineeship.setIsAssigned(false);
-                positionsMapper.save(traineeship); // Persist the change
+                positionsMapper.save(traineeship); 
 
                 if (traineeship.getStudentLogbook() != null) {
-                    traineeship.getStudentLogbook().clear();  // This triggers deletion in the database
+                    traineeship.getStudentLogbook().clear();  
                 }
     
-                // Remove traineeship from student
                 student.setAssignedTraineeship(null);
             } else {
                 student.setAssignedTraineeship(existingStudent.getAssignedTraineeship());

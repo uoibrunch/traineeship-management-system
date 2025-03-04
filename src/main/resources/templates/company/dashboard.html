@@ -41,18 +41,19 @@
             
         </div>
     </div>
-
-    <a href="/company/showPositionForm" class="btn btn-success btn-sm mb-3">
-        Announce New Position
-    </a>
-
-    <a href="/company/positions" class="btn btn-info btn-sm mb-3">
-        View Available Positions
-    </a>
-
-    <a href="/company/assignedPositions" class="btn btn-info btn-sm mb-3">
-        View Assigned Positions
-    </a>
+    <div th:if="${company != null and company.companyName != null and company.companyLocation != null}">
+        <a href="/company/showPositionForm" class="btn btn-success btn-sm mb-3">
+            Announce New Position
+        </a>
+    
+        <a href="/company/positions" class="btn btn-info btn-sm mb-3">
+            View Available Positions
+        </a>
+    
+        <a href="/company/assignedPositions" class="btn btn-info btn-sm mb-3">
+            View Assigned Positions
+        </a>
+    </div>
 
     <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
 

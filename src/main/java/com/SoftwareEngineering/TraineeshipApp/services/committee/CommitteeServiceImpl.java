@@ -113,7 +113,7 @@ public class CommitteeServiceImpl implements CommitteeService{
     @Override
     public List<TraineeshipPosition> listAssignedTraineeships(){
 
-        List<TraineeshipPosition> assignedPositions = positionsMapper.findByIsAssignedTrue();
+        List<TraineeshipPosition> assignedPositions = positionsMapper.findByIsAssignedTrueAndIsSupervisedFalse();;
 
         return assignedPositions;
     }

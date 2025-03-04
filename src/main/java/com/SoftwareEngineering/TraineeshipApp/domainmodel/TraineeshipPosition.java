@@ -34,6 +34,9 @@ public class TraineeshipPosition {
     @Column(name = "is_assigned")
     private boolean isAssigned;
 
+    @Column(name = "is_supervised")
+    private boolean isSupervised;
+
     @Column(name = "student_logbook")
     
     @OneToMany(mappedBy = "traineeshipPosition", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -146,5 +149,12 @@ public class TraineeshipPosition {
         return traineeshipId;
     }
     
+    public int is_supervised(){
+        return is_supervised();
+    }
+
+    public void setIsSupervised(boolean isSupervised){
+        this.isSupervised = isSupervised;
+    }
 
 }
