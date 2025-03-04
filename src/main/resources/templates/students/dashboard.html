@@ -54,8 +54,13 @@
         </div>
     </div>
     
-    <a th:href="@{/students/fillLogbook}" class="btn btn-warning btn-sm mb-3">Fill Logbook</a>
+   
     <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
+
+    <div th:if="${student != null && student.assignedTraineeship != null}">
+        <a th:href="@{/students/fillLogbook}" class="btn btn-warning btn-sm mb-3">Fill Logbook</a>
+    </div>
+    
 
     <!-- Wrap the entire traineeship logbook section in th:if -->
     <div class="card mb-3" th:if="${student != null && student.assignedTraineeship != null}">

@@ -64,8 +64,6 @@ public class StudentController {
     @RequestMapping("/students/retrieveProfile")
     public String retrieveProfile(Model model){
 
-        
-
         Student student = studentService.retrieveProfile(extractUsernameFromUser());
         
 
