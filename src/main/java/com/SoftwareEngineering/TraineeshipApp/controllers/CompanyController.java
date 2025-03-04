@@ -47,7 +47,7 @@ public class CompanyController {
     @RequestMapping("/company/showFormForUpdate")
 	public String showFormForUpdate(Model theModel) {
 		
-		Company theCompany = new Company();
+		Company theCompany = companyService.retrieveProfile(extractUsernameFromUser());
         
 		theModel.addAttribute("company", theCompany);
 		

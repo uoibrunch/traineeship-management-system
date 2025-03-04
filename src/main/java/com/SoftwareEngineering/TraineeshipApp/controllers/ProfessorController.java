@@ -37,7 +37,7 @@ public class ProfessorController {
     @RequestMapping("/professor/showFormForUpdate")
 	public String showFormForUpdateString(Model theModel) {
 
-		Professor theProfessor = new Professor();
+		Professor theProfessor = professorService.retrieveProfile(extractUsernameFromUser());
 
 		theModel.addAttribute("professor", theProfessor);
 		
