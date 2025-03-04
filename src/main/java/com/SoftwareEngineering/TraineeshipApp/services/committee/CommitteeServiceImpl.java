@@ -1,10 +1,10 @@
 package com.SoftwareEngineering.TraineeshipApp.services.committee;
 
-import com.SoftwareEngineering.TraineeshipApp.factory.*;
-import com.SoftwareEngineering.TraineeshipApp.factory.positions.PositionsSearchFactory;
-import com.SoftwareEngineering.TraineeshipApp.factory.search.PositionsSearchStrategy;
-import com.SoftwareEngineering.TraineeshipApp.factory.supervisor.SupervisorAssignmentFactory;
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
+import com.SoftwareEngineering.TraineeshipApp.search.*;
+import com.SoftwareEngineering.TraineeshipApp.search.assignment.SupervisorAssignmentFactory;
+import com.SoftwareEngineering.TraineeshipApp.search.position.PositionsSearchFactory;
+import com.SoftwareEngineering.TraineeshipApp.search.position.PositionsSearchStrategy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

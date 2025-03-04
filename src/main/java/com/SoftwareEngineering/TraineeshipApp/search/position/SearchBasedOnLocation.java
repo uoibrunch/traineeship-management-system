@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.factory.search;
+package com.SoftwareEngineering.TraineeshipApp.search.position;
 
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 

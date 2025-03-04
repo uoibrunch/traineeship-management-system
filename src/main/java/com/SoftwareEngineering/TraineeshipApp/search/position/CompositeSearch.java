@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.factory.search;
+package com.SoftwareEngineering.TraineeshipApp.search.position;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.factory.positions;
+package com.SoftwareEngineering.TraineeshipApp.search.position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
-import com.SoftwareEngineering.TraineeshipApp.factory.search.CompositeSearch;
-import com.SoftwareEngineering.TraineeshipApp.factory.search.PositionsSearchStrategy;
-import com.SoftwareEngineering.TraineeshipApp.factory.search.SearchBasedOnInterests;
-import com.SoftwareEngineering.TraineeshipApp.factory.search.SearchBasedOnLocation;
-import com.SoftwareEngineering.TraineeshipApp.factory.search.SearchBasedOnLocation;
 
 @Service
 public class PositionsSearchFactory {

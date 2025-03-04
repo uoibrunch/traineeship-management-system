@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.factory.supervisor;
+package com.SoftwareEngineering.TraineeshipApp.search.assignment;
 
 public interface SupervisorAssignmentStrategy {
 

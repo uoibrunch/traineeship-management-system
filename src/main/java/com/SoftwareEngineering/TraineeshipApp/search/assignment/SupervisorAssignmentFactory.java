@@ -1,7 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.factory.supervisor;
-
-import com.SoftwareEngineering.TraineeshipApp.factory.assignment.AssignmentBasedOnInterests;
-import com.SoftwareEngineering.TraineeshipApp.factory.assignment.AssignmentBasedOnLoad;
+package com.SoftwareEngineering.TraineeshipApp.search.assignment;
 
 public class SupervisorAssignmentFactory {
 
