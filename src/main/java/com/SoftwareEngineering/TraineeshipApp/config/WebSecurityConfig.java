@@ -91,34 +91,4 @@ public class WebSecurityConfig {
 
                 return http.build();
     }
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//
-//                http.authorizeRequests()
-//                // URL matching for accessibility
-//                .antMatchers("/", "/login", "/register", "/save").permitAll()
-//                .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
-//                .antMatchers("/user/**").hasAnyAuthority("USER") 
-//                .anyRequest().authenticated() // any request should be authenticated
-//                .and()
-//                // customize login
-//                .formLogin()
-//                .loginPage("/login")
-//                .successHandler(customSecuritySuccessHandler)
-//               .usernameParameter("username")
-//               .passwordParameter("password")
-//                .and()
-//                // customize logout
-//                .logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/")
-//                .and()
-//                .exceptionHandling()
-//                .accessDeniedPage("/access-denied");
-//
-//                http.authenticationProvider(authenticationProvider());
-//                http.headers().frameOptions().sameOrigin();
-//    	
-//                return http.build();
-//    }
 }
