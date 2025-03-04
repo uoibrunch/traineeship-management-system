@@ -49,7 +49,7 @@ public class StudentController {
 	public String showFormForUpdate(Model theModel) {
 		
 		// create model attribute to bind form data
-		Student theStudent = new Student();
+		Student theStudent = studentService.retrieveProfile(extractUsernameFromUser());
         
 		
 		theModel.addAttribute("student", theStudent);

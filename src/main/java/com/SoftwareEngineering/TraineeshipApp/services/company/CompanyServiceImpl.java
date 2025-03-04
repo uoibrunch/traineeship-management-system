@@ -17,12 +17,10 @@ public class CompanyServiceImpl implements CompanyService {
     
     @Autowired
     private CompanyMapper companyMapper;
-
-    @Autowired
-    private TraineeshipPositionsMapper positionsMapper;
     
     @Autowired
     private TraineeshipPositionsMapper traineeshipPositionMapper;
+
     @Override
     public Company retrieveProfile(String username){
         return companyMapper.findByUsername(username);
@@ -48,7 +46,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         if (company != null) {
 
-            return positionsMapper.findByCompanyAndIsAssignedFalse(company);
+            return traineeshipPositionMapper.findByCompanyAndIsAssignedFalse(company);
             
         } else {
             
