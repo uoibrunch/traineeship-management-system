@@ -50,6 +50,11 @@ public class StudentController {
 		
 		// create model attribute to bind form data
 		Student theStudent = studentService.retrieveProfile(extractUsernameFromUser());
+
+        if (theStudent == null) {
+            theStudent = new Student();
+            theStudent.setUsername(extractUsernameFromUser()); // Assign username if needed
+        }
         
 		
 		theModel.addAttribute("student", theStudent);
@@ -60,7 +65,10 @@ public class StudentController {
     @RequestMapping("/students/retrieveProfile")
     public String retrieveProfile(Model model){
 
+        
+
         Student student = studentService.retrieveProfile(extractUsernameFromUser());
+        
 
         model.addAttribute("student", student);
 
