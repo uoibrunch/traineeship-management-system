@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Assigned Positions</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h3>Assigned Positions</h3>
+    <hr>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Company</th>
+                <th>Student</th>
+                <th>Interests</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="position : ${positions}">
+                <td th:text="${position.title}"></td>
+                <td th:text="${position.company.companyName}"></td>
+                <td th:text="${position.student.studentName}"></td>
+                <td th:text="${position.topics}"></td>
+                <td>
+					<a th:href="@{/committee/selectPosition(traineeshipId=${position.traineeshipId})}"
+					   class="btn btn-info btn-sm">
+					    Select
+					</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/committee/dashboard" class="btn btn-secondary mt-3">Back to Committe Workspace</a>
+</div>
+
+</body>
+</html>

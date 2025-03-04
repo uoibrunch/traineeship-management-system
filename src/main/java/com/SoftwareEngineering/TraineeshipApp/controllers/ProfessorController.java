@@ -39,6 +39,10 @@ public class ProfessorController {
 
 		Professor theProfessor = professorService.retrieveProfile(extractUsernameFromUser());
 
+        if (theProfessor == null) {
+            theProfessor = new Professor();
+        }
+
 		theModel.addAttribute("professor", theProfessor);
 		
 		return "professor/professor-form";

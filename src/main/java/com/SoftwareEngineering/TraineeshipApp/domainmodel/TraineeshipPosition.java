@@ -35,8 +35,9 @@ public class TraineeshipPosition {
     private boolean isAssigned;
 
     @Column(name = "student_logbook")
-    @OneToMany(mappedBy = "traineeshipPosition", fetch = FetchType.LAZY) // Corrected relationship with mappedBy
-    private List<Logbook> studentLogbook; 
+    
+    @OneToMany(mappedBy = "traineeshipPosition", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Logbook> studentLogbook;
 
     @Column(name = "pass_fail_grade")
     private boolean passFailGrade;

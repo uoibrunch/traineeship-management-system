@@ -48,6 +48,10 @@ public class CompanyController {
 	public String showFormForUpdate(Model theModel) {
 		
 		Company theCompany = companyService.retrieveProfile(extractUsernameFromUser());
+
+        if (theCompany == null) {
+            theCompany = new Company();
+        }
         
 		theModel.addAttribute("company", theCompany);
 		

@@ -25,6 +25,7 @@
 
     <!-- Search Bar for Traineeship Positions -->
     <form th:action="@{/committee/findPositions}" method="GET">
+        
         <input type="hidden" name="studentUsername" th:value="${student.username}"/>
 
         <div class="form-group">

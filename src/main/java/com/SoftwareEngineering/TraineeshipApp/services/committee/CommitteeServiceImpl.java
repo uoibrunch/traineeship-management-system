@@ -7,6 +7,7 @@ import com.SoftwareEngineering.TraineeshipApp.factory.supervisor.SupervisorAssig
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +30,9 @@ public class CommitteeServiceImpl implements CommitteeService{
     @Autowired
     private TraineeshipPositionsMapper positionsMapper;
 
+    @Autowired
+    private ProfessorMapper professorMapper;
+
 
     @Override
     public List<Student> retrieveTraineeshipApplications(){
@@ -47,6 +51,12 @@ public class CommitteeServiceImpl implements CommitteeService{
     public Student findStudentById(int id){
 
         return studentMapper.findById(id);
+        
+    }
+
+    public TraineeshipPosition findPositionById(int id){
+
+        return positionsMapper.findById(id);
         
     }
 
@@ -101,14 +111,27 @@ public class CommitteeServiceImpl implements CommitteeService{
 
 
     @Override
+    public List<TraineeshipPosition> listAssignedTraineeships(){
+
+        List<TraineeshipPosition> assignedPositions = positionsMapper.findByIsAssignedTrue();
+
+        return assignedPositions;
+    }
+
+    @Override
+    public List <Professor> listProfessors(){
+
+       return professorMapper.findAll();
+
+    }
+
+
+    @Override
     public void assignSupervisor(Integer positionId, String strategy){
 
     }
 
-    @Override
-    public List<TraineeshipPosition> listAssignedTraineeships(){
-        return null;
-    }
+   
 
     @Override
     public void completeAssignedTraineeships(Integer positionId){

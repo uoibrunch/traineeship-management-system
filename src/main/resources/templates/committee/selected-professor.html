@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Selected Position</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h3>Selected Positions</h3>
+    <hr>
+
+    <div class="card p-3 mb-3">
+        <p><strong>Title:</strong> <span th:text="${position.title}"></span></p>
+        <p><strong>Company:</strong> <span th:text="${position.company.companyName}"></span></p>
+        <p><strong>Student:</strong> <span th:text="${position.student.studentName}"></span></p>
+        <p><strong>Interests:</strong> <span th:text="${position.topics}"></span></p>
+    </div>
+
+    <!-- Search Bar for Traineeship Positions -->
+    <form th:action="@{/committee/findProfessors}" method="GET">
+
+        
+        
+        <div class="form-group">
+            <label for="searchStrategy">Search By:</label>
+            <select id="searchStrategy" name="strategy" class="form-control">
+                <option value="interests">Interests</option>
+                <option value="location">Professor's Load</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Find Positions</button>
+    </form>
+
+    <div class="card p-3 mt-4">
+        <h4>Professors</h4>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Professor Name</th>
+                    <th>Interests</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="professor : ${professors}">
+                    <td th:text="${professor.professorName}"></td>
+                    <td th:text="${professor.interests}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/committee/showTraineeshipApplications" class="btn btn-secondary mt-3">Back to Student List</a>
+</div>
+
+</body>
+</html>

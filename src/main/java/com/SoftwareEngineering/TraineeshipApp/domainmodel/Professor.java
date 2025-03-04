@@ -60,5 +60,5 @@ public class Professor {
     public void setProfessorId(int id){
         this.professorId = id;
     }
-
+   
 }

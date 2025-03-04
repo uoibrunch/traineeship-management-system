@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.CommitteeMember;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
@@ -80,14 +81,48 @@ public class CommitteeController {
         return "committee/dashboard";
     }
 
+    @RequestMapping("/committee/showAssignedTraineeship")
+    public String listAssignedTraineeships(Model  model){
+        List<TraineeshipPosition> assignedPositions = committeeService.listAssignedTraineeships();
+        model.addAttribute("positions", assignedPositions);
+        return "committee/assignedPositions-list";
+    }
+
+    
+    @RequestMapping("/committee/selectPosition")
+    public String selectPosition(@RequestParam("traineeshipId") int theId,  Model model){
+
+        TraineeshipPosition selectedPosition = committeeService.findPositionById(theId);
+
+        List<Professor> professors = committeeService.listProfessors();
+
+        model.addAttribute("position", selectedPosition);
+
+        model.addAttribute("professors", professors);
+
+        return "committee/selected-professor";
+    }
+
+    @RequestMapping("/committee/findProfessors")
+    public String findProfessors(String studentUsername , String strategy , Model model){
+
+        // Student student = committeeService.findStudentByUsername(studentUsername);
+
+        // List<TraineeshipPosition> positions = committeeService.retrievePositionsForApplicant(studentUsername, strategy);
+
+        // model.addAttribute("student", student);
+
+        // model.addAttribute("positions", positions);
+
+        return null;
+    }
+
 
     public String assignSupervisor(Integer positionId, String strategy, Model model){
         return null;
     }
 
-    public String listAssignedTraineeships(Model  model){
-        return null;
-    }
+   
 
     public String completeAssignedTraineedships(Integer positionId , Model model){
         return null;

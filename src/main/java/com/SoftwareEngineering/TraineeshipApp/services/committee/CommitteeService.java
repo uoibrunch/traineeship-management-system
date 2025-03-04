@@ -22,4 +22,8 @@ public interface CommitteeService {
 
     Student findStudentByUsername(String username);
 
+    TraineeshipPosition findPositionById(int id);
+
+    List <Professor> listProfessors();
+
 }

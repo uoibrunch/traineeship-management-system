@@ -53,6 +53,10 @@ public class StudentServiceImpl implements StudentService {
                 traineeship.setStudent(null);
                 traineeship.setIsAssigned(false);
                 positionsMapper.save(traineeship); // Persist the change
+
+                if (traineeship.getStudentLogbook() != null) {
+                    traineeship.getStudentLogbook().clear();  // This triggers deletion in the database
+                }
     
                 // Remove traineeship from student
                 student.setAssignedTraineeship(null);
