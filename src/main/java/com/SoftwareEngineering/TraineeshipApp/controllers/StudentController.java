@@ -53,9 +53,8 @@ public class StudentController {
 
         if (theStudent == null) {
             theStudent = new Student();
-            theStudent.setUsername(extractUsernameFromUser()); // Assign username if needed
         }
-        
+
 		
 		theModel.addAttribute("student", theStudent);
 		
