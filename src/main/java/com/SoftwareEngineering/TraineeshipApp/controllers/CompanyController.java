@@ -1,21 +1,13 @@
 package com.SoftwareEngineering.TraineeshipApp.controllers;
 
-
-
 import com.SoftwareEngineering.TraineeshipApp.services.company.CompanyService;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
-
-
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 
 @Controller
@@ -27,7 +19,7 @@ public class CompanyController {
     @RequestMapping("/company/dashboard")
     public String getStudentDashboard(Model model){
         
-        Company company = companyService.retrieveProfile(extractUsernameFromUser());
+        Company company = companyService.retrieveProfile(companyService.extractUsernameFromUser());
 
         model.addAttribute("company", company);
 
@@ -37,7 +29,7 @@ public class CompanyController {
     @RequestMapping("/company/retrieveProfile")
     public String retrieveProfile(Model theModel){
     
-		Company company = companyService.retrieveProfile(extractUsernameFromUser());
+		Company company = companyService.retrieveProfile(companyService.extractUsernameFromUser());
 
         theModel.addAttribute("company", company);
 
@@ -47,7 +39,7 @@ public class CompanyController {
     @RequestMapping("/company/showFormForUpdate")
 	public String showFormForUpdate(Model theModel) {
 		
-		Company theCompany = companyService.retrieveProfile(extractUsernameFromUser());
+		Company theCompany = companyService.retrieveProfile(companyService.extractUsernameFromUser());
 
         if (theCompany == null) {
             theCompany = new Company();
@@ -61,7 +53,7 @@ public class CompanyController {
     @RequestMapping("/company/save")
     public String saveProfile(Company company , Model model){
 
-        saveUsernameAndId(company);
+        companyService.saveUsernameAndId(company);
        
         companyService.saveProfile(company);
         
@@ -81,22 +73,8 @@ public class CompanyController {
 
     @RequestMapping("/company/savePosition")
     public String savePosition(@ModelAttribute("position") TraineeshipPosition position, Model model) {
-        
-        String username = extractUsernameFromUser();
-
-
-        Company company = companyService.retrieveProfile(username);
-
-      
-        position.setCompany(company);
-
-        
-        position.setIsAssigned(false);
-
-        position.setIsSupervised(false);
-
        
-        companyService.addPosition(extractUsernameFromUser(),position);  
+        companyService.addPosition(companyService.extractUsernameFromUser(),position);  
         
         return "redirect:/company/retrieveProfile";
     }
@@ -104,20 +82,20 @@ public class CompanyController {
     @RequestMapping("/company/positions")
     public String listAvailablePositions(Model model){
 
-        String username = extractUsernameFromUser();
+        String username = companyService.extractUsernameFromUser();
 
         List<TraineeshipPosition> positions = companyService.retrieveAvailablePositions(username);
         
-       model.addAttribute("positions", positions);
+        model.addAttribute("positions", positions);
         
-       return "company/positions-list";
+        return "company/positions-list";
 
     }
     
     @RequestMapping("/company/assignedPositions")
     public String listAssignedPositions(Model model){
 
-        String username = extractUsernameFromUser();
+        String username = companyService.extractUsernameFromUser();
     
         List<TraineeshipPosition> assignedPositions = companyService.retrieveAssignedPositions(username);
         
@@ -142,23 +120,5 @@ public class CompanyController {
         return "redirect:/company/positions";
     }
 
-    public void saveUsernameAndId(Company company){
-
-        company.setUsername(extractUsernameFromUser());
-
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        User user = (User) userDetails;
-
-        company.setCompanyId(user.getId());
-
-    }
-
-    public String extractUsernameFromUser(){
-
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
-        return username;
-    }
 
 }

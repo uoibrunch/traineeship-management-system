@@ -1,23 +1,12 @@
 package com.SoftwareEngineering.TraineeshipApp.services.student;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Logbook;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
-import com.SoftwareEngineering.TraineeshipApp.mappers.LogbookMapper;
-import com.SoftwareEngineering.TraineeshipApp.mappers.StudentMapper;
-import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
 
-
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
+import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-
-
-
-import io.micrometer.observation.annotation.Observed;
-import lombok.extern.java.Log;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -87,6 +76,25 @@ public class StudentServiceImpl implements StudentService {
 
         }
 
+    }
+
+    @Override
+    public void saveUsernameAndId(Student student){
+
+        student.setUsername(extractUsernameFromUser());
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user = (User) userDetails;
+        
+        student.setStudentId(user.getId());
+
+    }
+
+    @Override
+    public String extractUsernameFromUser(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return username;
     }
 
 

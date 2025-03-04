@@ -18,4 +18,8 @@ public interface ProfessorService {
 
     void saveEvaluation(Integer positionId, Evaluation evaluation);
 
+    void saveUsernameAndId(Professor professor);
+
+    String extractUsernameFromUser();
+
 }

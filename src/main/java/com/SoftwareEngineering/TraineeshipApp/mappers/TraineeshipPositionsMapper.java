@@ -1,15 +1,9 @@
 package com.SoftwareEngineering.TraineeshipApp.mappers;
 
-
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

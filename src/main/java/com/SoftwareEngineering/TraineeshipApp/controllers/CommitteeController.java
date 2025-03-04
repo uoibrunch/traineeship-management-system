@@ -1,22 +1,11 @@
 package com.SoftwareEngineering.TraineeshipApp.controllers;
 
-
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.CommitteeMember;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.services.committee.CommitteeService;
 import org.springframework.ui.Model;
 
@@ -31,7 +20,7 @@ public class CommitteeController {
 
         CommitteeMember  committeeMember =  new CommitteeMember();
 
-        saveUsernameAndId(committeeMember);
+        committeeService.saveUsernameAndId(committeeMember);
 
         return "committee/dashboard";
     }
@@ -127,21 +116,5 @@ public class CommitteeController {
     public String completeAssignedTraineedships(Integer positionId , Model model){
         return null;
     }
-
-     public void saveUsernameAndId(CommitteeMember committeeMember){
-
-        committeeMember.setUsername(extractUsernameFromUser());
-
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = (User) userDetails;
-        committeeMember.setCommitteeMemberId(user.getId());
-
-
-    }
-    public String extractUsernameFromUser(){
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return username;
-    }
-    
 
 }

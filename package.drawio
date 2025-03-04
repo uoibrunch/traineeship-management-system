@@ -1,0 +1,85 @@
+<mxfile host="65bd71144e">
+    <diagram name="Page-1" id="PWG7rQHTNJb5_GZgcUHm">
+        <mxGraphModel dx="633" dy="983" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="resources.templates" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry y="220" width="150" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="TraineeshipApp.controllers" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="430" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.333;entryY=0.167;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="2" target="3">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="440" y="310" as="sourcePoint"/>
+                        <mxPoint x="600" y="310" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;TraineeshipApp.config&lt;/span&gt;" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="425" y="450" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.296;exitY=0.991;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.766;entryY=0.194;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="5" target="7">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="440" y="310" as="sourcePoint"/>
+                        <mxPoint x="630" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="TraineeshipApp.services" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="245" y="710" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.485;entryY=0.246;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="3" target="7">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="440" y="550" as="sourcePoint"/>
+                        <mxPoint x="600" y="550" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="TraineeshipApp.domainmodel" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="1390" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.338;entryY=0.165;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7" target="10">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="400" y="680" as="sourcePoint"/>
+                        <mxPoint x="340" y="1130" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="TraineeshipApp.mappers" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="380" y="1050" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.387;entryY=0.205;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7" target="14">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="400" y="780" as="sourcePoint"/>
+                        <mxPoint x="560" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="TraineeshipApp.search" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="520" y="870" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.878;exitY=1.027;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.41;entryY=0.194;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="7" target="16">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="540" y="680" as="sourcePoint"/>
+                        <mxPoint x="690" y="790" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="18" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=0;entryY=0;entryDx=110;entryDy=14;entryPerimeter=0;" edge="1" parent="1" source="14" target="10">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="290" y="1010" as="sourcePoint"/>
+                        <mxPoint x="430" y="1200" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=0;entryY=0;entryDx=110;entryDy=14;entryPerimeter=0;" edge="1" parent="1" source="16" target="14">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="510" y="900" as="sourcePoint"/>
+                        <mxPoint x="670" y="900" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=0;entryY=0;entryDx=180;entryDy=14;entryPerimeter=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="16" target="10">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="620" y="1380" as="sourcePoint"/>
+                        <mxPoint x="1000" y="1200" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

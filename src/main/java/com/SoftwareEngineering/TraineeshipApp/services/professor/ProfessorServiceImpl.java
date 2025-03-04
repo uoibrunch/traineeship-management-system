@@ -7,8 +7,9 @@ import com.SoftwareEngineering.TraineeshipApp.mappers.ProfessorMapper;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 
@@ -41,6 +42,23 @@ public class ProfessorServiceImpl  implements ProfessorService{
     @Override
     public void saveEvaluation(Integer positionId, Evaluation evaluation){
 
+    }
+
+    @Override
+    public void saveUsernameAndId(Professor professor){
+
+        professor.setUsername(extractUsernameFromUser());
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) userDetails;
+        professor.setProfessorId(user.getId());
+
+    }
+
+    @Override
+    public String extractUsernameFromUser(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return username;
     }
 
 

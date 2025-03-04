@@ -1,6 +1,6 @@
 package com.SoftwareEngineering.TraineeshipApp.search.assignment;
 
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
+
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 
 public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy {

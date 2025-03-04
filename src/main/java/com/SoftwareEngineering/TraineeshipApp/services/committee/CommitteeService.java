@@ -1,6 +1,6 @@
 package com.SoftwareEngineering.TraineeshipApp.services.committee;
-import java.util.List;
 
+import java.util.List;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 
 public interface CommitteeService {
@@ -25,5 +25,9 @@ public interface CommitteeService {
     TraineeshipPosition findPositionById(int id);
 
     List <Professor> listProfessors();
+
+    void saveUsernameAndId(CommitteeMember committeeMember);
+    
+    String extractUsernameFromUser();
 
 }

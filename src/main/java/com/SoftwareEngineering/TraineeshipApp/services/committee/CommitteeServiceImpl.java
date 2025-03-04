@@ -1,15 +1,12 @@
 package com.SoftwareEngineering.TraineeshipApp.services.committee;
 
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
-import com.SoftwareEngineering.TraineeshipApp.search.*;
-import com.SoftwareEngineering.TraineeshipApp.search.assignment.SupervisorAssignmentFactory;
 import com.SoftwareEngineering.TraineeshipApp.search.position.PositionsSearchFactory;
 import com.SoftwareEngineering.TraineeshipApp.search.position.PositionsSearchStrategy;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -138,6 +135,21 @@ public class CommitteeServiceImpl implements CommitteeService{
 
     }
 
-  
+    @Override
+    public void saveUsernameAndId(CommitteeMember committeeMember){
+
+        committeeMember.setUsername(extractUsernameFromUser());
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) userDetails;
+        committeeMember.setCommitteeMemberId(user.getId());
+
+    }
+
+    @Override
+    public String extractUsernameFromUser(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return username;
+    }
 
 }

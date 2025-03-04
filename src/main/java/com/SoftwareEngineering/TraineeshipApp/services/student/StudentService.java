@@ -13,5 +13,9 @@ public interface StudentService {
     Student retrieveProfile(String studentUsername);
 
     void saveLogbook(Logbook logbook, Student student);
+
+    void saveUsernameAndId(Student student);
+
+    String extractUsernameFromUser();
     
 }

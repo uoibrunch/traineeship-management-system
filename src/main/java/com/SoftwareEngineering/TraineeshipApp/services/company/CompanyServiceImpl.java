@@ -4,11 +4,14 @@ import java.util.List;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
 import com.SoftwareEngineering.TraineeshipApp.mappers.CompanyMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 
@@ -58,6 +61,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void addPosition(String username, TraineeshipPosition position) {
+
+        position.setIsAssigned(false);
+
+        position.setIsSupervised(false);
         
         Company company = companyMapper.findByUsername(username);
         
@@ -102,5 +109,27 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void saveEvaluation(Integer positionId, Evaluation evaulation){};
+
+
+    @Override
+    public void saveUsernameAndId(Company company){
+
+        company.setUsername(extractUsernameFromUser());
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user = (User) userDetails;
+
+        company.setCompanyId(user.getId());
+
+    }
+
+    @Override
+    public String extractUsernameFromUser(){
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return username;
+    }
 
 }

@@ -25,4 +25,8 @@ public interface CompanyService {
 
     void deleteById(int id);
 
+    void saveUsernameAndId(Company company);
+
+    String extractUsernameFromUser();
+
 }
