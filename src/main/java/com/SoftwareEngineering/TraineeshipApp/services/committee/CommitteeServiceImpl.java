@@ -1,8 +1,11 @@
 package com.SoftwareEngineering.TraineeshipApp.services.committee;
 
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
+import com.SoftwareEngineering.TraineeshipApp.search.assignment.SupervisorAssignmentFactory;
+import com.SoftwareEngineering.TraineeshipApp.search.assignment.SupervisorAssignmentStrategy;
 import com.SoftwareEngineering.TraineeshipApp.search.position.PositionsSearchFactory;
 import com.SoftwareEngineering.TraineeshipApp.search.position.PositionsSearchStrategy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +21,8 @@ public class CommitteeServiceImpl implements CommitteeService{
     @Autowired
     private PositionsSearchFactory positionsSearchFactory;
 
-    // @Autowired
-    // private SupervisorAssignmentFactory supervisorAssignementFactory;
+    @Autowired
+    private SupervisorAssignmentFactory supervisorAssignmentFactory;
 
     @Autowired
     private StudentMapper studentMapper;
@@ -71,6 +74,7 @@ public class CommitteeServiceImpl implements CommitteeService{
 
         return student;
     }
+    
 
     @Override
     public void assignPosition(Integer positionId, String studentUsername) {
@@ -110,7 +114,7 @@ public class CommitteeServiceImpl implements CommitteeService{
     @Override
     public List<TraineeshipPosition> listAssignedTraineeships(){
 
-        List<TraineeshipPosition> assignedPositions = positionsMapper.findByIsAssignedTrueAndIsSupervisedFalse();;
+        List<TraineeshipPosition> assignedPositions = positionsMapper.findByIsAssignedTrueAndIsSupervisedFalse();
 
         return assignedPositions;
     }
@@ -122,14 +126,26 @@ public class CommitteeServiceImpl implements CommitteeService{
 
     }
 
+    @Override
+    public List<Professor> retrieveProfessorsForPosition(int positionId, String strategy){
+
+        TraineeshipPosition position = findPositionById(positionId);
+
+        PositionsSearchStrategy searchStrategy = positionsSearchFactory.create(strategy);
+        //return searchStrategy.search(applicantUsername);
+        return null;
+    }
 
     @Override
     public void assignSupervisor(Integer positionId, String strategy){
 
+        SupervisorAssignmentStrategy assignStrategy = supervisorAssignmentFactory.create(strategy);
+        
+        assignStrategy.assign(positionId);
+
     }
 
    
-
     @Override
     public void completeAssignedTraineeships(Integer positionId){
 

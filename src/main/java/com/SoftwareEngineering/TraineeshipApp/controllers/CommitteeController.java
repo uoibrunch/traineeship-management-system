@@ -3,10 +3,14 @@ package com.SoftwareEngineering.TraineeshipApp.controllers;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.services.committee.CommitteeService;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.ui.Model;
 
 @Controller
@@ -92,26 +96,33 @@ public class CommitteeController {
         return "committee/selected-professor";
     }
 
-    @RequestMapping("/committee/findProfessors")
-    public String findProfessors(String studentUsername , String strategy , Model model){
+    @GetMapping("/committee/assignProfessor")
+    public String assignProfessor(@RequestParam("traineeshipId") Integer positionId,@RequestParam("strategy") String strategy, Model model){
 
-        // Student student = committeeService.findStudentByUsername(studentUsername);
+        if (positionId == null) {
+            model.addAttribute("errorMessage", "Traineeship ID is missing.");
+            return "committee/assignment_error"; // Redirect to an error page
+        }
 
-        // List<TraineeshipPosition> positions = committeeService.retrievePositionsForApplicant(studentUsername, strategy);
+        committeeService.assignSupervisor(positionId, strategy);
 
-        // model.addAttribute("student", student);
+        TraineeshipPosition position = committeeService.findPositionById(positionId);
+        if (position == null) {
+            model.addAttribute("errorMessage", "Traineeship position not found.");
+            return "committee/assignment_error";
+        }
 
-        // model.addAttribute("positions", positions);
+        Professor assignedProfessor = position.getSupervisor();
+        if (assignedProfessor == null) {
+            model.addAttribute("errorMessage", "No professor was assigned to this traineeship position.");
+            return "committee/assignment_error";
+        }
 
-        return null;
+        model.addAttribute("professor", assignedProfessor);
+        model.addAttribute("position", position);
+
+        return "committee/assigned_professor";
     }
-
-
-    public String assignSupervisor(Integer positionId, String strategy, Model model){
-        return null;
-    }
-
-   
 
     public String completeAssignedTraineedships(Integer positionId , Model model){
         return null;

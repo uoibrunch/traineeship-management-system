@@ -53,19 +53,17 @@
             </p>
         </div>
     </div>
-    
-   
+
     <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
 
     <div th:if="${student != null && student.assignedTraineeship != null}">
-        <a th:href="@{/students/fillLogbook}" class="btn btn-warning btn-sm mb-3">Fill Logbook</a>
+        <a th:href="@{/students/fillLogbook}" class="btn btn-warning btn-sm mb-3">Report In Logbook</a>
     </div>
-    
 
-    <!-- Wrap the entire traineeship logbook section in th:if -->
+    <!-- Traineeship logbook section -->
     <div class="card mb-3" th:if="${student != null && student.assignedTraineeship != null}">
         <div class="card-body">
-            <h5 class="card-title">Traineeship Logbook</h5>
+            <h5 class="card-title">Traineeship Info</h5>
             
             <p>
                 <strong>Title:</strong> 
@@ -76,10 +74,16 @@
                 <strong>Company:</strong> 
                 <span th:text="${student.assignedTraineeship.company.companyName}"></span>
             </p>
-            
+
+            <!-- Show supervisor name if traineeship is supervised -->
+            <p th:if="${student.assignedTraineeship.isSupervised}">
+                <strong>Supervisor:</strong> 
+                <span th:text="${student.assignedTraineeship.supervisor.professorName}"></span>
+            </p>
+
             <!-- Display logbook entries only if there are any -->
             <div th:if="${student.assignedTraineeship.studentLogbook != null and not #lists.isEmpty(logbooks)}">
-                <p><strong>Logbook Entries:</strong></p>
+                <p><strong>Activities:</strong></p>
                 <table class="table table-bordered">
                     <thead class="thead-dark">
                         <tr>
@@ -102,5 +106,3 @@
 
 </body>
 </html>
-
-

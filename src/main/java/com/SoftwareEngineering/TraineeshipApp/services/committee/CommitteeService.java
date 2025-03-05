@@ -30,4 +30,6 @@ public interface CommitteeService {
     
     String extractUsernameFromUser();
 
+    List<Professor> retrieveProfessorsForPosition(int positionId, String strategy);
+
 }

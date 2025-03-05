@@ -22,19 +22,20 @@
     </div>
 
     <!-- Search Bar for Traineeship Positions -->
-    <form th:action="@{/committee/findProfessors}" method="GET">
+    <form th:action="@{/committee/assignProfessor}" method="GET">
 
-        
-        
+        <!-- Hidden Field for Traineeship ID -->
+        <input type="hidden" name="traineeshipId" th:value="${position.traineeshipId}" />
+
         <div class="form-group">
-            <label for="searchStrategy">Search By:</label>
+            <label for="searchStrategy">Assign By:</label>
             <select id="searchStrategy" name="strategy" class="form-control">
                 <option value="interests">Interests</option>
-                <option value="location">Professor's Load</option>
+                <option value="load">Professor's Load</option>
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Find Positions</button>
+        <button type="submit" class="btn btn-primary">Assign Professor</button>
     </form>
 
     <div class="card p-3 mt-4">

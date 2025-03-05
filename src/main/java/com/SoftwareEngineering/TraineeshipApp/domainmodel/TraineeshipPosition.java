@@ -149,8 +149,8 @@ public class TraineeshipPosition {
         return traineeshipId;
     }
     
-    public int is_supervised(){
-        return is_supervised();
+    public boolean isSupervised(){
+        return isSupervised;
     }
 
     public void setIsSupervised(boolean isSupervised){

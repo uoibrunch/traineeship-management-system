@@ -20,6 +20,9 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private LogbookMapper logbookMapper;
 
+    @Autowired
+    private ProfessorMapper professorMapper;
+
     @Override
     public Student retrieveProfile(String studentUsername){
 
@@ -39,13 +42,24 @@ public class StudentServiceImpl implements StudentService {
     
                 traineeship.setStudent(null);
                 traineeship.setIsAssigned(false);
-                positionsMapper.save(traineeship); 
+
+                Professor supervisor = traineeship.getSupervisor();
+                if (supervisor != null) {
+                    supervisor.getSupervisedPositions().remove(traineeship);
+                    traineeship.setSupervisor(null);
+                    traineeship.setIsSupervised(false); 
+                    professorMapper.save(supervisor);
+                }
 
                 if (traineeship.getStudentLogbook() != null) {
                     traineeship.getStudentLogbook().clear();  
                 }
-    
+
                 student.setAssignedTraineeship(null);
+
+                positionsMapper.save(traineeship); 
+    
+                
             } else {
                 student.setAssignedTraineeship(existingStudent.getAssignedTraineeship());
             }

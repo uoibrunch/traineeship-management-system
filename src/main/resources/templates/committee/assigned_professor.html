@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigned Professor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h3>Professor Assigned Successfully</h3>
+        <hr>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <strong>Assigned Professor:</strong> <span th:text="${professor.professorName}"></span>
+                </h5>
+                <p class="card-text">
+                    <strong>Username:</strong> <span th:text="${professor.username}"></span>
+                </p>
+                <p class="card-text">
+                    <strong>Interests:</strong> <span th:text="${professor.interests}"></span>
+                </p>
+                <p class="card-text">
+                    <strong>Assigned Traineeship Position:</strong> <span th:text="${position.title}"></span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Button to return to the dashboard -->
+        <a href="/committee/dashboard" class="btn btn-primary mt-3">Back to Dashboard</a>
+    </div>
+</body>
+
+</html>

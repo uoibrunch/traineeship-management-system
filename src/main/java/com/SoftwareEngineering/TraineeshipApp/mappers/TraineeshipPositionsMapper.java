@@ -31,7 +31,4 @@ public interface TraineeshipPositionsMapper extends JpaRepository<TraineeshipPos
     TraineeshipPosition findById(int studentId);
     
     List<TraineeshipPosition> findByIsAssignedTrueAndIsSupervisedFalse();
-
-
-	
 }
