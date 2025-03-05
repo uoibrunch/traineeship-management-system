@@ -32,6 +32,8 @@
         <table class="table table-bordered">
             <thead class="thead-light">
                 <tr>
+                    <th>Company</th>
+                    <th>Location</th>
                     <th>Title</th>
                     <th>Description</th>
                     <th>From</th>
@@ -43,6 +45,8 @@
             </thead>
             <tbody>
                 <tr th:each="position : ${positions}">
+                    <td th:text="${position.company.companyName}"></td>
+                    <td th:text="${position.company.companyLocation}"></td>
                     <td th:text="${position.title}"></td>
                     <td th:text="${position.description}"></td>
                     <td th:text="${position.fromDate}"></td>

@@ -1,6 +1,8 @@
 package com.SoftwareEngineering.TraineeshipApp.controllers;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,9 +56,17 @@ public class ProfessorController {
         return "redirect:/professor/retrieveProfile";
     }
 
-    public String listAssignedTraineeships(Model model){
-        return null;
+    @RequestMapping("/professor/assignedTraineeships")
+    public String listAssignedTraineeships(Model model) {
+        
+        List<TraineeshipPosition> traineeships = professorService.retrieveAssignedPositions();
+        
+        model.addAttribute("traineeships", traineeships);
+
+        return "professor/assigned-traineeships";
+        
     }
+
 
     public String evaluateAssignedTraineeship(Integer positionId, Model model){
         return null;

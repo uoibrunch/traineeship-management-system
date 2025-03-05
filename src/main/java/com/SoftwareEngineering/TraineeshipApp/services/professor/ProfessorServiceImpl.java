@@ -1,5 +1,6 @@
 package com.SoftwareEngineering.TraineeshipApp.services.professor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
@@ -21,17 +22,33 @@ public class ProfessorServiceImpl  implements ProfessorService{
 
     @Override
     public Professor retrieveProfile(String username){
+
         return professorMapper.findByUsername(username);
+
     }
 
     @Override
     public void saveProfile(Professor professor){
+
         professorMapper.save(professor);
+
     }
 
     @Override
     public List<TraineeshipPosition> retrieveAssignedPositions(){
-        return null;
+
+        String username = extractUsernameFromUser();
+
+        Professor professor = professorMapper.findByUsername(username);
+
+        if (professor != null){
+
+            return professor.getSupervisedPositions();
+            
+        }
+
+        return  new ArrayList<>();
+        
     }
 
     @Override
