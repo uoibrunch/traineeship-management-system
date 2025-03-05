@@ -135,7 +135,7 @@ public class CompanyServiceImpl implements CompanyService {
             throw new RuntimeException("Company not found.");
         }
     
-        // Check if an evaluation already exists for this company and traineeship position
+
         Optional<Evaluation> existingEvaluation = evaluationMapper.findByTraineeshipPositionAndEvaluationType(position, EvaluationType.COMPANY);
     
         if (existingEvaluation.isPresent()) {
@@ -143,11 +143,11 @@ public class CompanyServiceImpl implements CompanyService {
             evalToUpdate.setMotivation(evaluation.getMotivation());
             evalToUpdate.setEfficiency(evaluation.getEfficiency());
             evalToUpdate.setEffectiveness(evaluation.getEffectiveness());
-            evaluationMapper.save(evalToUpdate);  // Update existing evaluation
+            evaluationMapper.save(evalToUpdate); 
         } else {
             evaluation.setTraineeshipPosition(position);
             evaluation.setEvaluationType(EvaluationType.COMPANY);
-            evaluationMapper.save(evaluation);  // Save new evaluation
+            evaluationMapper.save(evaluation);  
         }
         
     };
