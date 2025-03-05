@@ -60,5 +60,9 @@ public class Professor {
     public void setProfessorId(int id){
         this.professorId = id;
     }
+
+    public int getProfessorId(){
+        return this .professorId;
+    }
    
 }

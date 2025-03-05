@@ -29,6 +29,11 @@ public class ProfessorServiceImpl  implements ProfessorService{
 
     @Override
     public void saveProfile(Professor professor){
+        
+        Professor existingProfessor = professorMapper.findByUsername(professor.getUsername());
+        if (existingProfessor != null) {
+            professor.setProfessorId(existingProfessor.getProfessorId());
+        }
 
         professorMapper.save(professor);
 
