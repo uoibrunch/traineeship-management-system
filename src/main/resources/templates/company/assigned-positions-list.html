@@ -21,6 +21,7 @@
                     <th>From Date</th>
                     <th>To Date</th>
                     <th>Student</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +31,12 @@
                     <td th:text="${position.fromDate}"></td>
                     <td th:text="${position.toDate}"></td>
                     <td th:text="${position.student != null ? position.student.studentName : 'N/A'}"></td>
+                    <td>
+                        <a th:href="@{/company/selectPosition(positionId=${position.Id})}"
+                            class="btn btn-info btn-sm">
+                            Evaluate
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>

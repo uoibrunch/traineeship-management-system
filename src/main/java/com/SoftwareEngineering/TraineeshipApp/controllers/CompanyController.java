@@ -2,6 +2,8 @@ package com.SoftwareEngineering.TraineeshipApp.controllers;
 
 import com.SoftwareEngineering.TraineeshipApp.services.company.CompanyService;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -104,12 +106,27 @@ public class CompanyController {
         return "company/assigned-positions-list";
     }
 
-    public String evaluateAssignedTraineeship(Integer positionId, Model model){
-        return null;
+    @RequestMapping("/company/selectPosition")
+    public String evaluateAssignedTraineeship(Integer positionId , Model model){
+
+        TraineeshipPosition position = companyService.getTraineeshipPositionById(positionId);
+
+        Evaluation evaluation = new Evaluation();
+
+        model.addAttribute("position", position);
+
+        model.addAttribute("evaluation", evaluation);
+
+        return "company/evaluation-form"; 
     }
 
-    public String saveEvaluation(Integer positionId, Evaluation evaluation , Model model){
-        return null;
+    @RequestMapping("/company/saveEvaluation")
+    public String saveEvaluation( Integer positionId, Evaluation evaluation){
+
+        companyService.saveEvaluation(positionId, evaluation);
+           
+        return "redirect:/company/dashboard";
+        
     }
 
     @RequestMapping("company/delete")

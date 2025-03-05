@@ -1,13 +1,17 @@
 package com.SoftwareEngineering.TraineeshipApp.services.company;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
 import com.SoftwareEngineering.TraineeshipApp.mappers.CompanyMapper;
+import com.SoftwareEngineering.TraineeshipApp.mappers.EvaluationMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.EvaluationType;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +27,9 @@ public class CompanyServiceImpl implements CompanyService {
     
     @Autowired
     private TraineeshipPositionsMapper traineeshipPositionMapper;
+
+    @Autowired
+    private EvaluationMapper  evaluationMapper ;
 
     @Override
     public Company retrieveProfile(String username){
@@ -105,10 +112,45 @@ public class CompanyServiceImpl implements CompanyService {
     }
     
     @Override
-    public void evaluateAssignedPosition(Integer poistionId){};
+    public void evaluateAssignedPosition(Integer positionId) {
+        TraineeshipPosition position = getTraineeshipPositionById(positionId);
+        if (position == null) {
+            throw new RuntimeException("Traineeship position not found.");
+        }
+    }
+
 
     @Override
-    public void saveEvaluation(Integer positionId, Evaluation evaulation){};
+    public void saveEvaluation(Integer positionId, Evaluation evaluation){
+
+        TraineeshipPosition position = getTraineeshipPositionById(positionId);
+        if (position == null) {
+            throw new RuntimeException("Traineeship position not found.");
+        }
+    
+        String companyUsername = extractUsernameFromUser();
+        Company company = companyMapper.findByUsername(companyUsername);
+    
+        if (company == null) {
+            throw new RuntimeException("Company not found.");
+        }
+    
+        // Check if an evaluation already exists for this company and traineeship position
+        Optional<Evaluation> existingEvaluation = evaluationMapper.findByTraineeshipPositionAndEvaluationType(position, EvaluationType.COMPANY);
+    
+        if (existingEvaluation.isPresent()) {
+            Evaluation evalToUpdate = existingEvaluation.get();
+            evalToUpdate.setMotivation(evaluation.getMotivation());
+            evalToUpdate.setEfficiency(evaluation.getEfficiency());
+            evalToUpdate.setEffectiveness(evaluation.getEffectiveness());
+            evaluationMapper.save(evalToUpdate);  // Update existing evaluation
+        } else {
+            evaluation.setTraineeshipPosition(position);
+            evaluation.setEvaluationType(EvaluationType.COMPANY);
+            evaluationMapper.save(evaluation);  // Save new evaluation
+        }
+        
+    };
 
 
     @Override
@@ -131,5 +173,22 @@ public class CompanyServiceImpl implements CompanyService {
 
         return username;
     }
+
+    @Override
+    public TraineeshipPosition getTraineeshipPositionById(Integer positionId) {
+        return traineeshipPositionMapper.findById(positionId)
+            .orElseThrow(() -> new RuntimeException("Traineeship position not found"));
+    }
+
+    @Override
+    public Optional<Evaluation> getEvaluationForPosition(Integer positionId) {
+        TraineeshipPosition position = getTraineeshipPositionById(positionId);
+        if (position == null) {
+            throw new RuntimeException("Traineeship position not found.");
+        }
+        return evaluationMapper.findByTraineeshipPositionAndEvaluationType(position, EvaluationType.COMPANY);
+    }
+
+
 
 }

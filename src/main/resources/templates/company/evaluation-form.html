@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluate Traineeship</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h3>Evaluate Traineeship</h3>
+    <hr>
+    <form th:action="@{/company/saveEvaluation}" method="post" th:object="${evaluation}">
+        <input type="hidden" name="positionId" th:value="${position.traineeshipId}"/>
+
+        <div class="form-group">
+            <label>Motivation</label>
+            <select class="form-control" th:field="*{motivation}" required>
+                <option value="1">1 - Bad</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 - Perfect</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Effectiveness</label>
+            <select class="form-control" th:field="*{effectiveness}" required>
+                <option value="1">1 - Bad</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 - Perfect</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Efficiency</label>
+            <select class="form-control" th:field="*{efficiency}" required>
+                <option value="1">1 - Bad</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 - Perfect</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Evaluation</button>
+        <button type="button" class="btn btn-secondary mt-2" onclick="history.back()">Cancel</button>
+    </form>
+</div>
+</body>
+</html>

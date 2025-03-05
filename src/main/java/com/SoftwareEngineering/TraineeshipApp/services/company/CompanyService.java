@@ -1,6 +1,7 @@
 package com.SoftwareEngineering.TraineeshipApp.services.company;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
@@ -28,5 +29,9 @@ public interface CompanyService {
     void saveUsernameAndId(Company company);
 
     String extractUsernameFromUser();
+
+    TraineeshipPosition getTraineeshipPositionById(Integer positionId);
+
+    Optional<Evaluation> getEvaluationForPosition(Integer positionId);
 
 }
