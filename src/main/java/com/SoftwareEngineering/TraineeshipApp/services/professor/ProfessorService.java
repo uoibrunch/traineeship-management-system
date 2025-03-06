@@ -14,12 +14,12 @@ public interface ProfessorService {
 
     List<TraineeshipPosition> retrieveAssignedPositions();
 
-    void evaluateAssignedPosition(Integer positionId);
-
     void saveEvaluation(Integer positionId, Evaluation evaluation);
 
     void saveUsernameAndId(Professor professor);
 
     String extractUsernameFromUser();
+
+    TraineeshipPosition getTraineeshipPositionById(Integer positionId);
 
 }

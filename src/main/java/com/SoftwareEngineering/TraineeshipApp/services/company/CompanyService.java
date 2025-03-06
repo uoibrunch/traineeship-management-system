@@ -20,8 +20,6 @@ public interface CompanyService {
 
     List<TraineeshipPosition> retrieveAssignedPositions(String username);
 
-    void evaluateAssignedPosition(Integer positionId);
-
     void saveEvaluation(Integer positionId, Evaluation evaluation);
 
     void deleteById(int id);

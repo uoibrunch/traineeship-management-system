@@ -110,14 +110,6 @@ public class CompanyServiceImpl implements CompanyService {
         traineeshipPositionMapper.deleteById(theId);
 
     }
-    
-    @Override
-    public void evaluateAssignedPosition(Integer positionId) {
-        TraineeshipPosition position = getTraineeshipPositionById(positionId);
-        if (position == null) {
-            throw new RuntimeException("Traineeship position not found.");
-        }
-    }
 
 
     @Override

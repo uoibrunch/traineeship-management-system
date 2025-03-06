@@ -67,13 +67,25 @@ public class ProfessorController {
         
     }
 
-
+    @RequestMapping("/professor/evaluatePosition")
     public String evaluateAssignedTraineeship(Integer positionId, Model model){
-        return null;
+        TraineeshipPosition position = professorService.getTraineeshipPositionById(positionId);
+
+        Evaluation evaluation = new Evaluation();
+
+        model.addAttribute("position", position);
+
+        model.addAttribute("evaluation", evaluation);
+
+        return "professor/evaluation-form"; 
     }
 
+    @RequestMapping("/professor/saveEvaluation")
     public String saveEvaluation(Integer positionId, Evaluation evaluation , Model model){
-        return null;
+        
+        professorService.saveEvaluation(positionId, evaluation);
+           
+        return "redirect:/professor/dashboard";
     }
 
     

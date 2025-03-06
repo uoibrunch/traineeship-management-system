@@ -82,4 +82,20 @@ public class Evaluation {
         this.traineeshipPosition = traineeshipPosition;
     }
 
+    public int getFacility() {
+        return facility;
+    }
+    
+    public void setFacility(int facility) {
+        this.facility = facility;
+    }
+
+    public int getGuidance() {
+        return guidance;
+    }
+    
+    public void setGuidance(int guidance) {
+        this.guidance = guidance;
+    }
+
 }

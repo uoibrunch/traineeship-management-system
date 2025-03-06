@@ -22,6 +22,7 @@
                 <th>Company</th>
                 <th>From</th>
                 <th>To</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,12 @@
                 <td th:text="${position.company.companyName}"></td>
                 <td th:text="${position.fromDate}"></td>
                 <td th:text="${position.toDate}"></td>
+                <td>
+                    <a th:href="@{/professor/evaluatePosition(positionId=${position.Id})}"
+                        class="btn btn-info btn-sm">
+                        Evaluate
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>
