@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
 import com.SoftwareEngineering.TraineeshipApp.mappers.EvaluationMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.ProfessorMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
@@ -31,6 +32,8 @@ public class ProfessorServiceImpl  implements ProfessorService{
 
     @Autowired
     private EvaluationMapper  evaluationMapper ;
+
+    
 
     @Override
     public Professor retrieveProfile(String username){

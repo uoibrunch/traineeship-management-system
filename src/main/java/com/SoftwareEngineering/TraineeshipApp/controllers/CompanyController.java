@@ -17,6 +17,7 @@ public class CompanyController {
 
     @Autowired
     CompanyService companyService;
+    
 
     @RequestMapping("/company/dashboard")
     public String getStudentDashboard(Model model){
@@ -121,11 +122,17 @@ public class CompanyController {
     }
 
     @RequestMapping("/company/saveEvaluation")
-    public String saveEvaluation( Integer positionId, Evaluation evaluation , Model model){
+    public String saveEvaluation( Integer positionId, @ModelAttribute("evaluation")Evaluation evaluation , Model model){
 
         companyService.saveEvaluation(positionId, evaluation);
+        
+        Student student = companyService.getTraineeshipPositionById(positionId).getStudent();
+
+        model.addAttribute("evaluation", evaluation);
+
+        model.addAttribute("student", student);
            
-        return "redirect:/company/dashboard";
+        return "company/show-evaluation";
         
     }
 

@@ -71,22 +71,36 @@ public class ProfessorController {
     public String evaluateAssignedTraineeship(Integer positionId, Model model){
         TraineeshipPosition position = professorService.getTraineeshipPositionById(positionId);
 
+        List<Logbook> logbooks = position.getStudentLogbook();
+        
         Evaluation evaluation = new Evaluation();
+
+        Student student = position.getStudent();
+
+        Company company = position.getCompany();
 
         model.addAttribute("position", position);
 
         model.addAttribute("evaluation", evaluation);
 
+        model.addAttribute("student", student);
+
+        model.addAttribute("logbooks", logbooks);
+
+        model.addAttribute("company", company);
+
         return "professor/evaluation-form"; 
     }
 
     @RequestMapping("/professor/saveEvaluation")
-    public String saveEvaluation(Integer positionId, Evaluation evaluation , Model model){
+    public String saveEvaluation(Integer positionId, @ModelAttribute("evaluation") Evaluation evaluation , Model model){
         
         professorService.saveEvaluation(positionId, evaluation);
            
-        return "redirect:/professor/dashboard";
-    }
+        model.addAttribute("evaluation", evaluation);
 
-    
+        return "professor/show-evaluation";
+    }
+ 
+
 }

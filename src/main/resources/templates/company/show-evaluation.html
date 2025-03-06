@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluations</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Student Full Name Card -->
+        <div class="text-bg-success p-3">
+            <div class="card mb-3" style="background-color: khaki; margin-left:-15px">
+                <div class="card-body">     
+                    <h5 class="card-title">
+                        <strong>Student's Full Name:</strong> 
+                        <span th:text="${student != null ? student.studentName : 'Not Set'}"></span>
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <h3>Summary</h3>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Motivation</th>
+                    <th>Effectiveness</th>
+                    <th>Efficiency</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${evaluation.motivation}"></td>
+                    <td th:text="${evaluation.effectiveness}"></td>
+                    <td th:text="${evaluation.efficiency}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/company/dashboard" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+</body>
+</html>

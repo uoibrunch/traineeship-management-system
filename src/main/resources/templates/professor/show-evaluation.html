@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluations</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Summary</h3>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Motivation</th>
+                    <th>Effectiveness</th>
+                    <th>Efficiency</th>
+                    <th>Facility</th>
+                    <th>Guidance</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <td th:text="${evaluation.motivation}"></td>
+                    <td th:text="${evaluation.effectiveness}"></td>
+                    <td th:text="${evaluation.efficiency}"></td>
+                    <td th:text="${evaluation.facility}"></td>
+                    <td th:text="${evaluation.guidance}"></td>
+            </tbody>
+        </table>
+        <a href="/professor/dashboard" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+</body>
+</html>

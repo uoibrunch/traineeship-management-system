@@ -3,6 +3,7 @@ package com.SoftwareEngineering.TraineeshipApp.services.professor;
 import java.util.List;
 
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
 
