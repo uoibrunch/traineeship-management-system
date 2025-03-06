@@ -121,7 +121,7 @@ public class CompanyController {
     }
 
     @RequestMapping("/company/saveEvaluation")
-    public String saveEvaluation( Integer positionId, Evaluation evaluation){
+    public String saveEvaluation( Integer positionId, Evaluation evaluation , Model model){
 
         companyService.saveEvaluation(positionId, evaluation);
            

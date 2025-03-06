@@ -70,7 +70,9 @@ public class ProfessorServiceImpl  implements ProfessorService{
 
     @Override
     public void saveEvaluation(Integer positionId, Evaluation evaluation){
-         TraineeshipPosition position = getTraineeshipPositionById(positionId);
+
+        TraineeshipPosition position = getTraineeshipPositionById(positionId);
+
         if (position == null) {
             throw new RuntimeException("Traineeship position not found.");
         }
@@ -81,7 +83,6 @@ public class ProfessorServiceImpl  implements ProfessorService{
         if (professor == null) {
             throw new RuntimeException("Company not found.");
         }
-    
 
         Optional<Evaluation> existingEvaluation = evaluationMapper.findByTraineeshipPositionAndEvaluationType(position, EvaluationType.PROFESSOR);
     
@@ -96,7 +97,6 @@ public class ProfessorServiceImpl  implements ProfessorService{
             evaluation.setEvaluationType(EvaluationType.PROFESSOR);
             evaluationMapper.save(evaluation);  
         }
-
     }
 
     @Override

@@ -55,7 +55,6 @@ public class StudentController {
     public String retrieveProfile(Model model){
 
         Student student = studentService.retrieveProfile(studentService.extractUsernameFromUser());
-        
 
         model.addAttribute("student", student);
 
@@ -70,7 +69,7 @@ public class StudentController {
        
         studentService.saveProfile(student);
         
-        return "redirect:/students/retrieveProfile";
+        return "redirect:/students/dashboard";
     }
 
     @RequestMapping("/students/fillLogbook")
@@ -91,6 +90,5 @@ public class StudentController {
 
         return "redirect:/students/dashboard"; 
     }
-
 
 }

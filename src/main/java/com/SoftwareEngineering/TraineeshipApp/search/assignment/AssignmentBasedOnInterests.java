@@ -31,7 +31,7 @@ public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy 
 
         Optional<TraineeshipPosition> selectedPosition = positionsMapper.findById(positionId);
 
-        double threshold = 0.7;
+        double threshold = 0.8;
 
         if (selectedPosition.isPresent()) {
             
@@ -61,6 +61,12 @@ public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy 
                     highestSimilarity = jaccardSimilarity;
                 }
             }
+
+            
+            
+            position.setSupervisor(bestProfessor);
+            position.setIsSupervised(true);
+            positionsMapper.save(position);
         
         } else {
             throw new EntityNotFoundException("Traineeship Position not found with ID: " + positionId);
