@@ -6,58 +6,64 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <title>Selected Position</title>
+    <title>Traineeship</title>
 </head>
 <body>
 
-<div class="container mt-5">
-    <h3>Selected Position</h3>
-    <hr>
-
-    <div class="card p-3 mb-3">
-        <p><strong>Title:</strong> <span th:text="${position.title}"></span></p>
-        <p><strong>Company:</strong> <span th:text="${position.company.companyName}"></span></p>
-        <p><strong>Student:</strong> <span th:text="${position.student.studentName}"></span></p>
-        <p><strong>Interests:</strong> <span th:text="${position.topics}"></span></p>
-    </div>
-
-    <!-- Search Bar for Traineeship Positions -->
-    <form th:action="@{/committee/assignProfessor}" method="GET">
-
-        <!-- Hidden Field for Traineeship ID -->
-        <input type="hidden" name="traineeshipId" th:value="${position.traineeshipId}" />
-
-        <div class="form-group">
-            <label for="searchStrategy">Assign By:</label>
-            <select id="searchStrategy" name="strategy" class="form-control">
-                <option value="interests">Interests</option>
-                <option value="load">Professor's Load</option>
-            </select>
+    <div class="container mt-5">
+        <h3>Professor Assigning</h3>
+        <hr>
+    
+        <div class="card p-3 mb-3">
+            <p><strong>Title:</strong> <span th:text="${position.title}"></span></p>
+            <p><strong>Company:</strong> <span th:text="${position.company.companyName}"></span></p>
+            <p><strong>Student:</strong> <span th:text="${position.student.studentName}"></span></p>
+            <p><strong>Interests:</strong> <span th:text="${position.topics}"></span></p>
         </div>
-
-        <button type="submit" class="btn btn-primary">Assign Professor</button>
-    </form>
-
-    <div class="card p-3 mt-4">
-        <h4>Professors</h4>
-        <table class="table table-bordered">
-            <thead class="thead-light">
-                <tr>
-                    <th>Professor Name</th>
-                    <th>Interests</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="professor : ${professors}">
-                    <td th:text="${professor.professorName}"></td>
-                    <td th:text="${professor.interests}"></td>
-                </tr>
-            </tbody>
-        </table>
+    
+        <!-- If professors exist, show the form and table -->
+        <div th:if="${not #lists.isEmpty(professors)}">
+            <!-- Search Bar for Traineeship Positions -->
+            <form th:action="@{/committee/assignProfessor}" method="GET">
+                <!-- Hidden Field for Traineeship ID -->
+                <input type="hidden" name="traineeshipId" th:value="${position.traineeshipId}" />
+    
+                <div class="form-group">
+                    <label for="searchStrategy">Assign By:</label>
+                    <select id="searchStrategy" name="strategy" class="form-control">
+                        <option value="interests">Interests</option>
+                        <option value="load">Professor's Load</option>
+                    </select>
+                </div>
+    
+                <button type="submit" class="btn btn-primary">Assign Professor</button>
+            </form>
+    
+            <div class="card p-3 mt-4">
+                <h4>Professors</h4>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Professor Name</th>
+                            <th>Interests</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="professor : ${professors}">
+                            <td th:text="${professor.professorName}"></td>
+                            <td th:text="${professor.interests}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        <!-- If no professors exist, show a warning message -->
+        <div th:if="${#lists.isEmpty(professors)}" class="alert alert-warning">
+            No professors available for assignment.
+        </div>
+    
+        <a href="/committee/showTraineeshipApplications" class="btn btn-secondary mt-3">Back to Student List</a>
     </div>
-
-    <a href="/committee/showTraineeshipApplications" class="btn btn-secondary mt-3">Back to Student List</a>
-</div>
-
 </body>
 </html>

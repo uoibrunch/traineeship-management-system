@@ -29,40 +29,26 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.findByUsername(studentUsername);
         
     }
+
+    @Override
+    public void applyForATraineeship(Student student ){
+
+        Student existingStudent = studentMapper.findByUsername(student.getUsername());
+
+        existingStudent.setLookingForTraineeship(true);
+
+        studentMapper.save(existingStudent);
+        
+    }
     @Override
     public void saveProfile(Student student) {
         
         Student existingStudent = studentMapper.findByUsername(student.getUsername());
     
         if (existingStudent != null) {
+
             student.setStudentId(existingStudent.getStudentId());
             
-            if (student.isLookingForTraineeship() && existingStudent.getAssignedTraineeship() != null) {
-                TraineeshipPosition traineeship = existingStudent.getAssignedTraineeship();
-    
-                traineeship.setStudent(null);
-                traineeship.setIsAssigned(false);
-
-                Professor supervisor = traineeship.getSupervisor();
-                if (supervisor != null) {
-                    supervisor.getSupervisedPositions().remove(traineeship);
-                    traineeship.setSupervisor(null);
-                    traineeship.setIsSupervised(false); 
-                    professorMapper.save(supervisor);
-                }
-
-                if (traineeship.getStudentLogbook() != null) {
-                    traineeship.getStudentLogbook().clear();  
-                }
-
-                student.setAssignedTraineeship(null);
-
-                positionsMapper.save(traineeship); 
-    
-                
-            } else {
-                student.setAssignedTraineeship(existingStudent.getAssignedTraineeship());
-            }
         }
     
         studentMapper.save(student);
@@ -91,7 +77,7 @@ public class StudentServiceImpl implements StudentService {
         }
 
     }
-
+    
     @Override
     public void saveUsernameAndId(Student student){
 
