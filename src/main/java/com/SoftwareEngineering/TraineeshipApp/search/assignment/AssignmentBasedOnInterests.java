@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,7 @@ public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy 
 
         Optional<TraineeshipPosition> selectedPosition = positionsMapper.findById(positionId);
 
-        double threshold = 0.8;
+        double threshold = 4.0;
 
         if (selectedPosition.isPresent()) {
             
@@ -44,7 +45,16 @@ public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy 
 
             List<Professor> professors = professorMapper.findAll();
 
-            Professor bestProfessor = null;
+            Random rnd = new Random();
+
+            Professor bestProfessor = new Professor();
+
+            if (!professors.isEmpty()) {
+                int randomIndex = rnd.nextInt(professors.size()); 
+                bestProfessor = professors.get(randomIndex); 
+            }
+
+
             double highestSimilarity = 0.0;
 
             for (Professor professor : professors){
@@ -62,10 +72,12 @@ public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy 
                 }
             }
 
-            
+
             
             position.setSupervisor(bestProfessor);
+
             position.setIsSupervised(true);
+            
             positionsMapper.save(position);
         
         } else {

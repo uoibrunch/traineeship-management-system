@@ -101,7 +101,7 @@ public class CommitteeController {
 
         if (positionId == null) {
             model.addAttribute("errorMessage", "Traineeship ID is missing.");
-            return "committee/assignment_error"; // Redirect to an error page
+            return "committee/assignment_error";
         }
 
         committeeService.assignSupervisor(positionId, strategy);

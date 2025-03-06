@@ -30,21 +30,34 @@ public class StudentController {
 
         }
 
+        if (student == null) {
+            student = new Student();
+        }
+
         model.addAttribute("student", student);
 
         return "students/dashboard";
     }
 
+    @RequestMapping("/students/applyForATraineeship")
+	public String applyForATraineeship(Model theModel) {
+
+        Student student = studentService.retrieveProfile(studentService.extractUsernameFromUser());
+    
+        studentService.applyForATraineeship(student);
+
+        return "redirect:/students/dashboard ";
+    }
+
+
     @RequestMapping("/students/showFormForUpdate")
 	public String showFormForUpdate(Model theModel) {
 		
-		// create model attribute to bind form data
 		Student theStudent = studentService.retrieveProfile(studentService.extractUsernameFromUser());
 
         if (theStudent == null) {
             theStudent = new Student();
         }
-
 		
 		theModel.addAttribute("student", theStudent);
 		
@@ -65,9 +78,16 @@ public class StudentController {
     @RequestMapping("/students/save")
     public String saveProfile(@ModelAttribute("student") Student student){
 
+        Student theStudent = studentService.retrieveProfile(studentService.extractUsernameFromUser());
+
+        if (theStudent != null){
+            student.setLookingForTraineeship(theStudent.isLookingForTraineeship());
+        }
+ 
         studentService.saveUsernameAndId(student);
        
         studentService.saveProfile(student);
+
         
         return "redirect:/students/dashboard";
     }

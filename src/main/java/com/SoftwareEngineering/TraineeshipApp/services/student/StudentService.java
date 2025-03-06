@@ -17,5 +17,7 @@ public interface StudentService {
     void saveUsernameAndId(Student student);
 
     String extractUsernameFromUser();
+
+    void applyForATraineeship(Student student );
     
 }

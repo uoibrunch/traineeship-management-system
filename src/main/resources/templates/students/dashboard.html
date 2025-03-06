@@ -47,13 +47,23 @@
                 <strong>Skills:</strong> 
                 <span th:text="${student != null ? student.skills : 'Not Set'}"></span>
             </p>
-            <p class="card-text">
-                <strong>Applied for Traineeship:</strong> 
-                <span th:text="${student != null && student.lookingForTraineeship ? 'Yes' : 'No'}"></span>
-            </p>
         </div>
     </div>
 
+    <div th:if="${!student.lookingForTraineeship and student.username != null and student.assignedTraineeship == null}" class="mb-4">
+        <form th:action="@{/students/applyForATraineeship}" method="get">
+            <button type="submit" class="btn btn-success">
+                Apply for a traineeship.
+            </button>
+        </form>
+    </div>
+
+    <div th:unless="${!student.lookingForTraineeship and student.username != null}" class="mb-4">
+        <p class="text-success">
+            You have already applied for a traineeship.
+        </p>
+    </div>
+    
     <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
 
     <div th:if="${student != null && student.assignedTraineeship != null}">
