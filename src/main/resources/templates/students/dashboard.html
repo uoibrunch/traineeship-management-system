@@ -58,9 +58,9 @@
         </form>
     </div>
 
-    <div th:if="${!(!student.lookingForTraineeship and student.assignedTraineeship == null)}" class="mb-4">
+    <div th:if="${(student.lookingForTraineeship and student.assignedTraineeship == null) and student.username != null}" class="mb-4">
         <p class="text-success">
-            You have already applied for a traineeship.
+            You have applied for a traineeship.
         </p>
     </div>
     

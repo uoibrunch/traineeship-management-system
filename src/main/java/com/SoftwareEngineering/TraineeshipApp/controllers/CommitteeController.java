@@ -96,7 +96,7 @@ public class CommitteeController {
         return "committee/selected-professor";
     }
 
-    @GetMapping("/committee/assignProfessor")
+    @RequestMapping("/committee/assignProfessor")
     public String assignProfessor(@RequestParam("traineeshipId") Integer positionId,@RequestParam("strategy") String strategy, Model model){
 
         if (positionId == null) {
@@ -124,8 +124,30 @@ public class CommitteeController {
         return "committee/assigned_professor";
     }
 
-    public String completeAssignedTraineedships(Integer positionId , Model model){
-        return null;
+    @RequestMapping("/committee/completeTraineeship")
+    public String completeAssignedTraineedships(@RequestParam("traineeshipId") Integer positionId , Model model){
+
+        TraineeshipPosition position =  committeeService.findPositionById(positionId);
+
+        List<Logbook> logbooks = position.getStudentLogbook();
+        
+        Evaluation evaluation = new Evaluation();
+
+        Student student = position.getStudent();
+
+        Company company = position.getCompany();
+
+        model.addAttribute("position", position);
+
+        model.addAttribute("evaluation", evaluation);
+
+        model.addAttribute("student", student);
+
+        model.addAttribute("logbooks", logbooks);
+
+        model.addAttribute("company", company);
+    
+        return "/committee/complete-form";
     }
 
 }
