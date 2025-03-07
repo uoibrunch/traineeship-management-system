@@ -10,7 +10,40 @@
     <h3>Evaluate Traineeship</h3>
     <hr>
     <form th:action="@{/company/saveEvaluation}" method="post" th:object="${evaluation}">
+        
         <input type="hidden" name="positionId" th:value="${position.traineeshipId}"/>
+        <div class="container mt-5">
+            <div class="text-bg-success p-3">
+                <div class="card mb-3" style = "background-color: khaki; margin-left:-15px">
+                    <div class="card-body">     
+                        <h5 class="card-title">
+                            <strong>Student's Full Name:</strong> 
+                            <span th:text="${student != null ? student.studentName : 'Not Set'}"></span>
+                        </h5>
+                    </div>
+                </div>
+        </div>
+    
+
+        <h3>Student Logbook</h3>
+        <hr>
+        <div th:if="${student.assignedTraineeship.studentLogbook != null and not #lists.isEmpty(logbooks)}"> 
+            <p><strong>Activities:</strong></p>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th style="width: 150px; text-align: center;">Date</th>
+                        <th style="width: 500px;">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="logbook : ${logbooks}">
+                        <td th:text="${logbook.date}"></td>
+                        <td th:text="${logbook.description}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <div class="form-group">
             <label>Motivation</label>

@@ -112,11 +112,23 @@ public class CompanyController {
 
         TraineeshipPosition position = companyService.getTraineeshipPositionById(positionId);
 
+        List<Logbook> logbooks = position.getStudentLogbook();
+
         Evaluation evaluation = new Evaluation();
+
+        Student student = position.getStudent();
+
+        Company company = position.getCompany();
 
         model.addAttribute("position", position);
 
         model.addAttribute("evaluation", evaluation);
+
+        model.addAttribute("student", student);
+
+        model.addAttribute("logbooks", logbooks);
+
+        model.addAttribute("company", company);
 
         return "company/evaluation-form"; 
     }

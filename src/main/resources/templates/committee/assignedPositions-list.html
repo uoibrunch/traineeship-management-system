@@ -25,7 +25,7 @@
                 <th>Company</th>
                 <th>Student</th>
                 <th>Interests</th>
-                <th class="action-column">Action</th> <!-- Apply custom class here -->
+                <th class="action-column">Action</th> 
             </tr>
         </thead>
         <tbody>
@@ -36,13 +36,15 @@
                 <td th:text="${position.topics}"></td>
                 <td class="action-column">
                     <!-- Select Button -->
-                    <a th:href="@{/committee/selectPosition(traineeshipId=${position.traineeshipId})}"
-                       class="btn btn-info btn-sm mr-2">
+                    <a th:if="${position.supervisor == null}" 
+                    th:href="@{/committee/selectPosition(traineeshipId=${position.traineeshipId})}"
+                    class="btn btn-info btn-sm mr-2">
                         Assign Professor
                     </a>
-                    <!-- Evaluate Button -->
-                    <a th:href="@{/committee/completeTraineeship(traineeshipId=${position.traineeshipId})}"
-                       class="btn btn-warning btn-sm">
+                
+                    <a  
+                        th:href="@{/committee/completeTraineeship(traineeshipId=${position.traineeshipId})}"
+                        class="btn btn-warning btn-sm">
                         Complete
                     </a>
                 </td>

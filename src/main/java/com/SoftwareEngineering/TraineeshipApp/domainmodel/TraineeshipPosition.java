@@ -43,7 +43,7 @@ public class TraineeshipPosition {
     private List<Logbook> studentLogbook;
 
     @Column(name = "pass_fail_grade")
-    private boolean passFailGrade;
+    private Boolean passFailGrade;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")

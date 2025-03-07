@@ -14,8 +14,6 @@ public interface CommitteeService {
 
     List <TraineeshipPosition> listAssignedTraineeships();
 
-    void completeAssignedTraineeships(Integer positionId);
-
     Student findStudentById(int id);
 
     List <TraineeshipPosition> listUnassignedTraineeships();
@@ -31,5 +29,7 @@ public interface CommitteeService {
     String extractUsernameFromUser();
 
     List<Professor> retrieveProfessorsForPosition(int positionId, String strategy);
+
+    TraineeshipPosition completeAssignedTraineeships(int positionId , boolean grade);
 
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Traineeship Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Traineeship Info -->
+        <div class="card mb-3" th:if="${position.student != null && position.student.assignedTraineeship != null}">
+            <div class="card-body">
+                <h5 class="card-title">Traineeship Info</h5>
+                <p><strong>Student Name:</strong> 
+                    <span th:text="${position.student.studentName}"></span>
+                </p>
+                <p th:if="${position.student.assignedTraineeship.company != null and position.student.assignedTraineeship.company.companyName != null}">
+                    <strong>Company:</strong> 
+                    <span th:text="${position.student.assignedTraineeship.company.companyName}"></span>
+                </p>
+                <p th:if="${position.student.assignedTraineeship.isSupervised}">
+                    <strong>Supervisor:</strong> 
+                    <span th:text="${position.student.assignedTraineeship.supervisor.professorName}"></span>
+                </p>
+                
+                <p><strong>Title:</strong> 
+                    <span th:text="${position.student.assignedTraineeship.title}"></span>
+                </p>
+            </div>
+        </div>
+
+        <div th:if="${position != null}">
+            <div th:if="${position.passFailGrade}" class="alert alert-success" role="alert">
+                <p>The traineeship was successful!</p>
+            </div>
+            <div th:if="${!position.passFailGrade}" class="alert alert-danger" role="alert">
+                <p>The traineeship has failed.</p>
+            </div>
+        </div>
+
+        <a href="/committee/dashboard" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+</body>
+</html>

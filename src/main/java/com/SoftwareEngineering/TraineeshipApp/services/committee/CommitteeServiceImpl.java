@@ -114,7 +114,7 @@ public class CommitteeServiceImpl implements CommitteeService{
     @Override
     public List<TraineeshipPosition> listAssignedTraineeships(){
 
-        List<TraineeshipPosition> assignedPositions = positionsMapper.findByIsAssignedTrueAndIsSupervisedFalse();
+        List<TraineeshipPosition> assignedPositions = positionsMapper.findByIsAssignedTrueAndPassFailGradeIsNull();
 
         return assignedPositions;
     }
@@ -132,7 +132,7 @@ public class CommitteeServiceImpl implements CommitteeService{
         TraineeshipPosition position = findPositionById(positionId);
 
         PositionsSearchStrategy searchStrategy = positionsSearchFactory.create(strategy);
-        //return searchStrategy.search(applicantUsername);
+       
         return null;
     }
 
@@ -147,7 +147,15 @@ public class CommitteeServiceImpl implements CommitteeService{
 
    
     @Override
-    public void completeAssignedTraineeships(Integer positionId){
+    public TraineeshipPosition completeAssignedTraineeships(int positionId , boolean grade){
+
+        TraineeshipPosition position = positionsMapper.findById(positionId);
+
+        position.setPassFailGrade(grade);
+        
+        positionsMapper.save(position);
+
+        return position;
 
     }
 
@@ -167,5 +175,6 @@ public class CommitteeServiceImpl implements CommitteeService{
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return username;
     }
+
 
 }
