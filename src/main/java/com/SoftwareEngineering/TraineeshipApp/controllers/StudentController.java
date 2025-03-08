@@ -46,7 +46,7 @@ public class StudentController {
     
         studentService.applyForATraineeship(student);
 
-        return "redirect:/students/dashboard ";
+        return "redirect:/students/dashboard";
     }
 
 

@@ -18,7 +18,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Logbook;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.services.committee.CommitteeService;
 
 @SpringBootTest
@@ -53,6 +57,57 @@ public class CommitteeControllerTest {
             .andExpect(model().attribute("students", mockStudents));
     }
 
+    /*@Test
+    @WithMockUser(username = "testCommittee", authorities =  "COMMITTEE_MEMBER")
+    public void assignProfessor_ShouldReturnErrorMessageWhenPositionNotFound() throws Exception {
+        Integer positionId = null;
+        String strategy = "strategy1";
 
+        mockMvc.perform(MockMvcRequestBuilders.get("/committee/assignProfessor").with(csrf())
+                .param("traineeshipId", String.valueOf(positionId))
+                .param("strategy", strategy))
+            .andExpect(status().isOk())
+            .andExpect(view().name("committee/assignment_error"))
+            .andExpect(model().attribute("errorMessage", "Traineeship ID is missing."));
+    }
 
+    @Test
+    @WithMockUser(username = "testCommittee", authorities =  "COMMITTEE_MEMBER")
+    public void completeAssignedTraineeships_ShouldReturnCompleteForm() throws Exception {
+        Integer positionId = 1;
+        TraineeshipPosition position = new TraineeshipPosition();
+        List<Logbook> logbooks = Arrays.asList(new Logbook());
+        Evaluation evaluation = new Evaluation();
+        Student student = new Student();
+        Company company = new Company();
+
+        when(committeeService.findPositionById(positionId)).thenReturn(position);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/committee/completeTraineeship"). with(csrf())
+                .param("traineeshipId", String.valueOf(positionId)))
+            .andExpect(status().isOk())
+            .andExpect(view().name("committee/complete-form"))
+            .andExpect(model().attribute("position", position))
+            .andExpect(model().attribute("evaluation", evaluation))
+            .andExpect(model().attribute("student", student))
+            .andExpect(model().attribute("logbooks", logbooks))
+            .andExpect(model().attribute("company", company));
+    }
+
+    @Test
+    @WithMockUser(username = "testCommittee", authorities =  "COMMITTEE_MEMBER")
+    public void updateGrade_ShouldUpdateGradeAndReturnResult() throws Exception {
+        Integer positionId = 1;
+        boolean grade = true;
+        TraineeshipPosition position = new TraineeshipPosition();
+        when(committeeService.completeAssignedTraineeships(positionId, grade)).thenReturn(position);
+    
+        mockMvc.perform(MockMvcRequestBuilders.post("/committee/updateGrade/{id}", positionId) .with(csrf())
+                .param("grade", String.valueOf(grade)))
+               .andExpect(status().isOk())
+               .andExpect(view().name("/committee/traineeshipResult"))
+               .andExpect(model().attribute("position", position));
+    }
+               */
+    
 }
