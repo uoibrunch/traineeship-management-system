@@ -53,7 +53,7 @@
     <div th:if="${!student.lookingForTraineeship and student.username != null and student.assignedTraineeship == null}" class="mb-4">
         <form th:action="@{/students/applyForATraineeship}" method="get">
             <button type="submit" class="btn btn-success">
-                Apply for a traineeship.
+                Apply for a traineeship
             </button>
         </form>
     </div>
