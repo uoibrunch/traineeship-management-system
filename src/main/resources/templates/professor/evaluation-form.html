@@ -19,6 +19,19 @@
             </div>
     </div>
 
+    <div class="card mb-3">
+        <div class="card-body" style = "background-color: lightsalmon">
+            <h5 class="card-title">
+                <strong>Company Name:</strong> 
+                <span th:text="${company != null ? company.companyName : 'Not Set'}"></span>
+            </h5>
+            <p class="card-text">
+                <strong>Location:</strong> 
+                <span th:text="${company != null ? company.companyLocation : 'Not Set'}"></span>
+            </p>
+        </div>
+    </div>
+
     <!-- Logbook Section -->
     <h3>Student Logbook</h3>
     <hr>
