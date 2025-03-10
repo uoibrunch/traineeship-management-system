@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assigns.position;
+package com.SoftwareEngineering.TraineeshipApp.assignments.position;
 
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 

@@ -1,5 +1,6 @@
 package com.SoftwareEngineering.TraineeshipApp.controllers;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,57 +50,162 @@ public class CommitteeControllerTest {
             .andExpect(model().attribute("students", mockStudents));
     }
 
-    /*@Test
-    @WithMockUser(username = "testCommittee", authorities =  "COMMITTEE_MEMBER")
-    public void assignProfessor_ShouldReturnErrorMessageWhenPositionNotFound() throws Exception {
-        Integer positionId = null;
-        String strategy = "strategy1";
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/committee/assignProfessor").with(csrf())
-                .param("traineeshipId", String.valueOf(positionId))
+    @Test
+    @WithMockUser(username = "testCommittee", authorities = "COMMITTEE_MEMBER")
+    public void findPositions_ShouldReturnPositionsList() throws Exception {
+        String studentUsername = "Marios";
+        String strategy = "both";
+
+        Student mockStudent = new Student();
+        mockStudent.setUsername(studentUsername);
+
+        Company mockCompany = new Company();
+        mockCompany.setCompanyName("Apple");
+
+        TraineeshipPosition position1 = new TraineeshipPosition();
+        position1.setCompany(mockCompany);  
+
+        TraineeshipPosition position2 = new TraineeshipPosition();
+        position2.setCompany(mockCompany);  
+
+        List<TraineeshipPosition> mockPositions = Arrays.asList(position1, position2);
+
+        when(committeeService.findStudentByUsername(studentUsername)).thenReturn(mockStudent);
+        when(committeeService.retrievePositionsForApplicant(studentUsername, strategy)).thenReturn(mockPositions);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/committee/findPositions")
+                .param("studentUsername", studentUsername)
                 .param("strategy", strategy))
             .andExpect(status().isOk())
-            .andExpect(view().name("committee/assignment_error"))
-            .andExpect(model().attribute("errorMessage", "Traineeship ID is missing."));
+            .andExpect(view().name("committee/positions-list"))
+            .andExpect(model().attributeExists("student", "positions"))
+            .andExpect(model().attribute("student", mockStudent))
+            .andExpect(model().attribute("positions", mockPositions));
+    }
+
+
+    @Test
+    @WithMockUser(username = "testCommittee", authorities = "COMMITTEE_MEMBER")
+    public void selectStudent_ShouldReturnSelectedStudentView() throws Exception {
+        int studentId = 1;
+    
+        Student mockStudent = new Student();
+        mockStudent.setStudentId(studentId);
+    
+        Company mockCompany = new Company();
+        mockCompany.setCompanyName("Apple");
+    
+        TraineeshipPosition position1 = new TraineeshipPosition();
+        position1.setCompany(mockCompany);
+    
+        TraineeshipPosition position2 = new TraineeshipPosition();
+        position2.setCompany(mockCompany);
+    
+        List<TraineeshipPosition> mockUnassignedPositions = Arrays.asList(position1, position2);
+    
+        when(committeeService.findStudentById(studentId)).thenReturn(mockStudent);
+        when(committeeService.listUnassignedTraineeships()).thenReturn(mockUnassignedPositions);
+    
+        mockMvc.perform(MockMvcRequestBuilders.get("/committee/selectStudent")
+                .param("studentId", String.valueOf(studentId)))
+            .andExpect(status().isOk())
+            .andExpect(view().name("committee/selected-student"))
+            .andExpect(model().attributeExists("student", "positions"))
+            .andExpect(model().attribute("student", mockStudent))
+            .andExpect(model().attribute("positions", mockUnassignedPositions));
     }
 
     @Test
-    @WithMockUser(username = "testCommittee", authorities =  "COMMITTEE_MEMBER")
-    public void completeAssignedTraineeships_ShouldReturnCompleteForm() throws Exception {
-        Integer positionId = 1;
-        TraineeshipPosition position = new TraineeshipPosition();
-        List<Logbook> logbooks = Arrays.asList(new Logbook());
-        Evaluation evaluation = new Evaluation();
-        Student student = new Student();
-        Company company = new Company();
+    @WithMockUser(username = "testCommittee", authorities = "COMMITTEE_MEMBER")
+    public void assignPosition_ShouldRedirectToDashboardWithSuccessMessage() throws Exception {
+        int positionId = 5;
+        String studentUsername = "Marios";
 
-        when(committeeService.findPositionById(positionId)).thenReturn(position);
+        doNothing().when(committeeService).assignPosition(positionId, studentUsername);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/committee/completeTraineeship"). with(csrf())
-                .param("traineeshipId", String.valueOf(positionId)))
+        mockMvc.perform(MockMvcRequestBuilders.post("/committee/assignPosition")
+                .param("positionId", String.valueOf(positionId))
+                .param("studentUsername", studentUsername)
+                .with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(view().name("committee/dashboard"))
+            .andExpect(model().attributeExists("successMessage"));
+    }
+
+
+    @Test
+    @WithMockUser(username = "testCommittee", authorities = "COMMITTEE_MEMBER")
+    public void assignProfessor_ShouldReturnAssignedProfessorView() throws Exception {
+        int positionId = 10;
+        String strategy = "Interests";
+
+        Professor mockProfessor = new Professor();
+        mockProfessor.setProfessorId(1);
+        
+        TraineeshipPosition mockPosition = new TraineeshipPosition();
+        mockPosition.setId(positionId);
+        mockPosition.setSupervisor(mockProfessor);
+
+        when(committeeService.findPositionById(positionId)).thenReturn(mockPosition);
+        doNothing().when(committeeService).assignSupervisor(positionId, strategy);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/committee/assignProfessor")
+                .param("traineeshipId", String.valueOf(positionId))
+                .param("strategy", strategy)
+                .with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(view().name("committee/assigned_professor"))
+            .andExpect(model().attributeExists("professor", "position"))
+            .andExpect(model().attribute("professor", mockProfessor))
+            .andExpect(model().attribute("position", mockPosition));
+    }
+
+
+    @Test
+    @WithMockUser(username = "testCommittee", authorities = "COMMITTEE_MEMBER")
+    public void completeAssignedTraineedships_ShouldReturnCompleteForm() throws Exception {
+        int traineeshipId = 10;
+
+        Student mockStudent = new Student();
+        Company mockCompany = new Company();
+        List<Logbook> mockLogbooks = Arrays.asList(new Logbook(), new Logbook());
+        TraineeshipPosition mockPosition = new TraineeshipPosition();
+        mockPosition.setStudent(mockStudent);
+        mockPosition.setCompany(mockCompany);
+        mockPosition.setStudentLogbook(mockLogbooks);
+
+        when(committeeService.findPositionById(traineeshipId)).thenReturn(mockPosition);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/committee/completeTraineeship")
+                .param("traineeshipId", String.valueOf(traineeshipId)))
             .andExpect(status().isOk())
             .andExpect(view().name("committee/complete-form"))
-            .andExpect(model().attribute("position", position))
-            .andExpect(model().attribute("evaluation", evaluation))
-            .andExpect(model().attribute("student", student))
-            .andExpect(model().attribute("logbooks", logbooks))
-            .andExpect(model().attribute("company", company));
+            .andExpect(model().attributeExists("position", "evaluation", "student", "logbooks", "company"))
+            .andExpect(model().attribute("position", mockPosition))
+            .andExpect(model().attribute("student", mockStudent))
+            .andExpect(model().attribute("company", mockCompany))
+            .andExpect(model().attribute("logbooks", mockLogbooks));
     }
 
     @Test
-    @WithMockUser(username = "testCommittee", authorities =  "COMMITTEE_MEMBER")
-    public void updateGrade_ShouldUpdateGradeAndReturnResult() throws Exception {
-        Integer positionId = 1;
+    @WithMockUser(username = "testCommittee", authorities = "COMMITTEE_MEMBER")
+    public void updateGrade_ShouldReturnTraineeshipResultView() throws Exception {
+        int traineeshipId = 10;
         boolean grade = true;
-        TraineeshipPosition position = new TraineeshipPosition();
-        when(committeeService.completeAssignedTraineeships(positionId, grade)).thenReturn(position);
-    
-        mockMvc.perform(MockMvcRequestBuilders.post("/committee/updateGrade/{id}", positionId) .with(csrf())
-                .param("grade", String.valueOf(grade)))
-               .andExpect(status().isOk())
-               .andExpect(view().name("/committee/traineeshipResult"))
-               .andExpect(model().attribute("position", position));
+
+        TraineeshipPosition mockPosition = new TraineeshipPosition();
+        mockPosition.setPassFailGrade(grade);  
+
+        when(committeeService.completeAssignedTraineeships(traineeshipId, grade)).thenReturn(mockPosition);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/committee/updateGrade/{id}", traineeshipId)
+                .param("grade", String.valueOf(grade))
+                .with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(view().name("/committee/traineeshipResult"))
+            .andExpect(model().attributeExists("position"))
+            .andExpect(model().attribute("position", mockPosition));
     }
-               */
-    
+
 }

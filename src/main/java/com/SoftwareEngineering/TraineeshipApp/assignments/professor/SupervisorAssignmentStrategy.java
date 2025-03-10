@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assigns.professor;
+package com.SoftwareEngineering.TraineeshipApp.assignments.professor;
 
 public interface SupervisorAssignmentStrategy {
 

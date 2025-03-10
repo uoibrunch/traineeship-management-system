@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assignments;
+package com.SoftwareEngineering.TraineeshipApp.assignments.professor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -17,7 +17,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.SoftwareEngineering.TraineeshipApp.assigns.professor.AssignmentBasedOnInterests;
+
+import com.SoftwareEngineering.TraineeshipApp.assignments.professor.AssignmentBasedOnInterests;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 
@@ -80,16 +81,21 @@ public class AssignmentBasedOnInterestsTest {
 
     @Test
     void testAssignProfessor_NoSuitableProfessor() {
+
         professor1.setInterests("History, Politics");  
+        
         professor2.setInterests("Math, Physics");  
 
         when(professorMapper.findAll()).thenReturn(Arrays.asList(professor1, professor2));
+
         when(positionsMapper.findById(Integer.valueOf(10))).thenReturn(Optional.of(position));
 
         assignmentStrategy.assign(10);
 
         verify(positionsMapper, times(1)).save(position);
+
         assertNotNull(position.getSupervisor());
+
         assertTrue(position.isSupervised());
     }
 
