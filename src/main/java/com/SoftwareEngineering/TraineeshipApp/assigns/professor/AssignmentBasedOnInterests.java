@@ -24,7 +24,7 @@ public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy 
 
         Optional<TraineeshipPosition> selectedPosition = positionsMapper.findById(positionId);
 
-        double threshold = 4.0;
+        double threshold = 0.3;
 
         if (selectedPosition.isPresent()) {
             

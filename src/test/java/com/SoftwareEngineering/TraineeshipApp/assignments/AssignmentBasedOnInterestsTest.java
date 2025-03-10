@@ -1,11 +1,16 @@
 package com.SoftwareEngineering.TraineeshipApp.assignments;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.SoftwareEngineering.TraineeshipApp.assigns.professor.AssignmentBasedOnInterests;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
@@ -39,41 +45,59 @@ public class AssignmentBasedOnInterestsTest {
 
     private TraineeshipPosition position;
     private Professor professor1;
+    private Professor professor2;
 
     @BeforeEach
     void setUp() {
-        /*MockitoAnnotations.openMocks(this);
-        assignmentStrategy = new assignmentStrategy(assignmentStrategy); */ //Ean den ekana @InjectMocks
         MockitoAnnotations.openMocks(this);
 
+        // Initialize the position without saving it to the repository
         position = new TraineeshipPosition();
         position.setId(10);
-        position.setTopics("Coding,HAcking, NetwOrking,HarDware DesiGning");
-        positionsMapper.save(position);
+        position.setTopics("Coding, Hacking, Networking");
 
+        // Initialize professors
         professor1 = new Professor();
         professor1.setProfessorId(24);
-        professor1.setInterests("Java, AI, Verilog");
-        
+        professor1.setInterests("Coding, AI, Verilog");
+
+        professor2 = new Professor();
+        professor2.setProfessorId(15);
+        professor2.setInterests("Coding, Hacking, AI, Verilog");
     }
 
 
     @Test
-    void testTraineeshipPositionTrimming(){
+    void testAssignProfessor() {
+        
+        when(professorMapper.findAll()).thenReturn(Arrays.asList(professor1, professor2));
+
+        when(positionsMapper.findById(Integer.valueOf(10))).thenReturn(Optional.of(position));
 
         assignmentStrategy.assign(10);
 
-        //TraineeshipPosition retrievedPosition = positionsMapper.findById(10);
+        verify(positionsMapper, times(1)).save(position);
 
-        System.out.println("POSITIONS TOPICS: %s" +position.getTopics());
-        System.out.println("==================================");
-        assertTrue(position.getTopics().equals("codinghackingnetworkinghardwaredesigning"));
+        assertNotNull(position.getSupervisor());
+
+        assertEquals(professor2, position.getSupervisor()); 
+
+        assertTrue(position.isSupervised());
     }
 
-
     @Test
-    void testingProfessorTrimming(){
+    void testAssignProfessor_NoSuitableProfessor() {
+        professor1.setInterests("History, Politics");  
+        professor2.setInterests("Math, Physics");  
 
+        when(professorMapper.findAll()).thenReturn(Arrays.asList(professor1, professor2));
+        when(positionsMapper.findById(Integer.valueOf(10))).thenReturn(Optional.of(position));
+
+        assignmentStrategy.assign(10);
+
+        verify(positionsMapper, times(1)).save(position);
+        assertNotNull(position.getSupervisor());
+        assertTrue(position.isSupervised());
     }
 
     @Test
