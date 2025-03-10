@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import com.SoftwareEngineering.TraineeshipApp.assignments.position.*;
-import com.SoftwareEngineering.TraineeshipApp.assignments.professor.*;
+import com.SoftwareEngineering.TraineeshipApp.assigns.position.*;
+import com.SoftwareEngineering.TraineeshipApp.assigns.professor.*;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 
 @Service

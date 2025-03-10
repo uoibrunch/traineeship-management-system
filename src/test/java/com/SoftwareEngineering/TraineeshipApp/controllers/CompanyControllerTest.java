@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp;
+package com.SoftwareEngineering.TraineeshipApp.controllers;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

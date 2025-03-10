@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assignments.professor;
+package com.SoftwareEngineering.TraineeshipApp.assigns.professor;
 
 import java.util.List;
 import java.util.Optional;

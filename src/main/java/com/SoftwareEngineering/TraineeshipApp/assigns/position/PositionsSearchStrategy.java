@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assignments.position;
+package com.SoftwareEngineering.TraineeshipApp.assigns.position;
 
 import java.util.List;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;

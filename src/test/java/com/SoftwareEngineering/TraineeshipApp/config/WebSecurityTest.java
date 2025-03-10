@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp;
+package com.SoftwareEngineering.TraineeshipApp.config;
 
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;

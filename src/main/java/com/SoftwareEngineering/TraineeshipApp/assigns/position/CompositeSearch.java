@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assignments.position;
+package com.SoftwareEngineering.TraineeshipApp.assigns.position;
 
 import java.util.ArrayList;
 import java.util.HashSet;
