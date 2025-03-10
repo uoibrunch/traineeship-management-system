@@ -7,25 +7,20 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
 import com.SoftwareEngineering.TraineeshipApp.assigns.professor.AssignmentBasedOnInterests;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
-import com.SoftwareEngineering.TraineeshipApp.mappers.ProfessorMapper;
-import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
+import com.SoftwareEngineering.TraineeshipApp.mappers.*;
+
 
 
 import jakarta.transaction.Transactional;
@@ -51,12 +46,10 @@ public class AssignmentBasedOnInterestsTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        // Initialize the position without saving it to the repository
         position = new TraineeshipPosition();
         position.setId(10);
         position.setTopics("Coding, Hacking, Networking");
 
-        // Initialize professors
         professor1 = new Professor();
         professor1.setProfessorId(24);
         professor1.setInterests("Coding, AI, Verilog");
@@ -102,11 +95,11 @@ public class AssignmentBasedOnInterestsTest {
 
     @Test
     void calculateJaccardSimilarity_CorrectCalculation() {
-        // Private method, but we can make it package-private for testing purposes
+       
         Set<String> set1 = new HashSet<>(Arrays.asList("AI", "Machine Learning"));
         Set<String> set2 = new HashSet<>(Arrays.asList("AI", "Data Science"));
 
-        // Use reflection to access private method (Alternative: Make method package-private for testing)
+      
         try {
             var method = AssignmentBasedOnInterests.class.getDeclaredMethod("calculateJaccardSimilarity", Set.class, Set.class);
             method.setAccessible(true);  // Bypass private access
