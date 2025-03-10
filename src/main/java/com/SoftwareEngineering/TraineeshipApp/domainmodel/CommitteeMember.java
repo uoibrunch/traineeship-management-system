@@ -27,5 +27,9 @@ public class CommitteeMember {
         this.username = username;
     }
 
+    public String getUsername(){
+        return this.username;
+    }
+
    
 }

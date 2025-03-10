@@ -17,8 +17,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.SoftwareEngineering.TraineeshipApp.assignments.professor.AssignmentBasedOnInterests;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 

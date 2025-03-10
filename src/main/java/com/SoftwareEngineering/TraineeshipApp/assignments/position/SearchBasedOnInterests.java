@@ -31,7 +31,7 @@ public class SearchBasedOnInterests implements PositionsSearchStrategy {
 
         Student student = studentMapper.findByUsername(applicantUsername);
 
-        Double threshold = 0.7;
+        Double threshold = 0.6;
 
         if (student == null || student.getSkills() == null || student.getInterests() == null) {
             return new ArrayList<>();
