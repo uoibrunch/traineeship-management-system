@@ -1,8 +1,7 @@
 package com.SoftwareEngineering.TraineeshipApp.services.committee;
 
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
-import com.SoftwareEngineering.TraineeshipApp.search.assignment.*;
-import com.SoftwareEngineering.TraineeshipApp.search.position.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import com.SoftwareEngineering.TraineeshipApp.assigns.position.*;
+import com.SoftwareEngineering.TraineeshipApp.assigns.professor.*;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 
 @Service

@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.search.assignment;
+package com.SoftwareEngineering.TraineeshipApp.assigns.professor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
