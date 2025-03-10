@@ -4,7 +4,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,10 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import com.SoftwareEngineering.TraineeshipApp.controllers.StudentController;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Logbook;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.services.student.StudentService;
 
 

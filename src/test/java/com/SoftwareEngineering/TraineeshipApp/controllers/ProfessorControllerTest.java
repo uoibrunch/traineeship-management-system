@@ -17,11 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
-
-import com.SoftwareEngineering.TraineeshipApp.controllers.ProfessorController;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.services.professor.ProfessorService;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 

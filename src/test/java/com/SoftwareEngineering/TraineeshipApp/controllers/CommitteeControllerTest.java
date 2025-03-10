@@ -4,10 +4,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-import java.util.Arrays;
-import java.util.List;
-
+import java.util.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,12 +14,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Logbook;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.services.committee.CommitteeService;
 
 @SpringBootTest
