@@ -1,11 +1,8 @@
 package com.SoftwareEngineering.TraineeshipApp.services.committee;
 
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
-import com.SoftwareEngineering.TraineeshipApp.search.assignment.SupervisorAssignmentFactory;
-import com.SoftwareEngineering.TraineeshipApp.search.assignment.SupervisorAssignmentStrategy;
-import com.SoftwareEngineering.TraineeshipApp.search.position.PositionsSearchFactory;
-import com.SoftwareEngineering.TraineeshipApp.search.position.PositionsSearchStrategy;
-
+import com.SoftwareEngineering.TraineeshipApp.search.assignment.*;
+import com.SoftwareEngineering.TraineeshipApp.search.position.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -126,15 +123,6 @@ public class CommitteeServiceImpl implements CommitteeService{
 
     }
 
-    @Override
-    public List<Professor> retrieveProfessorsForPosition(int positionId, String strategy){
-
-        TraineeshipPosition position = findPositionById(positionId);
-
-        PositionsSearchStrategy searchStrategy = positionsSearchFactory.create(strategy);
-       
-        return null;
-    }
 
     @Override
     public void assignSupervisor(Integer positionId, String strategy){

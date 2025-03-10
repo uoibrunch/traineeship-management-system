@@ -1,10 +1,6 @@
 package com.SoftwareEngineering.TraineeshipApp.services.student;
 
-import java.util.List;
-
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Logbook;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 
 public interface StudentService {
 

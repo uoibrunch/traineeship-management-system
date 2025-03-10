@@ -2,7 +2,7 @@ package com.SoftwareEngineering.TraineeshipApp.mappers;
 
 import org.springframework.stereotype.Repository;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
-import org.springframework.stereotype.Repository;
+
 
 import java.util.Optional;
 

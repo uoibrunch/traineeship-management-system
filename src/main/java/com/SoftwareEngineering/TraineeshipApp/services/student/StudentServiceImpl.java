@@ -20,8 +20,6 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private LogbookMapper logbookMapper;
 
-    @Autowired
-    private ProfessorMapper professorMapper;
 
     @Override
     public Student retrieveProfile(String studentUsername){

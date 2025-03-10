@@ -1,19 +1,11 @@
 package com.SoftwareEngineering.TraineeshipApp.search.assignment;
 
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -83,9 +75,7 @@ public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy 
         } else {
             throw new EntityNotFoundException("Traineeship Position not found with ID: " + positionId);
         }
-        
     }
-
     private double calculateJaccardSimilarity(Set<String> set1, Set<String> set2) {
         Set<String> intersection = new HashSet<>(set1);
         intersection.retainAll(set2);
@@ -95,5 +85,4 @@ public class AssignmentBasedOnInterests implements SupervisorAssignmentStrategy 
 
         return (double) intersection.size() / union.size();
     }
-
 }

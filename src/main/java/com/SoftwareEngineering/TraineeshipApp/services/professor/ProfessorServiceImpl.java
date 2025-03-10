@@ -1,20 +1,8 @@
 package com.SoftwareEngineering.TraineeshipApp.services.professor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
-import com.SoftwareEngineering.TraineeshipApp.mappers.EvaluationMapper;
-import com.SoftwareEngineering.TraineeshipApp.mappers.ProfessorMapper;
-import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.EvaluationType;
-
+import java.util.*;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
+import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

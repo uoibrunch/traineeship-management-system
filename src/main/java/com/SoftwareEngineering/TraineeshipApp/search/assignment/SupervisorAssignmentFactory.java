@@ -3,9 +3,6 @@ package com.SoftwareEngineering.TraineeshipApp.search.assignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.SoftwareEngineering.TraineeshipApp.search.position.PositionsSearchStrategy;
-
-
 @Service
 public class SupervisorAssignmentFactory {
 

@@ -28,8 +28,6 @@ public interface CommitteeService {
     
     String extractUsernameFromUser();
 
-    List<Professor> retrieveProfessorsForPosition(int positionId, String strategy);
-
     TraineeshipPosition completeAssignedTraineeships(int positionId , boolean grade);
 
 }
