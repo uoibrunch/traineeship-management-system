@@ -32,6 +32,10 @@ public class Logbook {
     @JoinColumn(name = "traineeship_position_id") 
     private TraineeshipPosition traineeshipPosition;
 
+    public TraineeshipPosition getTraineeshipPosition(){
+        return this.traineeshipPosition;
+    }
+
     public void setTraineeshipPosition(TraineeshipPosition position){
         this.traineeshipPosition = position;
     }
