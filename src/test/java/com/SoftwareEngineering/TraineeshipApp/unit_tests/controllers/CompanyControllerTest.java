@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.controllers;
+package com.SoftwareEngineering.TraineeshipApp.unit_tests.controllers;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -18,6 +18,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.SoftwareEngineering.TraineeshipApp.controllers.CompanyController;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Company;
 import com.SoftwareEngineering.TraineeshipApp.services.company.CompanyService;
 

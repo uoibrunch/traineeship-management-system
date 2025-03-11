@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assignments.professor;
+package com.SoftwareEngineering.TraineeshipApp.unit_tests.assignments.professor;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.SoftwareEngineering.TraineeshipApp.assignments.professor.AssignmentBasedOnLoad;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 

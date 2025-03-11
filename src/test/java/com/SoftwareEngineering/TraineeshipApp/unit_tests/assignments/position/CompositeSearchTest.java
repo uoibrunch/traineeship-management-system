@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assignments.position;
+package com.SoftwareEngineering.TraineeshipApp.unit_tests.assignments.position;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,26 +6,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.SoftwareEngineering.TraineeshipApp.assignments.position.CompositeSearch;
+import com.SoftwareEngineering.TraineeshipApp.assignments.position.SearchBasedOnInterests;
+import com.SoftwareEngineering.TraineeshipApp.assignments.position.SearchBasedOnLocation;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class CompositeSearchTest {

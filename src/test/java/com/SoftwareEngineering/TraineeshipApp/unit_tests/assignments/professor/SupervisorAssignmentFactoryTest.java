@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assignments.professor;
+package com.SoftwareEngineering.TraineeshipApp.unit_tests.assignments.professor;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,6 +7,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.SoftwareEngineering.TraineeshipApp.assignments.professor.AssignmentBasedOnInterests;
+import com.SoftwareEngineering.TraineeshipApp.assignments.professor.AssignmentBasedOnLoad;
+import com.SoftwareEngineering.TraineeshipApp.assignments.professor.SupervisorAssignmentFactory;
+import com.SoftwareEngineering.TraineeshipApp.assignments.professor.SupervisorAssignmentStrategy;
 
 @SpringBootTest
 public class SupervisorAssignmentFactoryTest {

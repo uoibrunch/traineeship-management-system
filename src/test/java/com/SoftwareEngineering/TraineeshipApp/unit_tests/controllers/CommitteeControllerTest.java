@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.controllers;
+package com.SoftwareEngineering.TraineeshipApp.unit_tests.controllers;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;

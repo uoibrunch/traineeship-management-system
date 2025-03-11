@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assignments.position;
+package com.SoftwareEngineering.TraineeshipApp.unit_tests.assignments.position;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.SoftwareEngineering.TraineeshipApp.assignments.position.SearchBasedOnLocation;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.*;
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 

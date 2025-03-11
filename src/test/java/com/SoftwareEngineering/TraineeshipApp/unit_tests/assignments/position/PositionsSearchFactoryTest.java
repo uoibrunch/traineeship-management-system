@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.assignments.position;
+package com.SoftwareEngineering.TraineeshipApp.unit_tests.assignments.position;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,6 +7,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.SoftwareEngineering.TraineeshipApp.assignments.position.CompositeSearch;
+import com.SoftwareEngineering.TraineeshipApp.assignments.position.PositionsSearchFactory;
+import com.SoftwareEngineering.TraineeshipApp.assignments.position.PositionsSearchStrategy;
+import com.SoftwareEngineering.TraineeshipApp.assignments.position.SearchBasedOnInterests;
+import com.SoftwareEngineering.TraineeshipApp.assignments.position.SearchBasedOnLocation;
 
 @SpringBootTest
 public class PositionsSearchFactoryTest {

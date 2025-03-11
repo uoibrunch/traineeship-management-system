@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.services;
+package com.SoftwareEngineering.TraineeshipApp.unit_tests.services;
 
 
 import static org.junit.jupiter.api.Assertions.*;
