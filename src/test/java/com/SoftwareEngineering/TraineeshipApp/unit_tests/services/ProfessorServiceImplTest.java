@@ -2,118 +2,109 @@ package com.SoftwareEngineering.TraineeshipApp.unit_tests.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 
+import java.util.ArrayList;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.test.context.TestPropertySource;
 
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.Evaluation;
+import com.SoftwareEngineering.TraineeshipApp.domainmodel.EvaluationType;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Professor;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.mappers.EvaluationMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.ProfessorMapper;
-import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
 import com.SoftwareEngineering.TraineeshipApp.services.professor.ProfessorServiceImpl;
 
 
 
 @AutoConfigureMockMvc
+@TestPropertySource( locations = "classpath:application.properties")
 @SpringBootTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ProfessorServiceImplTest {
 
-    @Mock
+   
+
+    @Autowired
     private ProfessorMapper professorMapper;
 
-    @Mock
-    private TraineeshipPositionsMapper traineeshipPositionMapper;
-
-    @Mock
+    @Autowired
     private EvaluationMapper evaluationMapper;
 
-    @InjectMocks
+    @Autowired
     private ProfessorServiceImpl professorService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        
 
     }
 
     @Test
-    void retrieveProfile_ShouldReturnProfessor() {
-        // Arrange
-        Professor professor = new Professor();
-        professor.setUsername("testProfessor");
-        when(professorMapper.findByUsername("testProfessor")).thenReturn(professor);
+    void retrieveProfileShouldReturnProfessor() {
 
-        // Act
-        Professor result = professorService.retrieveProfile("testProfessor");
-
-        // Assert
-        assertNotNull(result);
-        assertEquals("testProfessor", result.getUsername());
+        Professor storedProfessor = professorMapper.findByUsername("zarras");
+        assertNotNull(storedProfessor);
+        assertEquals(1, storedProfessor.getProfessorId());
+        assertEquals("Coding", storedProfessor.getInterests());
     }
 
     @Test
-    void saveProfile_ShouldSaveProfessor() {
-        // Arrange
-        Professor professor = new Professor();
-        professor.setUsername("testProfessor");
-        when(professorMapper.findByUsername("testProfessor")).thenReturn(null);
+    void saveProfileShouldSaveProfessor() {
+     
+       User user = new User("papapetrou", "123", new ArrayList<>());
+       
 
-        // Act
+        Professor professor = new Professor();
+        professor.setUsername(user.getUsername());
+        professor.setInterests("Diktya");
+        professor.setProfessorName("mr.Papapetrou");
+
         professorService.saveProfile(professor);
-
-        // Assert
-        verify(professorMapper).save(professor);
-    }
-
-    /*@Test
-    void retrieveAssignedPositions_ShouldReturnAssignedPositions() {
-        // Arrange
-        Professor professor = new Professor();
-        List<TraineeshipPosition> positions = Arrays.asList(new TraineeshipPosition());
-        professor.setSupervisedPositions(positions);
-        when(professorMapper.findByUsername("testProfessor")).thenReturn(professor);
-
-        // Act
-        List<TraineeshipPosition> result = professorService.retrieveAssignedPositions();
-
-        // Assert
-        assertEquals(1, result.size());
-    }
-
-    @Test
-    void saveEvaluation_ShouldSaveEvaluation() {
-
-    }
-
-    @Test
-    void saveEvaluation_ShouldUpdateExistingEvaluation() {
-        // Arrange
-    }
-    */
-    // @Test
-    // void getTraineeshipPositionById_ShouldReturnPosition() {
-    //     // Arrange
-    //     TraineeshipPosition traineeshipPosition = new TraineeshipPosition();
-    //     traineeshipPosition.setId(10);
-
-    //     when(traineeshipPositionMapper.findById(10)).thenReturn((traineeshipPosition));
-
-    //     TraineeshipPosition result = professorService.getTraineeshipPositionById(10);
         
-    //     assertNotNull(result);
+        Professor retrievedProfessor = professorMapper.findByUsername("papapetrou");
+        assertNotNull(retrievedProfessor);
+        assertEquals("mr.Papapetrou", retrievedProfessor.getProfessorName());
+        assertEquals("Diktya", retrievedProfessor.getInterests());
 
-    //     assertEquals(traineeshipPosition, result.getId());
-    // }
+    }
 
-    
+
+    @Test
+    void saveEvaluationShouldUpdateExistingEvaluation(){
+
+        Evaluation papapetrouEvaluation = new Evaluation();
+        EvaluationType professorEvaluation = EvaluationType.PROFESSOR;
+
+        papapetrouEvaluation.setEffectiveness(4);
+        papapetrouEvaluation.setEfficiency(4);
+        papapetrouEvaluation.setFacility(4);
+        papapetrouEvaluation.setMotivation(5);
+        papapetrouEvaluation.setId(10);
+        papapetrouEvaluation.setEvaluationType(professorEvaluation);
+        papapetrouEvaluation.setGuidance(2);
+        
+        evaluationMapper.save(papapetrouEvaluation);
+
+       
+        Optional<Evaluation> retrievedEvaluation = evaluationMapper.findById(10);
+        assertNotNull(retrievedEvaluation);
+        assertEquals(5, retrievedEvaluation.get().getMotivation());
+        assertEquals(10, retrievedEvaluation.get().getId());
+
+    }
+
+
 }

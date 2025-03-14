@@ -4,7 +4,6 @@ import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -145,17 +144,6 @@ public class CommitteeServiceImpl implements CommitteeService{
         positionsMapper.save(position);
 
         return position;
-
-    }
-
-    @Override
-    public void saveUsernameAndId(CommitteeMember committeeMember){
-
-        committeeMember.setUsername(extractUsernameFromUser());
-
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = (User) userDetails;
-        committeeMember.setCommitteeMemberId(user.getId());
 
     }
 

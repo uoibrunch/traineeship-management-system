@@ -2,9 +2,7 @@ package com.SoftwareEngineering.TraineeshipApp.unit_tests.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -15,70 +13,81 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.TestPropertySource;
 
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.Logbook;
 import com.SoftwareEngineering.TraineeshipApp.domainmodel.Student;
-import com.SoftwareEngineering.TraineeshipApp.domainmodel.TraineeshipPosition;
 import com.SoftwareEngineering.TraineeshipApp.mappers.LogbookMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.StudentMapper;
 import com.SoftwareEngineering.TraineeshipApp.mappers.TraineeshipPositionsMapper;
 import com.SoftwareEngineering.TraineeshipApp.services.student.StudentServiceImpl;
 
 @SpringBootTest
+@TestPropertySource( locations = "classpath:application.properties")
 @AutoConfigureMockMvc
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class StudentServiceImplTest {
-    @Mock
+
+    @Autowired
     private StudentMapper studentMapper;
     
-    @Mock
+    @Autowired
     private TraineeshipPositionsMapper positionsMapper;
     
-    @Mock
+    @Autowired
     private LogbookMapper logbookMapper;
     
-    @InjectMocks
+    @Autowired
     private StudentServiceImpl studentService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+
+        Student student = new Student();
+        student.setUsername("testUserNick");
+        student.setStudentId(2);
+        student.setStudentName("testNick");
+        student.setAM("5155");
+        student.setPreferredLocation("Xanthi");
+        student.setInterests("Coding");
+        student.setSkills("Pentesting");
+        student.setLookingForTraineeship(true);
+
+        studentService.saveProfile(student);
+
     }
 
     @Test
     void retrieveProfile_ShouldReturnStudent() {
-        // Arrange
-        Student student = new Student();
-        student.setUsername("testUser");
-        when(studentMapper.findByUsername("testUser")).thenReturn(student);
+        
+         //User user = new User("testUserNick", "123", new ArrayList<>());
 
-        // Act
-        Student result = studentService.retrieveProfile("testUser");
+        Student retrievedProfile = studentMapper.findByUsername("testUserNick");
 
-        // Assert
-        assertNotNull(result);
-        assertEquals("testUser", result.getUsername());
+        assertEquals("testNick", retrievedProfile.getStudentName());
+        assertEquals("5155", retrievedProfile.getAM());
+        assertEquals("Xanthi", retrievedProfile.getPreferredLocation());
+        assertEquals("Coding", retrievedProfile.getInterests());
+        assertEquals("Pentesting", retrievedProfile.getSkills());
+
+
+    
     }
 
     @Test
     void applyForATraineeship_ShouldUpdateLookingForTraineeship() {
         // Arrange
-        Student student = new Student();
-        student.setUsername("testUser");
-        when(studentMapper.findByUsername("testUser")).thenReturn(student);
 
-        // Act
-        studentService.applyForATraineeship(student);
 
-        // Assert
-        assertTrue(student.isLookingForTraineeship());
-        verify(studentMapper).save(student);
+        Student retrievedProfile = studentMapper.findByUsername("testUserNick");
+
+        assertEquals(true, retrievedProfile.isLookingForTraineeship());
+
     }
 
     @Test

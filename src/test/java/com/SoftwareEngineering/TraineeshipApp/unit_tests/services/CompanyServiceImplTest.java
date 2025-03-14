@@ -12,10 +12,15 @@ import java.util.List;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+
 import com.SoftwareEngineering.TraineeshipApp.mappers.*;
 import com.SoftwareEngineering.TraineeshipApp.services.company.CompanyServiceImpl;
 
 
+@SpringBootTest
+@TestPropertySource( locations = "classpath:application.properties")
 class CompanyServiceImplTest {
 
     @Mock
@@ -50,7 +55,7 @@ class CompanyServiceImplTest {
     }
 
     @Test
-    void testRetrieveProfile() {
+    void retrieveProfile() {
         String username = "Apple";
         
         
@@ -68,7 +73,7 @@ class CompanyServiceImplTest {
     }
 
     @Test
-    void testSaveProfile_UpdateExistingCompany() {
+    void testSaveProfileUpdateExistingCompany() {
         String username = "Apple";
         Company inputCompany = new Company();
         inputCompany.setUsername(username);

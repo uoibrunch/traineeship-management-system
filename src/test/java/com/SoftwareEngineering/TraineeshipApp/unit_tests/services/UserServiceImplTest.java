@@ -24,7 +24,7 @@ import com.SoftwareEngineering.TraineeshipApp.domainmodel.User;
 import com.SoftwareEngineering.TraineeshipApp.mappers.UserMapper;
 import com.SoftwareEngineering.TraineeshipApp.services.user.UserServiceImpl;
 
-@SpringBootTest
+@SpringBootTest(classes = {UserServiceImpl.class})
 @AutoConfigureMockMvc
 public class UserServiceImplTest {
     
@@ -47,9 +47,9 @@ public class UserServiceImplTest {
         // Arrange
         User user = new User();
         user.setUsername("testUser");
-        user.setPassword("plainPassword");
+        user.setPassword("nikos");
 
-        when(bCryptPasswordEncoder.encode("plainPassword")).thenReturn("encodedPassword");
+        when(bCryptPasswordEncoder.encode("nikos")).thenReturn("encodedPassword");
 
         // Act
         userService.saveUser(user);

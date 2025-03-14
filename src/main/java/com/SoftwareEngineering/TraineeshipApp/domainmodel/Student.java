@@ -83,11 +83,12 @@ public class Student {
         this.skills = skills;
     }
     public boolean isLookingForTraineeship() {
-        return lookingForTraineeship;
+        return this.lookingForTraineeship;
     }
     public void setLookingForTraineeship(boolean lookingForTraineeship) {
         this.lookingForTraineeship = lookingForTraineeship;
     }
+
     public TraineeshipPosition getAssignedTraineeship() {
         return assignedTraineeship;
     }

@@ -21,10 +21,6 @@ public class CommitteeController {
     @RequestMapping("/committee/dashboard")
     public String getComimmitteeDashboard(){
 
-        CommitteeMember  committeeMember =  new CommitteeMember();
-
-        committeeService.saveUsernameAndId(committeeMember);
-
         return "committee/dashboard";
     }
 

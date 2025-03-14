@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EvaluationMapper extends JpaRepository<Evaluation,Integer>{
 
     Optional<Evaluation> findByTraineeshipPositionAndEvaluationType(TraineeshipPosition position, EvaluationType evaluationType);
-
+    Optional<Evaluation> findById(Integer id);
 }
 

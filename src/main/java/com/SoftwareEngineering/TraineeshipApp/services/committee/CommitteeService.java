@@ -23,8 +23,6 @@ public interface CommitteeService {
     TraineeshipPosition findPositionById(int id);
 
     List <Professor> listProfessors();
-
-    void saveUsernameAndId(CommitteeMember committeeMember);
     
     String extractUsernameFromUser();
 
