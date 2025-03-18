@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 public interface TraineeshipPositionsMapper extends JpaRepository<TraineeshipPosition,Integer>{
 
     @Query("SELECT t FROM TraineeshipPosition t WHERE t.skills IN :requiredSkills")
-    List<TraineeshipPosition> findByRequiredSkillsIn(@Param("requiredSkills") List<String> requiredSkills);
+    List<TraineeshipPosition> findByRequiredSkillsIn(@Param("requiredSkills") String requiredSkills);
     
     List<TraineeshipPosition> findByIsAssignedFalse();
 

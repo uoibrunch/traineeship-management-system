@@ -28,6 +28,16 @@ public class User implements UserDetails{
     @Column(name="role")
 	private Role role;
 	
+	public User(String username, String password, Role role) {
+		this.username = username;
+		this.password = password;
+		this.role = role;
+	}
+
+	public User(){
+
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		 SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());

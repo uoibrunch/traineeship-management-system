@@ -38,8 +38,7 @@ public class TraineeshipPosition {
     private boolean isSupervised;
 
     @Column(name = "student_logbook")
-    
-    @OneToMany(mappedBy = "traineeshipPosition", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "traineeshipPosition", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Logbook> studentLogbook;
 
     @Column(name = "pass_fail_grade")
