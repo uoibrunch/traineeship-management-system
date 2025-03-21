@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.unit_tests.assignments.position;
+package com.SoftwareEngineering.TraineeshipApp.all_kind_of_tests.assignments.position;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.unit_tests.controllers;
+package com.SoftwareEngineering.TraineeshipApp.all_kind_of_tests.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;

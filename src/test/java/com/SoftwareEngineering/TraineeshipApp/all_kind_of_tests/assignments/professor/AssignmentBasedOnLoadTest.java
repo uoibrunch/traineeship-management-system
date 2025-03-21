@@ -1,4 +1,4 @@
-package com.SoftwareEngineering.TraineeshipApp.unit_tests.assignments.professor;
+package com.SoftwareEngineering.TraineeshipApp.all_kind_of_tests.assignments.professor;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
