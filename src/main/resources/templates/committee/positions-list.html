@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <title>Search Results - Positions</title>
 </head>
@@ -14,7 +14,7 @@
     <h3>Available Positions Matching Search Criteria</h3>
     <hr>
 
-    <!-- Student Information -->
+   
     <div class="card p-3 mb-3">
         <h4>Student Information</h4>
         <p><strong>Student Name:</strong> <span th:text="${student.studentName}"></span></p>
@@ -25,7 +25,7 @@
         
     </div>
 
-    <!-- Search Results - Positions -->
+    
     <div class="card p-3">
         <h4>Matching Traineeship Positions</h4>
 
@@ -64,7 +64,7 @@
             </tbody>
         </table>
 
-        <!-- Show message if no results found -->
+       
         <p class="text-muted" th:if="${positions.empty}">No matching positions found.</p>
     </div>
 

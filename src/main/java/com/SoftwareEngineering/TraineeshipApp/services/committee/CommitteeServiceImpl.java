@@ -84,6 +84,7 @@ public class CommitteeServiceImpl implements CommitteeService{
 
         Optional<TraineeshipPosition> positionOpt = positionsMapper.findById(positionId);
         
+        
         if (!positionOpt.isPresent()) {
             throw new IllegalArgumentException("Traineeship Position with ID " + positionId + " not found.");
         }

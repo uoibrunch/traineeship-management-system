@@ -36,7 +36,7 @@ public class SearchBasedOnLocation implements PositionsSearchStrategy {
                 .map(String::trim)
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
-            
+                
 
         List<Company> companiesBasedOnPrefferredLocation = companyMapper.findByCompanyLocation(student.getPreferredLocation());
         List<TraineeshipPosition> matchingPositions = new ArrayList<>();
@@ -52,7 +52,8 @@ public class SearchBasedOnLocation implements PositionsSearchStrategy {
                     .map(String::trim)
                     .map(String::toLowerCase)
                     .collect(Collectors.toList());
-
+                    
+        
                 if (!studentSkills.containsAll(positionSkills)) {
                     continue; 
                 }

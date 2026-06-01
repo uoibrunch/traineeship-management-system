@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <title>Selected Student</title>
 </head>
@@ -14,7 +14,7 @@
     <h3>Available Positions For This Student</h3>
     <hr>
 
-    <!-- Student Information -->
+   
     <div class="card p-3 mb-3">
         <p><strong>Student Name:</strong> <span th:text="${student.studentName}"></span></p>
         <p><strong>University ID:</strong> <span th:text="${student.AM}"></span></p>
@@ -23,7 +23,7 @@
         <p><strong>Skills:</strong> <span th:text="${student.skills}"></span></p>
     </div>
 
-    <!-- Search Bar for Traineeship Positions -->
+    
     <form th:action="@{/committee/findPositions}" method="GET">
         
         <input type="hidden" name="studentUsername" th:value="${student.username}"/>

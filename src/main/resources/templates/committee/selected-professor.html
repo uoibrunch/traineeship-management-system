@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <title>Traineeship</title>
 </head>
@@ -21,11 +20,11 @@
             <p><strong>Interests:</strong> <span th:text="${position.topics}"></span></p>
         </div>
     
-        <!-- If professors exist, show the form and table -->
+      
         <div th:if="${not #lists.isEmpty(professors)}">
-            <!-- Search Bar for Traineeship Positions -->
+           
             <form th:action="@{/committee/assignProfessor}" method="GET">
-                <!-- Hidden Field for Traineeship ID -->
+                
                 <input type="hidden" name="traineeshipId" th:value="${position.traineeshipId}" />
     
                 <div class="form-group">
@@ -58,7 +57,7 @@
             </div>
         </div>
     
-        <!-- If no professors exist, show a warning message -->
+        
         <div th:if="${#lists.isEmpty(professors)}" class="alert alert-warning">
             No professors available for assignment.
         </div>

@@ -58,6 +58,12 @@ public class TraineeshipPosition {
 
     @OneToMany(mappedBy = "traineeshipPosition", fetch = FetchType.LAZY)
     private List <Evaluation> evaluations;
+
+
+
+
+
+    
     
     public int getId() {
         return traineeshipId;
@@ -116,6 +122,7 @@ public class TraineeshipPosition {
     public boolean isPassFailGrade() {
         return passFailGrade;
     }
+    
     public void setPassFailGrade(boolean passFailGrade) {
         this.passFailGrade = passFailGrade;
     }
